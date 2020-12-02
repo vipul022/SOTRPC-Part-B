@@ -18,9 +18,9 @@ put /users/id - edit a user
 
 #### Auth:
 
-post /login - user logs in
+post /auth/login - user logs in
 
-post /logout - user logs out
+post /auth/logout - user logs out
 
 
 
