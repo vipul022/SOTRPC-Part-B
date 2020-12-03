@@ -19,10 +19,11 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         expires: 600000
-    },
-    store: new MongoStore({
-        mongooseConnection: mongoose.connection
-    })
+    }
+    // ,
+    // store: new MongoStore({
+    //     mongooseConnection: mongoose.connection
+    // })
 }))
 
 
@@ -48,7 +49,7 @@ app.listen(port, () => {
     console.log(`SOTRPC app listening on port ${port}`)
 })
 
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 
 
 app.get('/', (req, res) => {
