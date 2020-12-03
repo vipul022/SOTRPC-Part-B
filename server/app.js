@@ -1,12 +1,29 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const session = require("express-session")
+const userRouter = require("./routes/user_routes");
 
 const port = 3000;
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({
+    extended: true
+}));
+
+app.use(session({
+    secret: 'star wars',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        expires: 600000
+    },
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection
+    })
+}))
 
 
 const dbConn = process.env.MONGODB_URI || 'mongodb://localhost/SOTRPC';
@@ -21,14 +38,19 @@ mongoose.connect(dbConn, {
         if (err) {
             console.log('Error connecting to database', err);
         } else {
-            console.log('Connected to database',dbConn);
+            console.log('Connected to database', dbConn);
         }
-    });
+});
+
+
 
 app.listen(port, () => {
-	console.log(`SOTRPC app listening on port ${port}`)
+    console.log(`SOTRPC app listening on port ${port}`)
 })
 
-app.get('/', (req,res) => {
-	res.send('Welcome')
+app.use('/user', userRouter);
+
+
+app.get('/', (req, res) => {
+    res.send('Welcome')
 })
