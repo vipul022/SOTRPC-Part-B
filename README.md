@@ -48,13 +48,8 @@ The South of the River Potters Club (SOTRPC) is undergoing some renovations to s
 
 - Calendar of events - All upcoming events and classes displayed in a calendar type arrangement.
 
-- Kiln bookings - Admin able to add/edit/remove kiln availability. Members are able to book kiln time. (Mongo DB)
 
-- Event scheduling - Admin able to add/edit/remove events such as exhibitions (Mongo DB)
 
-- Calendar of events - All upcoming events and classes displayed in a calendar type arrangement.
-
-- Kiln bookings - Admin able to add/edit/remove kiln availability. Members are able to book kiln time. (Mongo DB)
 
 ##### Target audience
 
@@ -70,10 +65,8 @@ Primarily SOTRPC members and prospective members as well as anyone interested in
 - Mongodb Atlas (Online hosting site for the DB)
 - Mongoose (Object Data Modeling library)
 - AWS S3 (Buckets for persistent storage of photos and files)
-- Axios (API connection for S3 Buckets)
 - Express (Node JS Framework)
 - Node JS  (Runtime environment)
-- Dotenv (Storing environment variables)
 - Passport (Authentication)
 - Express-session (Cookie storage middleware)
 - Nodemon (Development Server restarter)
@@ -85,6 +78,7 @@ Primarily SOTRPC members and prospective members as well as anyone interested in
 
 - React (Front end library)
 - Cors (Allows cross origin whitelisting)
+- Axios (API connection to Backend)
 - Netlify (Online host for Front-end)
 
 
@@ -103,6 +97,8 @@ Primarily SOTRPC members and prospective members as well as anyone interested in
 - Lucid Chart (Dataflow and Architecture diagrams)
 
 
+
+
 ###### Workflow
 
 - Git (Version Control)
@@ -114,13 +110,13 @@ Primarily SOTRPC members and prospective members as well as anyone interested in
 
 ![DataFlow Diagram](./docs/DFD.png)
 
-###### 
+
 
 ### Application Architecture Diagram
 
 ![Application Architecture Diagram](./docs/AAD.png)
 
-###### 
+
 
 ### User Stories
 
@@ -191,7 +187,7 @@ Sandra is a nurse that is looking to start a new hobby. She has a cat called Mit
 - View any minutes from club meetings until a member.
 - View any past newsletters until a member.
 
-###### 
+
 
 ### Wireframes for multiple standard screen sizes, created using industry standard software
 
