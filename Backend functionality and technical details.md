@@ -16,11 +16,9 @@ get /users/id - show one user
 
 put /users/id - edit a user
 
-#### Auth:
+post /users/login - user logs in
 
-post /auth/login - user logs in
-
-post /auth/logout - user logs out
+get /users/logout - user logs out
 
 
 
