@@ -4,4 +4,4 @@ import { createContext, useContext } from "react";
 export const StateContext = createContext();
 
 // !custom hook that wraps useContext
-export const useGlobalState = useContext(StateContext);
+export const useGlobalState = () => useContext(StateContext);
