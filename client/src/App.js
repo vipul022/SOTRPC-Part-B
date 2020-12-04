@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./components/home/Home";
-import Nav from "./components/nav/Nav";
-import Classes from "./components/classes/Classes";
+import ClassData from "./data/class_data";
+import Home from "./components/Home/Home";
+import Nav from "./components/Nav/Nav";
+import Classes from "./components/Classes/Classes";
 
 const App = () => {
   return (
