@@ -1,5 +1,6 @@
 const {
-    addUserToDB} = require("../utils/user_utilities");
+    addUserToDB,
+    getUserFromDB} = require("../utils/user_utilities");
 
 
 
@@ -11,7 +12,7 @@ function logoutUser(req, res) {
     res.send("got your logoutUser request")
 };
 
-function showUsers(req, res) {
+function getUsers(req, res) {
     res.send("got your showUsers request")
 };
 
@@ -37,8 +38,16 @@ function deleteUser(req, res) {
     res.send("got your deleteUser request")
 };
 
-function showUser(req, res) {
-    res.send("got your showUser request")
+function getUser(req, res) {
+        // execute the query from getPostById
+        getUserFromDB(req).exec((err, user) => {
+            if (err) {
+                res.status(404)
+                res.send("User not found")
+            } else {
+            res.send(user)
+            }
+        })
 };
 
 function editUser(req, res) {
@@ -48,9 +57,9 @@ function editUser(req, res) {
 module.exports = {
     loginUser,
     logoutUser,
-    showUsers,
+    getUsers,
     addUser,
     deleteUser,
-    showUser,
+    getUser,
     editUser
 }
