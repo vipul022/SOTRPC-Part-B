@@ -1,4 +1,7 @@
-const UserModel = require("../models/user")
+const {
+    addUserToDB} = require("../utils/user_utilities");
+
+
 
 function loginUser(req, res) {
     res.send("got your loginUser request")
@@ -12,27 +15,22 @@ function showUsers(req, res) {
     res.send("got your showUsers request")
 };
 
-async function addUser (req, res) {
-    // res.send("got your addUser request")
-    res.json(req.body);
-    const {
-        name,
-        address,
-        phone,
-        email,
-        password
-    } = req.body;
-    const user = await UserModel.create({
-        name,
-        address,
-        phone,
-        email,
-        password
-    })
+function addUser(req, res) {
+    addUserToDB(req).save((err, user) => {
+        if (err) {
+            res.status(500);
+            res.json({
+                error: err.message
+            });
+        } else {
+            res.status(201);
+            res.send(user);
 
-    // Attach user to session
-    req.session.user = user;
-    console.log(req.session.user)
+            // Attach user to session
+            req.session.user = user;
+            console.log(req.session.user)
+        }
+    });
 };
 
 function deleteUser(req, res) {
