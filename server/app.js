@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const session = require("express-session")
 const userRouter = require("./routes/user_routes");
-const MongoStore = require("connect-mongo"(session))
+const MongoStore = require("connect-mongo")(session)
 
 const port = 3000;
 
