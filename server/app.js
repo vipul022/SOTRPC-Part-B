@@ -3,6 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const session = require("express-session")
 const userRouter = require("./routes/user_routes");
+const MongoStore = require("connect-mongo"(session))
 
 const port = 3000;
 
@@ -19,11 +20,10 @@ app.use(session({
     saveUninitialized: false,
     cookie: {
         expires: 600000
-    }
-    // ,
-    // store: new MongoStore({
-    //     mongooseConnection: mongoose.connection
-    // })
+    },
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection
+    })
 }));
 
 // Database connection
