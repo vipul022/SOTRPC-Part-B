@@ -1,6 +1,9 @@
 const {
     addUserToDB,
-    getUserFromDB} = require("../utils/user_utilities");
+    getUserFromDB,
+    deleteUserFromDB,
+    getUsersFromDB,
+    editUserFromDB} = require("../utils/user_utilities");
 
 
 
@@ -35,12 +38,20 @@ function addUser(req, res) {
 };
 
 function deleteUser(req, res) {
-    res.send("got your deleteUser request")
+    deleteUserFromDB(req.params.id).exec(err => {
+        if (err) {
+            res.status(500)
+            res.json({
+                error: err.message
+            })
+        }
+        res.sendStatus(204)
+    })
 };
 
 function getUser(req, res) {
         // execute the query from getPostById
-        getUserFromDB(req).exec((err, user) => {
+        getUserFromDB(req.params.id).exec((err, user) => {
             if (err) {
                 res.status(404)
                 res.send("User not found")

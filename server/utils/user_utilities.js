@@ -5,12 +5,12 @@ const addUserToDB = function(req) {
     return new User(req.body);
 };
 
-const getUserFromDB = function(req) {
-    return User.findById(req.params.id);
+const getUserFromDB = function(id) {
+    return User.findById(id);
 }
 
-const deleteUserFromDB = function(req) {
-
+const deleteUserFromDB = function(id) {
+    return User.findByIdAndRemove(id);
 }
 
 const getUsersFromDB = function(req) {
