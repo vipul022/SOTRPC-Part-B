@@ -14,7 +14,7 @@ app.use(express.urlencoded({
 }));
 
 app.use(session({
-    secret: 'star wars',
+    secret: 'star wars a new hope', // put this in .env
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -24,11 +24,10 @@ app.use(session({
     // store: new MongoStore({
     //     mongooseConnection: mongoose.connection
     // })
-}))
+}));
 
-
+// Database connection
 const dbConn = process.env.MONGODB_URI || 'mongodb://localhost/SOTRPC';
-
 mongoose.connect(dbConn, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -49,9 +48,12 @@ app.listen(port, () => {
     console.log(`SOTRPC app listening on port ${port}`)
 })
 
+//Routes
 app.use('/users', userRouter);
 
-
+// Home page test
 app.get('/', (req, res) => {
-    res.send('Welcome')
+    req.session.views = req.session.views? req.session.views +1 : 1;
+    res.json(req.session.views)
+    // res.send('Welcome')
 })
