@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import classData from "../../../src/data/class_data";
 import { useGlobalState } from "../../config/globalState";
+import { Link } from "react-router-dom";
 const Classes = () => {
-  // !useGlobalState is used to access store globally which is defined in app.js that has access to all the states
+  // !useGlobalState is used to access store and dispatch globally which are defined in app.js
   const { store, dispatch } = useGlobalState();
   const { classes } = store;
   // !use ClassData in use effect
@@ -26,18 +27,11 @@ const Classes = () => {
   return (
     <div>
       <h1>Classes</h1>
+      <Link to="/classes/new">
+        <button>New</button>
+      </Link>
       {content}
     </div>
   );
 };
 export default Classes;
-
-{
-  /* <div>
-      {blogPosts
-        .sort((a, b) => b.modified_date - a.modified_date)
-        .map((post) => (
-          <BlogPost key={post._id} post={post} />
-        ))}
-    </div> */
-}
