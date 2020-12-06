@@ -14,7 +14,7 @@ const deleteUserFromDB = function(id) {
 }
 
 const getUsersFromDB = function(req) {
-
+    return User.find()
 }
 
 const editUserFromDB = function(req) {

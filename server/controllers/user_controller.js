@@ -16,7 +16,15 @@ function logoutUser(req, res) {
 };
 
 function getUsers(req, res) {
-    res.send("got your showUsers request")
+    // res.send("got your showUsers request")
+    getUsersFromDB(req).exec((err, users) => {
+        if (err) {
+            res.status(404)
+            res.send("Users not found")
+        } else {
+        res.send(users)
+        }
+    })
 };
 
 function addUser(req, res) {
