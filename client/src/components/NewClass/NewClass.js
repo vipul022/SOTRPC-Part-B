@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
-const NewClass = () => {
+import classData from "../../../src/data/class_data";
+const NewClass = ({ history }) => {
+  // !accessing current state of classes from store
+  const { store, dispatch } = useGlobalState();
+  const { classes } = store;
+
   const initialFormState = {
     name: "",
     details: "",
@@ -13,7 +18,7 @@ const NewClass = () => {
 
   const handleChange = (event) => {
     console.log("event.target.value=>", event.target.value);
-    console.log("event.taeget.name=>", event.target.name);
+    console.log("event.target.name=>", event.target.name);
     const name = event.target.name;
     const value = event.target.value;
     setFormState({
@@ -21,9 +26,40 @@ const NewClass = () => {
       [name]: value,
     });
   };
+  // ! Adding a new class
+  const addClass = (c) => {
+    console.log("class=>", c);
+    console.log("classes inside NewClass=>", classes);
+    dispatch({
+      type: "setClasses",
+      data: [...classes, c],
+    });
+  };
+  // !creating nextId for add a new class
+  function getNextId() {
+    const ids = classes.map((c) => c._id);
+    return ids.sort()[ids.length - 1] + 1;
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("formState=>", formState);
+    const nextId = getNextId();
+    console.log("nextId=>", nextId);
+    const newClass = {
+      _id: nextId,
+      name: formState.name,
+      details: formState.details,
+      time: formState.time,
+      maxNumber: formState.maxNumber,
+      teacher: formState.teacher,
+    };
+    addClass(newClass);
+    history.push("/classes");
+  };
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h1>Add New Class</h1>
       <div>
         <label>Name</label>
@@ -64,7 +100,7 @@ const NewClass = () => {
           onChange={handleChange}
         ></input>
       </div>
-      <button>Create Class</button>
+      <input type="submit" value="Create Class"></input>
     </form>
   );
 };
