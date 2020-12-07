@@ -6,5 +6,10 @@ export default function (state, action) {
         ...state,
         classes: action.data,
       };
+    case "setMembers":
+      return {
+        ...state,
+        members: action.data,
+      };
   }
 }

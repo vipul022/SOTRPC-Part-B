@@ -12,6 +12,7 @@ import Members from "./components/Members/Members";
 const App = () => {
   const initialState = {
     classes: [],
+    members: [],
   };
 
   const [store, dispatch] = useReducer(stateReducer, initialState);
