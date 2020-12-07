@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import classData from "../../../src/data/class_data";
 import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
-const Classes = () => {
+const Classes = ({ history }) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
-  const { store, dispatch, match } = useGlobalState();
+  const { store, dispatch } = useGlobalState();
   const { classes } = store;
   // !use ClassData in use effect
   useEffect(() => {
@@ -40,6 +40,9 @@ const Classes = () => {
       <p>Maximum number: {c.maxNumber}</p>
       <button data-msg={c._id} onClick={handleDelete}>
         Delete
+      </button>
+      <button onClick={() => history.push("/classes/register")}>
+        Sign up for the class
       </button>
     </div>
   ));

@@ -6,6 +6,7 @@ import Home from "./components/Home/Home";
 import Nav from "./components/Nav/Nav";
 import Classes from "./components/Classes/Classes";
 import NewClass from "./components/NewClass/NewClass";
+import ClassRegister from "./components/ClassRegister/ClassRegister";
 
 const App = () => {
   const initialState = {
@@ -23,6 +24,7 @@ const App = () => {
             <Route exact path="/" component={Home} />
             <Route exact path="/classes" component={Classes} />
             <Route path="/classes/new" component={NewClass} />
+            <Route path="/classes/register" component={ClassRegister} />
           </Switch>
         </Router>
       </StateContext.Provider>
