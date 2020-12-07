@@ -4,14 +4,25 @@ const mongoose = require("mongoose");
 const session = require("express-session")
 const userRouter = require("./routes/user_routes");
 const MongoStore = require("connect-mongo")(session)
+const passport = require('passport');
 
 const port = 3000;
 
 const app = express();
-app.use(cors());
+
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
+}));
+const whitelist = ['http://localhost:3000']
+app.use(cors({
+    credentials: true,
+    origin: function (origin,callback) {
+        // Check each url in whitelist and see if it includes the origin (instead of matching exact string)
+        const whitelistIndex = whitelist.findIndex((url) => url.includes(origin))
+        console.log("found whitelistIndex", whitelistIndex)
+        callback(null,whitelistIndex > -1)
+    }
 }));
 
 app.use(session({
@@ -19,7 +30,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        expires: 600000
+        expires: 1800000
     },
     store: new MongoStore({
         mongooseConnection: mongoose.connection
@@ -42,18 +53,22 @@ mongoose.connect(dbConn, {
         }
 });
 
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport');
 
-
-app.listen(port, () => {
-    console.log(`SOTRPC app listening on port ${port}`)
-})
 
 //Routes
 app.use('/users', userRouter);
 
 // Home page test
 app.get('/', (req, res) => {
-    req.session.views = req.session.views? req.session.views +1 : 1;
-    res.json(req.session.views)
-    // res.send('Welcome')
+    // req.session.views = req.session.views? req.session.views +1 : 1;
+    // res.json(req.session.views)
+    res.send('Welcome')
+})
+
+
+app.listen(port, () => {
+    console.log(`SOTRPC app listening on port ${port}`)
 })

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const passportLocalMongoose = require('passport-local-mongoose')
 
 const User = new Schema({
     name:{
@@ -21,8 +22,19 @@ const User = new Schema({
     password: {
         type: String,
         required: true
+    },
+    paid:{
+        type: Boolean,
+        default: false
+    },
+    role: {
+        type: String,
+        default: 'user'
     }
 })
+
+// plugin the passport-local-mongoose middleware with our User schema
+User.plugin(passportLocalMongoose);
 
 User.plugin(require("mongoose-bcrypt"))
 module.exports = mongoose.model("User", User);
