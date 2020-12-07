@@ -7,6 +7,7 @@ const Nav = () => {
       <h1>South of the Rivers Potters Club</h1>
       <Link to="/">Home</Link>
       <Link to="/classes">Classes</Link>
+      <Link to="/members">Members</Link>
     </div>
   );
 };
