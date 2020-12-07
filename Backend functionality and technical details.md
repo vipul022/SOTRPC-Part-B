@@ -32,7 +32,7 @@ email: string
 
 password: string (bcrypt)
 
-paid: boolean
+paid: string
 
 role: string
 
