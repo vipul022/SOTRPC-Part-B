@@ -20,6 +20,23 @@ post /users/login - user logs in
 
 get /users/logout - user logs out
 
+### DB:
+
+name: string
+
+address: string
+
+phone: string
+
+email: string
+
+password: string (bcrypt)
+
+paid: boolean
+
+role: string
+
+
 
 
 ## Gallery

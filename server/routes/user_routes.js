@@ -3,10 +3,10 @@ const router = express.Router();
 const {
     loginUser,
     logoutUser,
-    showUsers, 
+    getUsers, 
     addUser,
     deleteUser,
-    showUser,
+    getUser,
     editUser
 } = require('../controllers/user_controller');
 
@@ -17,7 +17,7 @@ router.post("/login", loginUser);
 router.get("/logout", logoutUser);
 
 //show all users (admin only) 
-router.get("/", showUsers);
+router.get("/", getUsers);
 
 //add a new user
 router.post("/", addUser);
@@ -26,7 +26,7 @@ router.post("/", addUser);
 router.delete("/:id", deleteUser);
 
 //show one user
-router.get("/:id", showUser);
+router.get("/:id", getUser);
 
 //edit a user
 router.put("/:id", editUser);
