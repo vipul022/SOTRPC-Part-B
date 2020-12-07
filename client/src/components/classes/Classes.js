@@ -17,8 +17,8 @@ const Classes = () => {
 
   const content = classes.map((c) => (
     <div key={c._id}>
-      <h3>{c.title}</h3>
-      <p>{c.content}</p>
+      <h3>{c.name}</h3>
+      <p>{c.details}</p>
       <p>Time: {c.time}</p>
       <p>Maximum number: {c.maxNumber}</p>
     </div>
