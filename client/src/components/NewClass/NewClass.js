@@ -100,6 +100,7 @@ const NewClass = ({ history }) => {
           onChange={handleChange}
         ></input>
       </div>
+      <button onClick={() => history.goBack()}>Back</button>
       <input type="submit" value="Create Class"></input>
     </form>
   );

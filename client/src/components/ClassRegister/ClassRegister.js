@@ -1,8 +1,9 @@
 import React from "react";
 
-const ClassRegister = () => {
+const ClassRegister = ({ history }) => {
   return (
     <div>
+      <button onClick={() => history.goBack()}>Back</button>
       <h1>Class Info</h1>
       <p>To sign up for this class,</p>
       <p>please email harry@SOTRPC.com.au</p>

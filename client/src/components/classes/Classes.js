@@ -6,6 +6,7 @@ const Classes = ({ history }) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
   const { store, dispatch } = useGlobalState();
   const { classes } = store;
+
   // !use ClassData in use effect
   useEffect(() => {
     console.log("inside useEffect");
@@ -50,6 +51,7 @@ const Classes = ({ history }) => {
   return (
     <div>
       <h1>Classes</h1>
+      <button onClick={() => history.goBack()}>Back</button>
       <Link to="/classes/new">
         <button>New</button>
       </Link>
