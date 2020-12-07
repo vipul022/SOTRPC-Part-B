@@ -24,8 +24,8 @@ const User = new Schema({
         required: true
     },
     paid:{
-        type: Boolean,
-        default: false
+        type: string,
+        default: 'not paid'
     },
     role: {
         type: String,
