@@ -1,38 +1,38 @@
 export default [
   {
     _id: 1,
-    title: "Weekly Beginners Class",
-    content:
+    name: "Weekly Beginners Class",
+    details:
       "This is a beginners course. We make pots, bowls, vases and various glazes using wheel",
     time: "12/12/20 at 07:00pm",
-    instructor: "Cindy",
-    MaxNumber: 8,
+    teacher: "Cindy",
+    maxNumber: 8,
   },
   {
     _id: 2,
-    title: "Weekly Advance Class",
-    content:
+    name: "Weekly Advance Class",
+    details:
       "This is a advance course. We make pots, bowls, vases and various glazes using wheel",
     time: "13/12/20 at 07:00pm",
-    instructor: "Brad",
-    MaxNumber: 8,
+    teacher: "Brad",
+    maxNumber: 8,
   },
   {
     _id: 3,
-    title: "Glazing Beginners Class",
-    content:
+    name: "Glazing Beginners Class",
+    details:
       "This is a beginners course. We make pots, bowls, vases and various glazes using wheel",
     time: "12/12/20 at 07:00pm",
-    instructor: "Maria",
-    MaxNumber: 8,
+    teacher: "Maria",
+    maxNumber: 8,
   },
   {
     _id: 4,
-    title: "Glazing Advance Class",
-    content:
+    name: "Glazing Advance Class",
+    details:
       "This is a beginners course. We make pots, bowls, vases and various glazes using wheel",
     time: "12/12/20 at 07:00pm",
-    instructor: "Cindy",
-    MaxNumber: 8,
+    teacher: "Cindy",
+    maxNumber: 8,
   },
 ];
