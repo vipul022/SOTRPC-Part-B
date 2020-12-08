@@ -14,7 +14,7 @@ export default [
     address: "921, main street, Melbourne",
     phone: "033223321",
     email: "mark@test.com",
-    paid: "not paid",
+    paid: "Unpaid",
     role: "User",
   },
   {
