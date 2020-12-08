@@ -28,7 +28,8 @@ const EditMember = (props) => {
     name: "",
     address: "",
     phone: "",
-    email: "",
+    // !username will contain email, need a username field for passport-local-mongoose
+    username: "",
     paid: "",
     role: "",
   };
@@ -42,7 +43,7 @@ const EditMember = (props) => {
       name: member.name,
       address: member.address,
       phone: member.phone,
-      email: member.email,
+      username: member.username,
       paid: member.paid,
       role: member.role,
     });
@@ -93,7 +94,7 @@ const EditMember = (props) => {
       name: formState.name,
       address: formState.address,
       phone: formState.phone,
-      email: formState.email,
+      username: formState.username,
       paid: formState.paid,
       role: formState.role,
     };
@@ -140,8 +141,8 @@ const EditMember = (props) => {
           <label>Email</label>
           <input
             type="email"
-            name="email"
-            value={formState.email}
+            name="username"
+            value={formState.username}
             onChange={handleChange}
           ></input>
         </div>
