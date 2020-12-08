@@ -101,5 +101,27 @@ date:
 
 
 
+## Classes
+
+get /classes - list all classes
+
+delete /classes/id - delete one class
+
+post /classes - add one class
+
+put /classes/id - edit one class
+
+get /classes/id - get one class
+
+
+### DB:
+
+title:
+
+description:
+
+time:
+
+maxNumber:
 
 
