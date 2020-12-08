@@ -8,6 +8,7 @@ import Classes from "./components/Classes/Classes";
 import NewClass from "./components/NewClass/NewClass";
 import ClassRegister from "./components/ClassRegister/ClassRegister";
 import Members from "./components/Members/Members";
+import EditMember from "./components/EditMember/EditMember";
 
 const App = () => {
   const initialState = {
@@ -27,12 +28,13 @@ const App = () => {
             <Route exact path="/classes" component={Classes} />
             <Route path="/classes/new" component={NewClass} />
             <Route path="/classes/register" component={ClassRegister} />
-            <Route path="/members" component={Members} />
+            <Route exact path="/users" component={Members} />
+            <Route path="/users/edit/:id" component={EditMember} />
           </Switch>
         </Router>
       </StateContext.Provider>
     </div>
   );
 };
-
+// `/users/edit/${m._id}`
 export default App;
