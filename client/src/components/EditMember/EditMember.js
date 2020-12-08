@@ -1,9 +1,27 @@
 import React, { useState, useEffect } from "react";
+import { useGlobalState } from "../../config/globalState";
 
 const EditMember = (props) => {
+  const { store, dispatch } = useGlobalState();
+  const { members } = store;
+
+  // console.log("PROPS=>", props);
+  const { history } = props;
+  // !extracting history from props
+  // console.log("history=>", history);
   // !accessing member that is being passed from Members component
   const { member } = props.location.state;
-  console.log("member=>", member);
+
+  // const {
+  //   history,
+  //   {
+  //     {
+  //       member
+  //     } = state
+  //   }=location,
+
+  // } = props;
+  // console.log("member=>", member);
 
   // !set initial form values to empty string
   const initialFormState = {
@@ -16,18 +34,18 @@ const EditMember = (props) => {
   };
 
   const [formState, setFormState] = useState(initialFormState);
-  console.log("formState=>", formState);
+  // console.log("formState=>", formState);
   useEffect(() => {
     // !When member changes, set the form state to the values of the member's properties after the component mounts
-    member &&
-      setFormState({
-        name: member.name,
-        address: member.address,
-        phone: member.phone,
-        email: member.email,
-        paid: member.paid,
-        role: member.role,
-      });
+
+    setFormState({
+      name: member.name,
+      address: member.address,
+      phone: member.phone,
+      email: member.email,
+      paid: member.paid,
+      role: member.role,
+    });
   }, [member]);
 
   function handleChange(event) {
@@ -38,10 +56,59 @@ const EditMember = (props) => {
       [name]: value,
     });
   }
+
+  const deleteMember = (id) => {
+    const otherMembers = members.filter(
+      (member) => member._id !== parseInt(id)
+    );
+    console.log("otherMembers=>", otherMembers);
+    dispatch({
+      type: "setMembers",
+      data: [otherMembers],
+    });
+  };
+
+  const handleDelete = (event) => {
+    event.preventDefault();
+    const id = member._id;
+    // console.log("id=>", id);
+    deleteMember(id);
+    history.push("/users");
+  };
+
+  const updateMember = (updatedMember) => {
+    const otherMembers = members.filter(
+      (member) => member._id !== updatedMember._id
+    );
+    dispatch({
+      type: "setMembers",
+      data: [...otherMembers, updatedMember],
+    });
+  };
+
+  const handleUpdate = (event) => {
+    event.preventDefault();
+    const updatedMember = {
+      _id: member._id,
+      name: formState.name,
+      address: formState.address,
+      phone: formState.phone,
+      email: formState.email,
+      paid: formState.paid,
+      role: formState.role,
+    };
+    console.log("updatedMember=>", updatedMember);
+    updateMember(updatedMember);
+    history.push("/users");
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
   return (
     <div>
       <h1>Edit Member</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
           <label>Name</label>
           <input
@@ -94,9 +161,9 @@ const EditMember = (props) => {
           </select>
         </div>
         <div>
-          <button>Back</button>
-          <button>Update</button>
-          <button>Delete</button>
+          <button onClick={() => history.goBack()}>Back</button>
+          <button onClick={handleUpdate}>Update</button>
+          <button onClick={handleDelete}>Delete</button>
         </div>
       </form>
     </div>
