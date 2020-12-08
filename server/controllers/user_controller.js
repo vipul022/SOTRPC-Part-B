@@ -61,9 +61,9 @@ function addUser(req, res) {
         phone,
         role,
         paid,
-        name
+        name,
+        username //this contains the email
     } = req.body
-    const username = req.body.email
     User.register(new User({
         username,
         address,
