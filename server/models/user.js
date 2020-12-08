@@ -15,17 +15,14 @@ const User = new Schema({
         type: String,
         required: true
     },
-    email:{
-        type: String,
-        required: true
-    },
-    password: {
+    //username will contain the email. Need a username field for passport-local-mongoose
+    username:{
         type: String,
         required: true
     },
     paid:{
-        type: Boolean,
-        default: false
+        type: String,
+        default: 'not paid'
     },
     role: {
         type: String,
