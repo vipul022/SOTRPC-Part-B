@@ -1,4 +1,4 @@
-export default [
+const classData = [
   {
     _id: 1,
     name: "Weekly Beginners Class",
@@ -36,3 +36,4 @@ export default [
     maxNumber: 8,
   },
 ];
+export default classData;

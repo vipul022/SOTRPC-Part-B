@@ -15,6 +15,7 @@ const Members = () => {
       type: "setMembers",
       data: membersData,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log("members=>", members);
 
