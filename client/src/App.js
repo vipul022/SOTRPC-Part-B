@@ -10,7 +10,7 @@ import ClassRegister from "./components/ClassRegister/ClassRegister";
 import Members from "./components/Members/Members";
 import EditMember from "./components/EditMember/EditMember";
 import Register from "./components/Register/Register";
-// import SignIn from "./components/SignIn/SignIn";
+import SignIn from "./components/SignIn/SignIn";
 
 const App = () => {
   const initialState = {
@@ -34,7 +34,7 @@ const App = () => {
             <Route exact path="/users" component={Members} />
             <Route path="/users/edit/:id" component={EditMember} />
             <Route exact path="/auth/register" component={Register} />
-            {/* <Route path="/auth/login" component={SignIn} /> */}
+            <Route path="/auth/login" component={SignIn} />
           </Switch>
         </Router>
       </StateContext.Provider>

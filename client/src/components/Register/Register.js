@@ -24,7 +24,7 @@ const Register = ({ history }) => {
 
   const registerUser = () => {
     dispatch({
-      type: "setLoggedInUse",
+      type: "setLoggedInUser",
       data: userDetails.name,
     });
   };

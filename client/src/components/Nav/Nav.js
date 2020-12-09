@@ -9,7 +9,7 @@ const Nav = () => {
 
   const logoutUser = () => {
     dispatch({
-      type: "setLoggedInUse",
+      type: "setLoggedInUser",
       data: null,
     });
   };
