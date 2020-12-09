@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
 const SignIn = ({ history }) => {
+  // !extracting dispatch from global state(store)
   const { dispatch } = useGlobalState();
 
   const initialFormState = {
@@ -9,19 +10,6 @@ const SignIn = ({ history }) => {
   };
 
   const [userDetails, setUserDetails] = useState(initialFormState);
-
-  const loginUser = (useeDetails) => {
-    dispatch({
-      type: "setLoggedInUser",
-      data: userDetails.username,
-    });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    loginUser();
-    history.push("/");
-  };
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -32,6 +20,20 @@ const SignIn = ({ history }) => {
       ...userDetails,
       [name]: value,
     });
+  };
+  console.log("userDetails>", userDetails);
+  const loginUser = () => {
+    console.log("userDetails>", userDetails);
+    dispatch({
+      type: "setLoggedInUser",
+      data: userDetails.username,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    loginUser();
+    history.push("/");
   };
 
   return (
