@@ -26,10 +26,10 @@ const Nav = () => {
       {/* <Link to="/auth/login">Login</Link> */}
       {loggedInUser ? (
         <div>
+          <h3>Welcome {loggedInUser}</h3>
           <Link onClick={logoutUser} to="/">
             Logout
           </Link>
-          <h3>Welcome {loggedInUser}</h3>
         </div>
       ) : (
         <div>
