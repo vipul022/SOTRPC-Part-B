@@ -11,5 +11,10 @@ export default function (state, action) {
         ...state,
         members: action.data,
       };
+    case "setLoggedInUse":
+      return {
+        ...state,
+        loggedInUser: action.data,
+      };
   }
 }
