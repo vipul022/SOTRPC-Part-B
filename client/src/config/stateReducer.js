@@ -1,5 +1,5 @@
 // ! The state that is passed as argument to the function below is the initial state which is defined in app.js
-export default function (state, action) {
+export default function StateReducer(state, action) {
   switch (action.type) {
     case "setClasses":
       return {
@@ -16,5 +16,7 @@ export default function (state, action) {
         ...state,
         loggedInUser: action.data,
       };
+    default:
+      return state;
   }
 }
