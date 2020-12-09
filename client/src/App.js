@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { StateContext } from "./config/globalState";
 import stateReducer from "./config/stateReducer";
 import Home from "./components/Home/Home";
-import Nav from "./components/Nav/Nav";
+import Nav from "./components/Nav2/Nav";
 import Classes from "./components/PotteryClasses/Classes";
 import NewClass from "./components/NewClass/NewClass";
 import ClassRegister from "./components/ClassRegister/ClassRegister";
