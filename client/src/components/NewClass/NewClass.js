@@ -37,6 +37,7 @@ const NewClass = ({ history }) => {
   };
   // !creating nextId for add a new class
   function getNextId() {
+    console.log("classes in getNextId=>", classes);
     const ids = classes.map((c) => c._id);
     return ids.sort()[ids.length - 1] + 1;
   }
