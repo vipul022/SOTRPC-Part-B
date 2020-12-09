@@ -37,4 +37,4 @@ const membersData = [
   },
 ];
 
-export default membersData;
+export default membersData
