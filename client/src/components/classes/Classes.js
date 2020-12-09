@@ -14,6 +14,7 @@ const Classes = ({ history }) => {
       type: "setClasses",
       data: classData,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log("classes=>", classes);
 

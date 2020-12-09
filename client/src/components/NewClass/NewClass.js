@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
-import classData from "../../../src/data/class_data";
+// import classData from "../../../src/data/class_data";
 const NewClass = ({ history }) => {
   // !accessing current state of classes from store
   const { store, dispatch } = useGlobalState();

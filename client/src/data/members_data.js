@@ -1,4 +1,4 @@
-export default [
+const membersData = [
   {
     _id: 1,
     name: "John Cena",
@@ -36,3 +36,5 @@ export default [
     role: "Admin",
   },
 ];
+
+export default membersData;
