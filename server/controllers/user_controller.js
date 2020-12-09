@@ -53,25 +53,25 @@ function getUsers(req, res) {
     })
 };
 
-function addUser(req, res) {
-    // addUserToDB(req)
+async function addUser(req, res) {
+    console.log('in addUser')
     const {
         password,
         address,
         phone,
         role,
         paid,
-        name
+        name,
+        username //this contains the email
     } = req.body
-    const username = req.body.email
-    User.register(new User({
+    await User.register(new User({
         username,
         address,
         phone,
         role,
         paid,
         name
-    }), password, function (err) {
+    }), password, async function (err) {
         if (err) {
             if (err.name === 'UserExistsError') {
                 res.status(409)
@@ -85,7 +85,9 @@ function addUser(req, res) {
                 });
             }
         } else {
+            // return next()
             // Log in the newly registered user
+            console.log('finished add user, logging in')
             loginUser(req, res);
         }
     });
