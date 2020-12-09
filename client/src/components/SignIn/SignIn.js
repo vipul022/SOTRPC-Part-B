@@ -1,38 +1,66 @@
-// import React, { useState } from "react";
-// import { useGlobalState } from "../../config/globalState";
-// const SignIn = ({ history }) => {
-//   const { dispatch } = useGlobalState();
+import React, { useState } from "react";
+import { useGlobalState } from "../../config/globalState";
+const SignIn = ({ history }) => {
+  const { dispatch } = useGlobalState();
 
-//   const initialFormState = {
-//     username: "",
-//     password: "",
-//   };
+  const initialFormState = {
+    username: "",
+    password: "",
+  };
 
-//   const [userDetails, setUserDetails] = useState(initialFormState);
+  const [userDetails, setUserDetails] = useState(initialFormState);
 
-//   const handleSubmit = (event) {
-//     event.preventDefault()
-//   }
+  const loginUser = (useeDetails) => {
+    dispatch({
+      type: "setLoggedInUser",
+      data: userDetails.username,
+    });
+  };
 
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit}>
-// <div>
-//   <label>Email</label>
-//   <input
-//   required
-//   type="email"
-//   name="username"
-//   placeholder="Enter your email..."
-//   onChange={handleChange}
-//   ></input>
-// </div>
-// <div>
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    loginUser();
+    history.push("/");
+  };
 
-// </div>
-//       </form>
-//     </div>
-//   );
-// };
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    // console.log("name=>", name);
+    // console.log("value=>", value);
+    setUserDetails({
+      ...userDetails,
+      [name]: value,
+    });
+  };
 
-// export default SignIn;
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Email</label>
+        <input
+          required
+          type="email"
+          name="username"
+          placeholder="Enter your email..."
+          onChange={handleChange}
+        ></input>
+      </div>
+      <div>
+        <label>Password</label>
+        <input
+          required
+          type="password"
+          name="password"
+          placeholder="Enter your password..."
+          onChange={handleChange}
+        ></input>
+      </div>
+      <div>
+        <input type="submit" value="Log in"></input>
+      </div>
+    </form>
+  );
+};
+
+export default SignIn;
