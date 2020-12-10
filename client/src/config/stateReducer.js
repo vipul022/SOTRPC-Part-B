@@ -11,7 +11,7 @@ export default function StateReducer(state, action) {
         ...state,
         members: action.data,
       };
-    case "setLoggedInUse":
+    case "setLoggedInUser":
       return {
         ...state,
         loggedInUser: action.data,

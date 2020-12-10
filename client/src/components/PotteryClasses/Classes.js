@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import classData from "../../../src/data/class_data";
+import classData from "../../data/class_data";
 import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
 const Classes = ({ history }) => {
