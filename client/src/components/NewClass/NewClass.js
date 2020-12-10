@@ -4,10 +4,10 @@ import { useGlobalState } from "../../config/globalState";
 const NewClass = ({ history }) => {
   // !accessing current state of classes from store
   const { store, dispatch } = useGlobalState();
-  console.log("store=> ", store);
+  // console.log("store=> ", store);
   const { classes } = store;
-  console.log("classes=>", classes);
-  console.log("useGlobalState=>", useGlobalState());
+  // console.log("classes=>", classes);
+  // console.log("useGlobalState=>", useGlobalState());
   const initialFormState = {
     name: "",
     details: "",
@@ -39,7 +39,7 @@ const NewClass = ({ history }) => {
   };
   // !creating nextId for add a new class
   function getNextId() {
-    console.log("classes in getNextId=>", classes);
+    // console.log("classes in getNextId=>", classes);
     const ids = classes.map((c) => c._id);
     return ids.sort()[ids.length - 1] + 1;
   }
@@ -65,17 +65,20 @@ const NewClass = ({ history }) => {
     <form onSubmit={handleSubmit}>
       <h1>Add New Class</h1>
       <div>
-        <label>Name</label>
+        <label>"Name"</label>
         <input
+          required
           type="text"
           name="name"
           placeholder="Enter class name..."
           onChange={handleChange}
+          data-testid="name"
         ></input>
       </div>
       <div>
         <label>Details</label>
         <textarea
+          required
           name="details"
           placeholder="Enter details..."
           onChange={handleChange}
@@ -84,6 +87,7 @@ const NewClass = ({ history }) => {
       <div>
         <label>Time</label>
         <input
+          required
           type="text"
           name="time"
           placeholder="Enter class timings..."
@@ -92,11 +96,17 @@ const NewClass = ({ history }) => {
       </div>
       <div>
         <label>Max number</label>
-        <input type="number" name="maxNumber" onChange={handleChange}></input>
+        <input
+          required
+          type="number"
+          name="maxNumber"
+          onChange={handleChange}
+        ></input>
       </div>
       <div>
         <label>Teacher</label>
         <input
+          required
           type="text"
           name="teacher"
           placeholder="Enter teacher's name..."
