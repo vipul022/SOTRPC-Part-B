@@ -4,8 +4,10 @@ import { useGlobalState } from "../../config/globalState";
 const NewClass = ({ history }) => {
   // !accessing current state of classes from store
   const { store, dispatch } = useGlobalState();
+  console.log("store=> ", store);
   const { classes } = store;
-
+  console.log("classes=>", classes);
+  console.log("useGlobalState=>", useGlobalState());
   const initialFormState = {
     name: "",
     details: "",

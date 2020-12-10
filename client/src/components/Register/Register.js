@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
+import { registerUser } from "../../services/authServices";
 
 const Register = ({ history }) => {
   const initialFormState = {
@@ -11,6 +12,8 @@ const Register = ({ history }) => {
   };
 
   const [userDetails, setUserDetails] = useState(initialFormState);
+  const [errorMessage, setErrorMessage] = useState(null);
+
   const { dispatch } = useGlobalState();
 
   const handleChange = (event) => {
@@ -22,22 +25,41 @@ const Register = ({ history }) => {
     });
   };
 
-  const registerUser = () => {
-    dispatch({
-      type: "setLoggedInUser",
-      data: userDetails.name,
-    });
-  };
+  // const registerUser = () => {
+  //   dispatch({
+  //     type: "setLoggedInUser",
+  //     data: userDetails.name,
+  //   });
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    registerUser();
-    history.push("/");
+    //!RegisterUser is a function that hit the backend route and save data to the db
+    registerUser(userDetails)
+      .then(() => {
+        // console.log("userDetails=>", userDetails);
+        dispatch({
+          type: "setLoggedInUser",
+          data: userDetails.username,
+        });
+        history.push("/");
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 401)
+          setErrorMessage(
+            "Authentication failed, please check user name and password"
+          );
+        else
+          setErrorMessage(
+            "There may be a problem with the server please try later"
+          );
+      });
   };
   return (
     <div>
       <h1>Create Account</h1>
       <form onSubmit={handleSubmit}>
+        {errorMessage && <p>{errorMessage}</p>}
         <div>
           <label>Name</label>
           <input
