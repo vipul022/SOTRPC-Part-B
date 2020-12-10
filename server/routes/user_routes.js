@@ -12,7 +12,8 @@ const {
 const {
     userAuthenticated,
     isAdmin,
-    isMember
+    isMember,
+    isOwnUserOrAdmin
 } = require("../utils/common_utils");
 
 //route for user login
@@ -29,15 +30,15 @@ router.get("/", userAuthenticated, isAdmin, getUsers);
 router.post("/", addUser);
 
 //delete a user
-router.delete("/:id", userAuthenticated, isAdmin, deleteUser);
+router.delete("/:id", userAuthenticated, isOwnUserOrAdmin, deleteUser);
 // router.delete("/:id", deleteUser);
 
 //show one user
-router.get("/:id", userAuthenticated, getUser);
+router.get("/:id", userAuthenticated, isOwnUserOrAdmin, getUser);
 // router.get("/:id", getUser);
 
 //edit a user
-router.put("/:id", userAuthenticated, editUser);
+router.put("/:id", userAuthenticated, isOwnUserOrAdmin, editUser);
 // router.put("/:id", editUser);
 
 module.exports = router;

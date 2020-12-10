@@ -33,5 +33,5 @@ const User = new Schema({
 // plugin the passport-local-mongoose middleware with our User schema
 User.plugin(passportLocalMongoose);
 
-User.plugin(require("mongoose-bcrypt"))
+
 module.exports = mongoose.model("User", User);
