@@ -3,8 +3,9 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const session = require("express-session")
 const userRouter = require("./routes/user_routes");
+const classRouter = require("./routes/pottery_classes_routes");
 const MongoStore = require("connect-mongo")(session)
-const passport = require('passport');
+const passport = require("passport");
 
 const port = 3001;
 
@@ -14,7 +15,7 @@ app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }));
-const whitelist = ['http://localhost:3000']
+const whitelist = ["http://localhost:3000"]
 app.use(cors({
     credentials: true,
     origin: function (origin,callback) {
@@ -26,7 +27,7 @@ app.use(cors({
 }));
 
 app.use(session({
-    secret: 'star wars a new hope', // put this in .env
+    secret: "star wars a new hope", // put this in .env
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -38,7 +39,7 @@ app.use(session({
 }));
 
 // Database connection
-const dbConn = process.env.MONGODB_URI || 'mongodb://localhost/SOTRPC';
+const dbConn = process.env.MONGODB_URI || "mongodb://localhost/SOTRPC";
 mongoose.connect(dbConn, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -47,28 +48,29 @@ mongoose.connect(dbConn, {
     },
     (err) => {
         if (err) {
-            console.log('Error connecting to database', err);
+            console.log("Error connecting to database", err);
         } else {
-            console.log('Connected to database', dbConn);
+            console.log("Connected to database", dbConn);
         }
 });
 
 app.use(passport.initialize());
 app.use(passport.session());
-require('./config/passport');
+require("./config/passport");
 
 
 //Routes
-app.use('/users', userRouter);
+app.use("/users", userRouter);
+app.use("/classes", classRouter);
 
 // Home page test
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
     // req.session.views = req.session.views? req.session.views +1 : 1;
     // res.json(req.session.views)
-    res.send('Welcome')
+    res.send("Welcome")
 })
 
 
 app.listen(port, () => {
-    console.log(`SOTRPC app listening on port ${port}`)
+    console.log("SOTRPC app listening on port ${port}")
 })
