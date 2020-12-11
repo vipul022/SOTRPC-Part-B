@@ -20,7 +20,7 @@ const addClass = function(req, res) {
 }
 
 function getClasses(req, res) {
-    getClassesFromDB(req).exec((err, classes) => {
+    getClassesFromDB().exec((err, classes) => {
         if (err) {
             res.status(404)
             res.json({
