@@ -15,10 +15,11 @@ const PotteryClass = new Schema({
         required: true
     },
     maxNumber:{
-        type: Number,
-        required: true
+        type: Number
+    },
+    teacher:{
+        type: String
     }
-
 })
 
 module.exports = mongoose.model("PotteryClass", PotteryClass);
