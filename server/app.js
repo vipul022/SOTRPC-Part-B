@@ -6,7 +6,7 @@ const userRouter = require("./routes/user_routes");
 const MongoStore = require("connect-mongo")(session)
 const passport = require('passport');
 
-const port = 3000;
+const port = 3001;
 
 const app = express();
 
