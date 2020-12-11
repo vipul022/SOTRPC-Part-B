@@ -98,6 +98,7 @@ const Register = ({ history }) => {
             name="username"
             placeholder="Enter your email..."
             onChange={handleChange}
+            data-testid="email"
           ></input>
         </div>
         <div>

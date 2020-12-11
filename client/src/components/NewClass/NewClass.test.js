@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import NewClass from "./NewClass";
 import { StateContext } from "../../config/globalState";
-import { useGlobalState } from "../../config/globalState";
+// import { useGlobalState } from "../../config/globalState";
 
 const store = {
   classes: [
@@ -79,9 +79,11 @@ describe("NewClass component renders as expected", () => {
     screen.getByRole("button", { name: /create class/i });
   });
   test("text box should display the correct user input ", () => {
+    // !as there are multiple text boxes, therefore  getByTestId id used to target a specific textbox
     // userEvent.type(screen.getByTestId("name", "Vipul"));
     // expect((screen.getByTestId("name").value).toBe("Vipul"));
     const input = screen.getByTestId("name");
+    // !"vipul" is passed a value to the text box
     userEvent.type(input, "vipul");
     expect(input.value).toBe("vipul");
     // console.log("name=>", input);
