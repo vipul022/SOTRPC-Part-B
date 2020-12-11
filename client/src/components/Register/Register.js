@@ -38,7 +38,7 @@ const Register = ({ history }) => {
     console.log("userDetails.username=>", userDetails.username);
     registerUser(userDetails)
       .then((data) => {
-        // console.log("data=>", data.user.name);
+        console.log("data=>", data);
         const { name } = data.user;
         console.log("name=>", name);
         dispatch({
@@ -64,37 +64,40 @@ const Register = ({ history }) => {
       <form onSubmit={handleSubmit}>
         {errorMessage && <p>{errorMessage}</p>}
         <div>
-          <label>Name</label>
+          <label for="name">Name</label>
           <input
             required
             type="text"
             name="name"
             placeholder="Enter your full name..."
+            data-testid="name"
             onChange={handleChange}
           ></input>
         </div>
         <div>
-          <label>Address</label>
+          <label for="address">Address</label>
           <input
             required
             type="text"
             name="address"
             placeholder="Enter your address..."
+            data-testid="address"
             onChange={handleChange}
           ></input>
         </div>
         <div>
-          <label>Phone</label>
+          <label for="phone">Phone</label>
           <input
             required
             type="text"
             name="phone"
             placeholder="Enter your phone number..."
+            data-testid="phone"
             onChange={handleChange}
           ></input>
         </div>
         <div>
-          <label>Email</label>
+          <label for="email">Email</label>
           <input
             required
             type="email"
@@ -105,12 +108,13 @@ const Register = ({ history }) => {
           ></input>
         </div>
         <div>
-          <label>Password</label>
+          <label for="password">Password</label>
           <input
             required
             type="password"
             name="password"
             placeholder="Enter password..."
+            data-testid="password"
             onChange={handleChange}
           ></input>
         </div>

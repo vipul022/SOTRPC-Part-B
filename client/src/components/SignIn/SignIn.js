@@ -35,11 +35,12 @@ const SignIn = ({ history }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     loginUser(userDetails)
-      .then(() => {
-        console.log("userDetails=>", userDetails);
+      .then((data) => {
+        const { name } = data.user;
+        console.log("name=>", name);
         dispatch({
           type: "setLoggedInUser",
-          data: userDetails.username,
+          data: name,
         });
         history.push("/");
       })
