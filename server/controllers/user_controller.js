@@ -42,7 +42,6 @@ function getUsers(req, res) {
     getUsersFromDB(req).exec((err, users) => {
         if (err) {
             res.status(404)
-            res.send("Users not found")
             res.json({
                 error: err.message
             })
@@ -59,8 +58,6 @@ async function addUser(req, res) {
         password,
         address,
         phone,
-        role,
-        paid,
         name,
         username //this contains the email
     } = req.body
@@ -68,8 +65,6 @@ async function addUser(req, res) {
         username,
         address,
         phone,
-        role,
-        paid,
         name
     }), password, async function (err) {
         if (err) {
@@ -109,7 +104,6 @@ function getUser(req, res) {
     getUserFromDB(req.params.id).exec((err, user) => {
         if (err) {
             res.status(404)
-            res.send("User not found")
             res.json({
                 error: err.message
             })
