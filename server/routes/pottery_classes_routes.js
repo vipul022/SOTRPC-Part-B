@@ -14,19 +14,19 @@ const {
 } = require("../utils/common_utils");
 
 // list all classes
-router.get("/")
+router.get("/", getClasses)
 
 //add one class
-router.post("/")
+router.post("/", addClass)
 
 //get one class
-router.get("/id")
+router.get("/id", getClass)
 
 //edit one class
-router.put("/id")
+router.put("/id", editClass)
 
 //delete one class
-router.delete("/id")
+router.delete("/id", deleteClass)
 
 
 module.exports = router;
