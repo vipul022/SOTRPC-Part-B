@@ -1,7 +1,8 @@
-const mongoose = require('mongoose');
-const expect = require('expect');
-const utilities = require('../utils/user_utilities');
-const User = require('../models/user');
+const mongoose = require("mongoose");
+const expect = require("expect");
+const utilities = require("../utils/user_utilities");
+const controller = require("../controllers/user_controller");
+const User = require("../models/user");
 const {
     connectToDb,
     disconnectFromDb
@@ -57,51 +58,49 @@ describe('getUsersFromDB with one user', () => {
     });
 });
 
-// addUser removed due to not being in the utilities folder anymore
-// describe('addUser', (done) => {
-//     it('should add a new User', function (done) {
-//         // define a req object with expected structure
-//         const req = {
-//             body: {
-//                 name: "Vipul",
-//                 email: "vipul@vipul.com",
-//                 phone: "032443382",
-//                 password: "123123",
-//                 address: "123 Fake st Spotswood 3015",
-//                 paid: "awaiting",
-//                 role: "admin"
-//             }
-//         }
-//         utilities.addUserToDB(req).save((err, user) => {
-//             console.log(err)
-//             expect(user.name).toBe(req.body.name);
-//             done();
-//         });
-//     });
-//     it('should fail if a required field is missing', function (done) {
-//         // define a req object with missing required field (phone)
-//         const req = {
-//             body: {
-//                 name: "Jason",
-//                 email: "jason@jason.com",
-//                 // phone: "032443382",
-//                 password: "123123",
-//                 address: "43 Benbow St Yarraville 3013",
-//                 paid: "paid",
-//                 role: "admin"
-//             }
-//         }
-//         utilities.addUserToDB(req).save((err, post) => {
-//             if (err) {
-//                 expect(err.message).toMatch(/validation/);
-//                 done();
-//             } else {
-//                 expect(true).toBe(false);
-//                 done();
-//             }
-//         });
-//     });
-// });
+describe('addUser', (done) => {
+    it('should add a new User', function (done) {
+        // define a req object with expected structure
+        const req = {
+            body: {
+                name: "Vipul",
+                email: "vipul@vipul.com",
+                phone: "032443382",
+                password: "123123",
+                address: "123 Fake st Spotswood 3015",
+                paid: "awaiting",
+                role: "admin"
+            }
+        }
+        controller.addUser(req, res)
+        expect(res.user.name).toBe(req.body.name);
+        done();
+    });
+
+    // it('should fail if a required field is missing', function (done) {
+    //     // define a req object with missing required field (phone)
+    //     const req = {
+    //         body: {
+    //             name: "Jason",
+    //             email: "jason@jason.com",
+    //             // phone: "032443382",
+    //             password: "123123",
+    //             address: "43 Benbow St Yarraville 3013",
+    //             paid: "paid",
+    //             role: "admin"
+    //         }
+    //     }
+    //     controller.addUser(req)
+    //     if (err) {
+    //         expect(err.message).toMatch(/validation/);
+    //         done();
+    //     } else {
+    //         expect(true).toBe(false);
+    //         done();
+    //     }
+
+    // });
+});
 
 
 
