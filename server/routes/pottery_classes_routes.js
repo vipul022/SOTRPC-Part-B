@@ -17,16 +17,16 @@ const {
 router.get("/", getClasses)
 
 //add one class
-router.post("/", addClass)
+router.post("/",userAuthenticated, isAdmin, addClass)
 
 //get one class
-router.get("/id", getClass)
+router.get("/:id", getClass)
 
 //edit one class
-router.put("/id", editClass)
+router.put("/:id",userAuthenticated, isAdmin, editClass)
 
 //delete one class
-router.delete("/id", deleteClass)
+router.delete("/:id",userAuthenticated, isAdmin, deleteClass)
 
 
 module.exports = router;
