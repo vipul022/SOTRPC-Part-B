@@ -40,7 +40,7 @@ describe("Register component renders as expected", () => {
   test("should select input element by placeholder text", () => {
     screen.getByPlaceholderText("Enter password...").toBeInTheDocument;
   });
-  // ! all methods starting with query does not throw error but it is very useful for checking negative outcome using expect with it
+  // ! all methods starting with query does not throw error but it is very useful for checking negative outcome using expect with it as it returns null in such cases
   test('should not find the role "whatever" in our component', () => {
     expect(screen.queryByRole("whatever")).toBeNull();
   });
@@ -58,6 +58,4 @@ describe("Register component renders as expected", () => {
   test("email field should be required", () => {
     expect(screen.getByTestId("email")).toBeRequired;
   });
-  
 });
-
