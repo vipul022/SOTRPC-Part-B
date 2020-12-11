@@ -12,7 +12,6 @@ const {
 const {
     userAuthenticated,
     isAdmin,
-    isMember,
     isOwnUserOrAdmin
 } = require("../utils/common_utils");
 
@@ -38,7 +37,7 @@ router.get("/:id", userAuthenticated, isOwnUserOrAdmin, getUser);
 // router.get("/:id", getUser);
 
 //edit a user
-router.put("/:id", userAuthenticated, isOwnUserOrAdmin, editUser);
-// router.put("/:id", editUser);
+router.put("/:id", userAuthenticated, isOwnUserOrAdmin, editUser); // ***change to this route AFTER creating first admin account and for rest of production
+// router.put("/:id", userAuthenticated, editUser); // *** Change to this route to create the first admin account when setting up
 
 module.exports = router;
