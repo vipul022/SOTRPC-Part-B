@@ -18,8 +18,13 @@ const isAdmin = function (req, res, next) {
 }
 
 const isOwnUserOrAdmin = function (req, res, next) {
-    if (req.user._id === req.params.id || checkAdmin(req.user.role)) return next();
-    else res.sendStatus(403);
+    // console.log('in isOwnUserOrAdmin')
+    // console.log('req.user._id', req.user._id)
+    // console.log('req.params.id', req.params.id)
+    // console.log('checkAdmin', checkAdmin(req.user.role))
+    // console.log("req.user._id == req.params.id", req.user._id == req.params.id)
+    if (req.user._id == req.params.id || checkAdmin(req.user.role)) return next();
+     else res.sendStatus(403);
 };
 
 const userAuthenticated = function (req, res, next) {
