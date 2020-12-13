@@ -4,24 +4,27 @@ import Register from "./Register";
 import { StateContext } from "../../config/globalState";
 import userEvent from "@testing-library/user-event";
 // import { mocked } from "ts-jest/utils";
-import { rest } from "msw";
-import { setupServer } from "msw/node";
 import "@testing-library/jest-dom/extend-expect";
-import { registerUser } from "../../services/authServices";
+
 import { BrowserRouter, Route } from "react-router-dom";
 import Home from "../Home/Home";
+import Nav from "../Nav/Nav";
+// ! // import API mocking utilities from Mock Service Worker.
+import { rest } from "msw";
+import { setupServer } from "msw/node";
 
+// const store = { loggedInUser: "vipul" };
 const fakeData = { name: "vipul" };
 
+//  !declare which API requests to mock
 const server = setupServer(
+  // !capture "POST /users request"
   rest.post("/users", (req, res, ctx) => {
+    // ! getting back response using mocked json body
     return res(ctx.json(fakeData));
   })
 );
 
-beforeAll(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
 describe("Register component renders as expected", () => {
   // !beforeEach render the app before every test
   beforeEach(() => {
@@ -84,18 +87,27 @@ describe("Register component renders as expected", () => {
     screen.getByRole("button", { name: /create account/i });
   });
 });
+//  ! reference taken from: https://www.npmjs.com/package/@testing-library/react
 describe("Register component creates a user as expected", () => {
+  //! establish API mocking before all tests
+  beforeAll(() => server.listen());
+  //! reset any request handlers that are declared as a part of our tests
+  afterEach(() => server.resetHandlers());
+  //! clean up once the tests are done
+  afterAll(() => server.close());
+
   test("on click 'Create Account' button, Register component should create a new user and redirect to home page ", async () => {
     const { container } = render(
-      <StateContext.Provider value={""}>
+      <StateContext.Provider value="">
         <BrowserRouter>
           <Register />
 
+          {/* user is redirected to home page after successfully creating the user, therefore home component is passed below  */}
           <Route exact path="/" component={Home} />
         </BrowserRouter>
       </StateContext.Provider>
     );
-    //! fill out the form
+    //! fill out the form for testing
     fireEvent.change(screen.getByTestId("name"), {
       target: { value: "vipul" },
     });
@@ -115,7 +127,11 @@ describe("Register component creates a user as expected", () => {
     const button = screen.getByRole("button", { name: /create account/i });
     fireEvent.click(button);
     // screen.debug();
+    // const heading = await screen.getByRole("heading");
+    // !if user is redirected to home page, that implies that user has been successfully created
     expect(container).toHaveTextContent(/Home/);
+    // expect(heading).toHaveTextContent(/welcome/i);
+
     // console.log("container=>", container);
     // expect(container).toHaveTextContent(/Welcome vipul/);
     // await waitFor(() => screen.getByRole("heading"));
