@@ -56,9 +56,13 @@ function getUsers(req, res) {
 };
 
 
-async function addUser(req, res) {  
-    //check if the username is taken 
-    if (userExists(req)) return res.status(409).send("User already registered."); 
+function addUser(req, res) {  
+    //check if the username is taken
+    userExists(req).then((req))
+
+        
+        // return res.status(409).send("User already registered."); 
+    }
     //try and save the new user    
     addUserToDB(req).save((err, user) => {
             if (err) {

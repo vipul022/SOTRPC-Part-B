@@ -2,7 +2,10 @@ let User = require("../models/user")
 const passport = require('passport');
 
 async function userExists(req) {
-    return await User.findOne({ username : req.body.username });
+    //returns user if username exists in DB or null if not
+    if (await User.exists({ username : req.body.username })) {
+        throw("User already registered.")
+    } else return req
 }
 
 const addUserToDB = function (req, res) {
