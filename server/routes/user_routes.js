@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {
+    sendUser,
     loginUser,
     logoutUser,
     getUsers, 
@@ -16,7 +17,7 @@ const {
 } = require("../utils/common_utils");
 
 //route for user login
-router.post("/login", loginUser);
+router.post("/login", loginUser, sendUser);
 
 //route for user logout
 router.get("/logout", logoutUser);

@@ -1,8 +1,9 @@
 const passport = require('passport');
-const User = require('../models/user')
+// const User = require('../models/user')
 
 const {
-    // addUserToDB,
+    userExists,
+    addUserToDB,
     getUserFromDB,
     deleteUserFromDB,
     getUsersFromDB,
@@ -12,29 +13,31 @@ const {
 
 
 const logoutUser = function (req, res) {
-    req.logout();
-    console.log('logged out user');
-    console.log('session object:', req.session);
-    console.log('req.user:', req.user);
-    res.sendStatus(200);
+    req.session.destroy(() => {
+        console.log('logged out user');
+        console.log('session object:', req.session);
+        console.log('req.user:', req.user);
+        res.sendStatus(200);
+    });
+
 }
 
 // helper functions
 const authenticate = passport.authenticate('local');
 
-function loginUser(req, res) {
+async function loginUser(req, res, next) {
     console.log("in loginUser")
-    // passport.authenticate returns a function that we will call with req, res, and a callback function to execute on success    
-    authenticate(req, res, function () {
-        console.log('authenticated', req.user.name);
-        console.log('session object:', req.session);
-        console.log('req.user:', req.user);
-        console.log('session ID:', req.sessionID);
-        res.status(200);
-        res.json({
-            user: req.user,
-            sessionID: req.sessionID
-        });
+    // passport.authenticate returns a function that we will call with req, res, and a callback function to execute on success  
+    const loginFunc = passport.authenticate('local')
+    // console.log(req.user)
+    await loginFunc(req, res, next)
+}
+
+function sendUser(req, res) {
+    console.log(req.user)
+    res.json({
+        user: req.user,
+        sessionID: req.sessionID
     });
 }
 
@@ -52,39 +55,26 @@ function getUsers(req, res) {
     })
 };
 
-async function addUser(req, res) {
-    console.log('in addUser')
-    const {
-        password,
-        address,
-        phone,
-        name,
-        username //this contains the email
-    } = req.body
-    await User.register(new User({
-        username,
-        address,
-        phone,
-        name
-    }), password, async function (err) {
-        if (err) {
-            if (err.name === 'UserExistsError') {
-                res.status(409)
-                res.json({
+
+async function addUser(req, res) {  
+    //check if the username is taken 
+    if (userExists(req)) return res.status(409).send("User already registered."); 
+    //try and save the new user    
+    addUserToDB(req).save((err, user) => {
+            if (err) {
+                res.status(500);
+                return res.json({
                     error: err.message
                 });
-            } else {
-                res.status(500);
-                res.json({
-                    error: err
-                });
             }
-        } else {
-            // return next()
-            // Log in the newly registered user
+            //after creating the user, login the user
             console.log('finished add user, logging in')
-            loginUser(req, res);
-        }
+            req.login(user, (err) => {
+                if (err) {
+                    console.log(err)
+                    res.send(err)
+                } else sendUser(req, res)
+            });
     });
 };
 
@@ -129,6 +119,7 @@ function editUser(req, res) {
 };
 
 module.exports = {
+    sendUser,
     loginUser,
     logoutUser,
     getUsers,
