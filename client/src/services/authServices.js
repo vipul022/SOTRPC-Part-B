@@ -9,6 +9,7 @@ async function registerUser(userInfo) {
 }
 
 async function loginUser(userInfo) {
+  console.log("inside loginUser");
   const response = await api.post("/users/login", userInfo);
   console.log("got user back from server", response);
   return response.data;
