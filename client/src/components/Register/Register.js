@@ -7,7 +7,7 @@ const Register = ({ history }) => {
     name: "",
     address: "",
     phone: "",
-    username: "",
+    email: "",
     password: "",
   };
 
@@ -36,7 +36,7 @@ const Register = ({ history }) => {
     console.log("hello");
     event.preventDefault();
     //!RegisterUser is a function that hit the backend route and save data to the db
-    console.log("userDetails.username=>", userDetails.username);
+    console.log("userDetails.email=>", userDetails.email);
     registerUser(userDetails)
       .then((data) => {
         console.log("data=>", data);
@@ -104,7 +104,7 @@ const Register = ({ history }) => {
           <input
             required
             type="email"
-            name="username"
+            name="email"
             placeholder="Enter your email..."
             onChange={handleChange}
             data-testid="email"

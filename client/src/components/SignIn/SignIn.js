@@ -6,7 +6,7 @@ const SignIn = ({ history }) => {
   const { dispatch } = useGlobalState();
 
   const initialFormState = {
-    username: "",
+    email: "",
     password: "",
   };
 
@@ -28,7 +28,7 @@ const SignIn = ({ history }) => {
   //   console.log("userDetails>", userDetails);
   //   dispatch({
   //     type: "setLoggedInUser",
-  //     data: userDetails.username,
+  //     data: userDetails.email,
   //   });
   // };
   //!loginUser is a function that hit the backend route and save data to the db
@@ -64,7 +64,7 @@ const SignIn = ({ history }) => {
         <input
           required
           type="email"
-          name="username"
+          name="email"
           placeholder="Enter your email..."
           onChange={handleChange}
           data-testid="email"
