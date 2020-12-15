@@ -16,6 +16,12 @@ export default function StateReducer(state, action) {
         ...state,
         loggedInUser: action.data,
       };
+    // eslint-disable-next-line
+    case "setClasses":
+      return {
+        ...state,
+        classes: action.data,
+      };
     default:
       return state;
   }

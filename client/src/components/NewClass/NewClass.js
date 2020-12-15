@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
 // import classData from "../../../src/data/class_data";
+import { addNewClass } from "../../services/classesServices";
 const NewClass = ({ history }) => {
   // !accessing current state of classes from store
   const { store, dispatch } = useGlobalState();
@@ -10,7 +11,7 @@ const NewClass = ({ history }) => {
   // console.log("useGlobalState=>", useGlobalState());
   const initialFormState = {
     name: "",
-    details: "",
+    description: "",
     time: "",
     maxNumber: "",
     teacher: "",
@@ -29,35 +30,44 @@ const NewClass = ({ history }) => {
     });
   };
   // ! Adding a new class
-  const addClass = (c) => {
-    console.log("class=>", c);
-    console.log("classes inside NewClass=>", classes);
-    dispatch({
-      type: "setClasses",
-      data: [...classes, c],
-    });
-  };
+  // const addClass = (c) => {
+  //   console.log("class=>", c);
+  //   console.log("classes inside NewClass=>", classes);
+  //   dispatch({
+  //     type: "setClasses",
+  //     data: [...classes, c],
+  //   });
+  // };
   // !creating nextId for add a new class
-  function getNextId() {
-    // console.log("classes in getNextId=>", classes);
-    const ids = classes.map((c) => c._id);
-    return ids.sort()[ids.length - 1] + 1;
-  }
+  // function getNextId() {
+  //   // console.log("classes in getNextId=>", classes);
+  //   const ids = classes.map((c) => c._id);
+  //   return ids.sort()[ids.length - 1] + 1;
+  // }
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("formState=>", formState);
-    const nextId = getNextId();
-    console.log("nextId=>", nextId);
+    // const nextId = getNextId();
+    // console.log("nextId=>", nextId);
     const newClass = {
-      _id: nextId,
+      // _id: nextId,
       name: formState.name,
-      details: formState.details,
+      description: formState.description,
       time: formState.time,
       maxNumber: formState.maxNumber,
       teacher: formState.teacher,
     };
-    addClass(newClass);
+    addNewClass(newClass)
+      // console
+      //   .log(" newClass inside addNewClass in NewClass=>", newClass)
+      .then((newClassData) => {
+        dispatch({
+          type: "setClasses",
+          data: [...classes, newClassData],
+        });
+      })
+      .catch((error) => console.log(error));
     history.push("/classes");
   };
 
@@ -65,7 +75,7 @@ const NewClass = ({ history }) => {
     <form onSubmit={handleSubmit}>
       <h1>Add New Class</h1>
       <div>
-        <label>"Name"</label>
+        <label>Name</label>
         <input
           required
           type="text"
@@ -76,11 +86,11 @@ const NewClass = ({ history }) => {
         ></input>
       </div>
       <div>
-        <label>Details</label>
+        <label>description</label>
         <textarea
           required
-          name="details"
-          placeholder="Enter details..."
+          name="description"
+          placeholder="Enter description..."
           onChange={handleChange}
         ></textarea>
       </div>
