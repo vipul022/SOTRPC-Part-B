@@ -74,5 +74,5 @@ app.get("/", (req, res) => {
 
 
 app.listen(port, () => {
-    console.log("SOTRPC app listening on port ${port}")
+    console.log(`SOTRPC app listening on port ${port}`)
 })
