@@ -41,5 +41,5 @@ const App = () => {
     </div>
   );
 };
-// `/users/edit/${m._id}`
+
 export default App;
