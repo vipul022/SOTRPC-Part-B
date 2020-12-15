@@ -67,6 +67,7 @@ const SignIn = ({ history }) => {
           name="username"
           placeholder="Enter your email..."
           onChange={handleChange}
+          data-testid="email"
         ></input>
       </div>
       <div>
@@ -77,6 +78,7 @@ const SignIn = ({ history }) => {
           name="password"
           placeholder="Enter your password..."
           onChange={handleChange}
+          data-testid="password"
         ></input>
       </div>
       <div>
