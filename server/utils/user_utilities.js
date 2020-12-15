@@ -1,9 +1,6 @@
 let User = require("../models/user")
 const passport = require('passport');
 
-async function userExists(req) {
-    return await User.findOne({ username : req.body.username });
-}
 
 const addUserToDB = function (req, res) {
     return new User(req.body);
@@ -30,7 +27,6 @@ const editUserFromDB = function (req) {
 }
 
 module.exports = {
-    userExists,
     addUserToDB,
     getUserFromDB,
     deleteUserFromDB,
