@@ -11,7 +11,7 @@ const {
     editUser
 } = require('../controllers/user_controller');
 const {
-    usernameNotExist,
+    emailNotExist,
     userAuthenticated,
     isAdmin,
     isOwnUserOrAdmin
@@ -28,7 +28,7 @@ router.get("/", userAuthenticated, isAdmin, getUsers);
 //  router.get("/", getUsers);
 
 //add a new user
-router.post("/", usernameNotExist, addUser);
+router.post("/", emailNotExist, addUser);
 
 //delete a user
 router.delete("/:id", userAuthenticated, isOwnUserOrAdmin, deleteUser);

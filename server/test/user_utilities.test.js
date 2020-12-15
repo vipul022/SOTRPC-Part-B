@@ -64,7 +64,7 @@ describe('addUser', (done) => {
         const req = {
             body: {
                 name: "Vipul",
-                username: "vipul@vipul.com",
+                email: "vipul@vipul.com",
                 phone: "032443382",
                 password: "123123",
                 address: "123 Fake st Spotswood 3015",
@@ -119,7 +119,7 @@ describe('get one User FromDB', (done) => {
         //id from setup user
         const id = userId
         user_utilities.getUserFromDB(id).exec((err, user) => {
-                expect(user.username).toBe('zeb@zeb.com');
+                expect(user.email).toBe('zeb@zeb.com');
             done();
         })
     });  
@@ -131,7 +131,7 @@ describe('editUserFromDB', (done) => {
         const req = {
             body: {
                 name: "Zeb",
-                username: "zeb@zeb.com",
+                email: "zeb@zeb.com",
                 phone: "666666666",
                 password: "123123",
                 address: "52 Smith st Coburg 3423",
@@ -153,7 +153,7 @@ describe('editUserFromDB', (done) => {
 function setupUsers() {
     let testUser = {};
     testUser.name = 'Zeb';
-    testUser.username = 'zeb@zeb.com';
+    testUser.email = 'zeb@zeb.com';
     testUser.password = '123123'
     testUser.address = '52 Smith st Coburg 3423';
     testUser.phone = '0403023423';
@@ -161,7 +161,7 @@ function setupUsers() {
     testUser.paid = 'not paid'
     let testUser2 = {};
     testUser2.name = 'Harry';
-    testUser2.username = 'harry0harry.com';
+    testUser2.email = 'harry0harry.com';
     testUser2.password = '123123'
     testUser2.address = '52 Smith st Coburg 3423';
     testUser2.phone = '0403023423';

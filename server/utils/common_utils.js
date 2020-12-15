@@ -38,8 +38,8 @@ const userAuthenticated = function (req, res, next) {
         res.send(403, { error: "Not authorised." });;
     }
 }
-const usernameNotExist = async function (req, res, next) {
-    const isUser = await User.exists({username: req.body.username})
+const emailNotExist = async function (req, res, next) {
+    const isUser = await User.exists({email: req.body.email})
     if (isUser) {
         res.send(403, { error: "Email already exists." });
     }
@@ -47,7 +47,7 @@ const usernameNotExist = async function (req, res, next) {
 
 }
 module.exports = {
-    usernameNotExist,
+    emailNotExist,
     isAdmin,
     isMember,
     userAuthenticated,

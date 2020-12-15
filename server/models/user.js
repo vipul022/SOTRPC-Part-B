@@ -15,8 +15,7 @@ const User = new Schema({
         type: String,
         required: true
     },
-    //username will contain the email. Need a username field for passport-local-mongoose
-    username:{
+    email:{
         type: String,
         required: true,
         unique: true
