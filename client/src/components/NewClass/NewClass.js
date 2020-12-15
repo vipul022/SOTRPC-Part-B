@@ -10,7 +10,7 @@ const NewClass = ({ history }) => {
   // console.log("classes=>", classes);
   // console.log("useGlobalState=>", useGlobalState());
   const initialFormState = {
-    name: "",
+    title: "",
     description: "",
     time: "",
     maxNumber: "",
@@ -52,12 +52,13 @@ const NewClass = ({ history }) => {
     // console.log("nextId=>", nextId);
     const newClass = {
       // _id: nextId,
-      name: formState.name,
+      title: formState.title,
       description: formState.description,
       time: formState.time,
       maxNumber: formState.maxNumber,
       teacher: formState.teacher,
     };
+    console.log("newClass=>", newClass);
     addNewClass(newClass)
       // console
       //   .log(" newClass inside addNewClass in NewClass=>", newClass)
@@ -75,18 +76,18 @@ const NewClass = ({ history }) => {
     <form onSubmit={handleSubmit}>
       <h1>Add New Class</h1>
       <div>
-        <label>Name</label>
+        <label>Title</label>
         <input
           required
           type="text"
-          name="name"
+          name="title"
           placeholder="Enter class name..."
           onChange={handleChange}
           data-testid="name"
         ></input>
       </div>
       <div>
-        <label>description</label>
+        <label>Description</label>
         <textarea
           required
           name="description"

@@ -14,16 +14,16 @@ import { rest } from "msw";
 import { setupServer } from "msw/node";
 
 // const store = { loggedInUser: "vipul" };
-const fakeData = { name: "vipul" };
+// const fakeData = { name: "vipul" };
 
 // //  !declare which API requests to mock
-const server = setupServer(
-  //   // !capture "POST /users request"
-  rest.post("/users", (req, res, ctx) => {
-    //     // ! getting back response using mocked json body
-    return res(ctx.json(fakeData));
-  })
-);
+// const server = setupServer(
+//   // !capture "POST /users request"
+// rest.post("/users", (req, res, ctx) => {
+//     // ! getting back response using mocked json body
+// return res(ctx.json(fakeData));
+// })
+// );
 
 describe("Register component renders as expected", () => {
   // !beforeEach render the app before every test

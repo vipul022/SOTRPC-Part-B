@@ -44,7 +44,7 @@ const Classes = ({ history }) => {
 
   const content = classes.map((c) => (
     <div key={c._id}>
-      <h3>{c.name}</h3>
+      <h3>{c.title}</h3>
       <p>{c.description}</p>
       <p>Time: {c.time}</p>
       <p>Maximum number: {c.maxNumber}</p>

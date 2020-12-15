@@ -8,7 +8,7 @@ import { StateContext } from "../../config/globalState";
 const store = {
   classes: [
     {
-      details:
+      description:
         "This is a beginners course. We make pots, bowls, vases and various glazes using wheel",
       maxNumber: 8,
       name: "Weekly Beginners Class",
@@ -43,11 +43,11 @@ describe("NewClass component renders as expected", () => {
     screen.getAllByPlaceholderText("Enter class name...");
   });
 
-  test("should render 'Details' label", () => {
-    screen.getByText(/details/i);
+  test("should render 'Description' label", () => {
+    screen.getByText(/description/i);
   });
   test("should select input element by placeholder text", () => {
-    screen.getAllByPlaceholderText("Enter details...");
+    screen.getAllByPlaceholderText("Enter description...");
   });
   test("should render 'Time' label", () => {
     screen.getByText(/time/i);

@@ -6,8 +6,9 @@ async function getAllClasses() {
   return response.data;
 }
 
-async function addNewClass() {
-  const response = await api.post("/classes");
+async function addNewClass(newClass) {
+  console.log("inside addNewClass")
+  const response = await api.post("/classes", newClass);
   console.log("response inside addNewClass in classServices=>", response);
   return response.data;
 }
