@@ -1,7 +1,8 @@
-const mongoose = require('mongoose');
-const expect = require('expect');
-const utilities = require('../utils/user_utilities');
-const User = require('../models/user');
+const mongoose = require("mongoose");
+const expect = require("expect");
+const user_utilities = require("../utils/user_utilities");
+const controller = require("../controllers/user_controller");
+const User = require("../models/user");
 const {
     connectToDb,
     disconnectFromDb
@@ -23,14 +24,14 @@ after((done) => {
 beforeEach(async function () {
     // Load a test record in setupData
     // Use await so we can access the postId, which is used by some tests
-    let user = await setupData();
+    let user = await setupUser();
     userId = user._id;
 });
 
 // Delete test data after each test
 afterEach((done) => {
     // Execute the deleteMany query
-    tearDownData().exec(() => done());
+    tearDownUser().exec(() => done());
 });
 
 
@@ -42,7 +43,7 @@ describe('getUsersFromDB with one user', () => {
         let req = {
             query: {}
         };
-        await utilities.getUsersFromDB(req).exec((err, users) => {
+        await user_utilities.getUsersFromDB(req).exec((err, users) => {
             expect(Object.keys(users).length).toBe(1);
         });
     });
@@ -50,16 +51,15 @@ describe('getUsersFromDB with one user', () => {
         let req = {
             query: {}
         };
-        await utilities.getUsersFromDB(req).exec((err, users) => {
+        await user_utilities.getUsersFromDB(req).exec((err, users) => {
             expect(users[0].name).toBe('Zeb');
         });
 
     });
 });
 
-// addUser removed due to not being in the utilities folder anymore
 // describe('addUser', (done) => {
-//     it('should add a new User', function (done) {
+//     it('should add a new User', async function (done) {
 //         // define a req object with expected structure
 //         const req = {
 //             body: {
@@ -72,41 +72,39 @@ describe('getUsersFromDB with one user', () => {
 //                 role: "admin"
 //             }
 //         }
-//         utilities.addUserToDB(req).save((err, user) => {
-//             console.log(err)
-//             expect(user.name).toBe(req.body.name);
-//             done();
-//         });
+//         const usey = await controller.addUser(req, res)
+//         expect(usey.name).toBe(req.body.name);
+//         done();
 //     });
-//     it('should fail if a required field is missing', function (done) {
-//         // define a req object with missing required field (phone)
-//         const req = {
-//             body: {
-//                 name: "Jason",
-//                 email: "jason@jason.com",
-//                 // phone: "032443382",
-//                 password: "123123",
-//                 address: "43 Benbow St Yarraville 3013",
-//                 paid: "paid",
-//                 role: "admin"
-//             }
-//         }
-//         utilities.addUserToDB(req).save((err, post) => {
-//             if (err) {
-//                 expect(err.message).toMatch(/validation/);
-//                 done();
-//             } else {
-//                 expect(true).toBe(false);
-//                 done();
-//             }
-//         });
-//     });
+
+//     // it('should fail if a required field is missing', function (done) {
+//     //     // define a req object with missing required field (phone)
+//     //     const req = {
+//     //         body: {
+//     //             name: "Jason",
+//     //             email: "jason@jason.com",
+//     //             // phone: "032443382",
+//     //             password: "123123",
+//     //             address: "43 Benbow St Yarraville 3013",
+//     //             paid: "paid",
+//     //             role: "admin"
+//     //         }
+//     //     }
+//     //     controller.addUser(req)
+//     //     if (err) {
+//     //         expect(err.message).toMatch(/validation/);
+//     //         done();
+//     //     } else {
+//     //         expect(true).toBe(false);
+//     //         done();
+//     //     }
+
+//     // });
 // });
 
 
-
 // testdata
-function setupData() {
+function setupUser() {
     let testUser = {};
     testUser.name = 'Zeb';
     testUser.username = 'zeb@zeb.com';
@@ -118,6 +116,8 @@ function setupData() {
     return User.create(testUser);
 }
 
-function tearDownData() {
+
+
+function tearDownUser() {
     return User.deleteMany();
 }
