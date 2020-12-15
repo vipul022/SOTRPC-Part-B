@@ -33,6 +33,7 @@ const Register = ({ history }) => {
   // };
 
   const handleSubmit = (event) => {
+    console.log("hello");
     event.preventDefault();
     //!RegisterUser is a function that hit the backend route and save data to the db
     console.log("userDetails.username=>", userDetails.username);
@@ -48,7 +49,8 @@ const Register = ({ history }) => {
         history.push("/");
       })
       .catch((error) => {
-        if (error.response && error.response.status === 401)
+        console.log("error=>", error);
+        if (error.response && error.response.status === 409)
           setErrorMessage(
             "Authentication failed, please check user name and password"
           );
@@ -62,7 +64,8 @@ const Register = ({ history }) => {
     <div>
       <h1>Create Account</h1>
       <form onSubmit={handleSubmit}>
-        {errorMessage && <p>{errorMessage}</p>}
+        {errorMessage && <p data-testid="errorMessage">{errorMessage}</p>}
+        {/* {<p data-testid="error">{errorMessage}</p>} */}
         <div>
           <label for="name">Name</label>
           <input

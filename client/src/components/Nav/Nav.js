@@ -33,7 +33,9 @@ const Nav = () => {
         </div>
       ) : (
         <div>
-          <Link to="/auth/register">SignUp</Link>
+          <Link data-testid="register" to="/auth/register">
+            SignUp
+          </Link>
           <Link to="/auth/login">Login</Link>
         </div>
       )}
