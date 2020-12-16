@@ -1,22 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const {
-  loginUser,
-  logoutUser,
-  getUsers,
-  addUser,
-  deleteUser,
-  getUser,
-  editUser,
-} = require("../controllers/user_controller");
+    sendUser,
+    loginUser,
+    logoutUser,
+    getUsers, 
+    addUser,
+    deleteUser,
+    getUser,
+    editUser
+} = require('../controllers/user_controller');
 const {
-  userAuthenticated,
-  isAdmin,
-  isOwnUserOrAdmin,
+    emailNotExist,
+    userAuthenticated,
+    isAdmin,
+    isOwnUserOrAdmin
 } = require("../utils/common_utils");
 
 //route for user login
-router.post("/login", loginUser);
+router.post("/login", loginUser, sendUser);
 
 //route for user logout
 router.get("/logout", logoutUser);
@@ -26,7 +28,7 @@ router.get("/", userAuthenticated, isAdmin, getUsers);
 //  router.get("/", getUsers);
 
 //add a new user
-router.post("/", addUser);
+router.post("/", emailNotExist, addUser);
 
 //delete a user
 router.delete("/:id", userAuthenticated, isOwnUserOrAdmin, deleteUser);

@@ -1,19 +1,27 @@
 import React, { useEffect } from "react";
-import classData from "../../data/class_data";
+// import classData from "../../data/class_data";
 import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
+import { getAllClasses } from "../../services/classesServices";
 const Classes = ({ history }) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
   const { store, dispatch } = useGlobalState();
   const { classes } = store;
 
+  const fetchClasses = () => {
+    getAllClasses()
+      .then((classData) => {
+        dispatch({
+          type: "setClasses",
+          data: classData,
+        });
+      })
+      .catch((error) => console.log(error));
+  };
   // !use ClassData in use effect
   useEffect(() => {
     console.log("inside useEffect");
-    dispatch({
-      type: "setClasses",
-      data: classData,
-    });
+    fetchClasses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log("classes=>", classes);
@@ -36,8 +44,8 @@ const Classes = ({ history }) => {
 
   const content = classes.map((c) => (
     <div key={c._id}>
-      <h3>{c.name}</h3>
-      <p>{c.details}</p>
+      <h3>{c.title}</h3>
+      <p>{c.description}</p>
       <p>Time: {c.time}</p>
       <p>Maximum number: {c.maxNumber}</p>
       <button data-msg={c._id} onClick={handleDelete}>
