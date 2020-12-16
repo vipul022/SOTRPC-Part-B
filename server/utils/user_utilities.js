@@ -2,48 +2,9 @@ let User = require("../models/user")
 const passport = require('passport');
 
 
-// const addUserToDB = async function (req, res) {
-//     console.log("I'm in")
-//     // console.log("req.body:",req.body)
-//     // const { email, password, address, phone, role, paid, name } = req.body
-//     // return User.register({ email, password, address, phone, role, paid, name });
-//     // const { address, phone, role, paid, name } = req.body
-//     // const username = req.body.email;
-//     const {
-//         password,
-//         address,
-//         phone,
-//         role,
-//         paid,
-//         name
-//     } = req.body
-//     const username = req.body.email
-//     const user = await User.register(new User({
-//         username,
-//         address,
-//         phone,
-//         role,
-//         paid,
-//         name
-//     }), password, function (err) {
-//         console.log("after register")
-//         if (err) {
-//             console.log("error")
-//             if (err.name === 'UserExistsError') {
-//                 res.status(409)
-//                 res.json({
-//                     error: err.message
-//                 });
-//             } else {
-//                 res.status(500);
-//                 res.json({
-//                     error: err
-//                 });
-//             }
-//         }
-//     });
-//     console.log("after the block")
-// };
+const addUserToDB = function (req, res) {
+    return new User(req.body);
+};
 
 const getUserFromDB = function (id) {
     return User.findById(id);
@@ -58,7 +19,6 @@ const getUsersFromDB = function (req) {
 }
 
 const editUserFromDB = function (req) {
-    req.body.modified_date = Date.now();
     // new:true to return the updated user rather than the original user
     return User.findByIdAndUpdate(req.params.id, req.body, {
         new: true
@@ -66,7 +26,7 @@ const editUserFromDB = function (req) {
 }
 
 module.exports = {
-    // addUserToDB,
+    addUserToDB,
     getUserFromDB,
     deleteUserFromDB,
     getUsersFromDB,

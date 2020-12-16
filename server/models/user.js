@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const passportLocalMongoose = require('passport-local-mongoose')
+
 
 const User = new Schema({
     name:{
@@ -15,8 +15,12 @@ const User = new Schema({
         type: String,
         required: true
     },
-    //username will contain the email. Need a username field for passport-local-mongoose
-    username:{
+    email:{
+        type: String,
+        required: true,
+        unique: true
+    },
+    password: {
         type: String,
         required: true
     },
@@ -30,8 +34,8 @@ const User = new Schema({
     }
 })
 
-// plugin the passport-local-mongoose middleware with our User schema
-User.plugin(passportLocalMongoose);
+
+User.plugin(require('mongoose-bcrypt'));
 
 
 module.exports = mongoose.model("User", User);
