@@ -36,8 +36,8 @@ describe("NewClass component renders as expected", () => {
   test("should render 'Add New Class' heading", () => {
     screen.getByRole("heading", { name: /add new class/i }).toBeInTheDocument;
   });
-  test("should render 'Name' label", () => {
-    screen.getByText(/name/i);
+  test("should render 'Title' label", () => {
+    screen.getByText(/Title/i);
   });
   test("should select input element by placeholder text", () => {
     screen.getAllByPlaceholderText("Enter class name...");
