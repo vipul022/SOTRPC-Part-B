@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 // import classData from "../../data/class_data";
 import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
-import { getAllClasses } from "../../services/classesServices";
+import { getAllClasses, deleteClass } from "../../services/classesServices";
+
 const Classes = ({ history }) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
   const { store, dispatch } = useGlobalState();
@@ -18,7 +19,7 @@ const Classes = ({ history }) => {
       })
       .catch((error) => console.log(error));
   };
-  // !use ClassData in use effect
+
   useEffect(() => {
     console.log("inside useEffect");
     fetchClasses();
@@ -26,22 +27,35 @@ const Classes = ({ history }) => {
   }, []);
   console.log("classes=>", classes);
 
-  const deleteClass = (id) => {
-    const updatedClasses = classes.filter((c) => c._id !== parseInt(id));
-    dispatch({
-      type: "setClasses",
-      data: updatedClasses,
-    });
-  };
+  // const deleteClass = (id) => {
+  //   const updatedClasses = classes.filter((c) => c._id !== id);
+  //   console.log("classes inside deleclass=>", classes);
+  //   console.log("updatedclasses=>", updatedClasses);
+  //   dispatch({
+  //     type: "setClasses",
+  //     data: updatedClasses,
+  //   });
+  // };
 
   const handleDelete = (event) => {
     event.preventDefault();
     console.log("event.target=>", event.target.dataset.msg);
     // !event.target.dataset.msg is used to retrieve the id of the particular class
     const id = event.target.dataset.msg;
-    deleteClass(id);
+    const updatedClasses = classes.filter((c) => c._id !== id);
+    console.log("updatedclasses=>", updatedClasses);
+    deleteClass(id)
+      .then((response) => {
+        console.log("res=>", response);
+        dispatch({
+          type: "setClasses",
+          data: [updatedClasses],
+        });
+      })
+      .catch((error) => console.log(error));
+    history.push("/classes");
   };
-
+  console.log("classes=>", classes);
   const content = classes.map((c) => (
     <div key={c._id}>
       <h3>{c.title}</h3>
