@@ -56,9 +56,12 @@ const Classes = ({ history }) => {
     history.push("/classes");
   };
   console.log("classes=>", classes);
+  //  !passing an object with pathname and state as properties with Link to, to access class (c) inside EditClass component
   const content = classes.map((c) => (
     <div key={c._id}>
-      <h3>{c.title}</h3>
+      <Link to={{ pathname: `/classes/edit/${c._id}`, state: { cl: c } }}>
+        <h3>{c.title}</h3>
+      </Link>
       <p>{c.description}</p>
       <p>Time: {c.time}</p>
       <p>Maximum number: {c.maxNumber}</p>
