@@ -1,20 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const {
-    sendUser,
-    loginUser,
-    logoutUser,
-    getUsers, 
-    addUser,
-    deleteUser,
-    getUser,
-    editUser
-} = require('../controllers/user_controller');
+  sendUser,
+  loginUser,
+  logoutUser,
+  getUsers,
+  addUser,
+  deleteUser,
+  getUser,
+  editUser,
+} = require("../controllers/user_controller");
 const {
-    emailNotExist,
-    userAuthenticated,
-    isAdmin,
-    isOwnUserOrAdmin
+  emailNotExist,
+  userAuthenticated,
+  isAdmin,
+  isOwnUserOrAdmin,
 } = require("../utils/common_utils");
 
 //route for user login

@@ -32,6 +32,8 @@ const userAuthenticated = function (req, res, next) {
     // console.log("in userAuthenticated got req.user", req.user)
     // console.log("in userAuthenticated got req.session", req.session)
     console.log("in userAuthenticated got req.sessionID", req.sessionID)
+    const isAuthenticated = req.isAuthenticated()
+    console.log("isAuthenticated=>", isAuthenticated)
     if (req.isAuthenticated()) {
         next();
     } else {
