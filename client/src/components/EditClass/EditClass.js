@@ -1,24 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useGlobalState } from "../../config/globalState";
-import { updateClass } from "../../services/classesServices";
+import { updateClass, getClassFromId } from "../../services/classesServices";
 
 const EditClass = (props) => {
   const { store, dispatch } = useGlobalState();
   const { classes } = store;
+  // !extracting history from props
   const { history } = props;
   console.log("props.match.params.id=>,", props.match.params.id);
   const id = props.match.params.id;
   // !extracting history from props
-  // console.log("history=>", history);
-  // !accessing class "c" that is being passed from Classes component
-  // const { cl } = props.location.state;
-  // console.log("C=>", cl);
-  // console.log("props.location.state=>", props.location.state);
+
   console.log("classes in editClass=>", classes);
-  const getClassFromId = (classes, id) => {
-    const cl = classes && classes.find((cl) => cl._id === id);
-    return cl;
-  };
+
   const cl = getClassFromId(classes, id);
   console.log("cl=>", cl);
   // !set initial form values to empty string
@@ -51,33 +45,9 @@ const EditClass = (props) => {
     event.preventDefault();
   };
 
-  // const updateMember = (updatedMember) => {
-  //   const otherMembers = members.filter(
-  //     (member) => member._id !== updatedMember._id
-  //   );
-  //   dispatch({
-  //     type: "setMembers",
-  //     data: [...otherMembers, updatedMember],
-  //   });
-  // };
-
-  // const handleUpdate = (event) => {
-  //   event.preventDefault();
-  //   const updatedMember = {
-  //     _id: member._id,
-  //     name: formState.name,
-  //     address: formState.address,
-  //     phone: formState.phone,
-  //     email: formState.email,
-  //     paid: formState.paid,
-  //     role: formState.role,
-  //   };
-  //   console.log("updatedMember=>", updatedMember);
-  //   updateMember(updatedMember);
-  //   history.push("/users");
-  // };
   const handleUpdate = (event) => {
     event.preventDefault();
+    // !created an updated class
     const updatedClass = {
       _id: cl._id,
       title: formState.title,
@@ -86,10 +56,10 @@ const EditClass = (props) => {
       maxNumber: formState.maxNumber,
       teacher: formState.teacher,
     };
-    console.log("classes=>", classes);
     console.log("updatedClass=>", updatedClass);
     const otherClasses = classes.filter((c) => c._id !== updatedClass._id);
     console.log("otherClasses=>", otherClasses);
+    
     updateClass(updatedClass)
       .then((response) => {
         console.log("response=>", response);

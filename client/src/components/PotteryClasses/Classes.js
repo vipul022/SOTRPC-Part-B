@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-// import classData from "../../data/class_data";
+
 import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
 import { getAllClasses, deleteClass } from "../../services/classesServices";
@@ -30,16 +30,6 @@ const Classes = ({ history }) => {
   }, []);
   console.log("classes=>", classes);
 
-  // const deleteClass = (id) => {
-  //   const updatedClasses = classes.filter((c) => c._id !== id);
-  //   console.log("classes inside deleclass=>", classes);
-  //   console.log("updatedclasses=>", updatedClasses);
-  //   dispatch({
-  //     type: "setClasses",
-  //     data: updatedClasses,
-  //   });
-  // };
-
   const handleDelete = (event) => {
     event.preventDefault();
     console.log("event.target=>", event.target.dataset.msg);
@@ -68,7 +58,7 @@ const Classes = ({ history }) => {
     history.push(`/classes/edit/${id}`);
   };
   console.log("classes=>", classes);
-  //  !passing an object with pathname and state as properties with Link to, to access class (c) inside EditClass component
+
   const content =
     classes &&
     classes.map((c) => {
@@ -76,9 +66,8 @@ const Classes = ({ history }) => {
       console.log("c=> ", c);
       return (
         <div key={c._id}>
-          {/* <Link to={{ pathname: `/classes/edit/${c._id}`, state: { cl: c } }}> */}
           <h3>{c.title}</h3>
-          {/* </Link> */}
+
           <p>{c.description}</p>
           <p>Time: {c.time}</p>
           <p>Maximum number: {c.maxNumber}</p>

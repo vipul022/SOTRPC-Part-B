@@ -27,4 +27,9 @@ async function updateClass(updatedClass) {
   console.log("response inside updateClass in class Services=>", response);
   return response;
 }
-export { getAllClasses, addNewClass, deleteClass, updateClass };
+
+const getClassFromId = (classes, id) => {
+  const cl = classes && classes.find((cl) => cl._id === id);
+  return cl;
+};
+export { getAllClasses, addNewClass, deleteClass, updateClass,  getClassFromId};
