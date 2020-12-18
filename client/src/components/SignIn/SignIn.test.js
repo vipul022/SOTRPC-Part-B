@@ -40,25 +40,25 @@ describe("SignIn component render as expected", () => {
     expect(screen.getByRole("button", { name: /log in/i }));
   });
 });
-describe("should successfully login the user with correct credentials and redirect to home page", () => {
-  const { container, getByTestId } = render(
-    <StateContext.Provider value="">
-      <BrowserRouter>
-        <SignIn />
+// describe("should successfully login the user with correct credentials and redirect to home page", () => {
+//   const { container, getByTestId } = render(
+//     <StateContext.Provider value="">
+//       <BrowserRouter>
+//         <SignIn />
 
-        {/* user is redirected to home page after successfully logging in, therefore home component is passed below  */}
-        <Route exact path="/" component={Home} />
-      </BrowserRouter>
-    </StateContext.Provider>
-  );
-  fireEvent.change(getByTestId("email"), {
-    target: { value: "v@v.com" },
-  });
-  fireEvent.change(getByTestId("password"), {
-    target: { value: "v" },
-  });
-  const button = screen.getByRole("button", { name: /log in/i });
-  console.log("button=>", button);
-  fireEvent.click(button);
-  expect(container).toHaveTextContent(/Home/);
-});
+//         {/* user is redirected to home page after successfully logging in, therefore home component is passed below  */}
+//         <Route exact path="/" component={Home} />
+//       </BrowserRouter>
+//     </StateContext.Provider>
+//   );
+//   fireEvent.change(getByTestId("email"), {
+//     target: { value: "v@v.com" },
+//   });
+//   fireEvent.change(getByTestId("password"), {
+//     target: { value: "v" },
+//   });
+//   const button = screen.getByRole("button", { name: /log in/i });
+//   console.log("button=>", button);
+//   fireEvent.click(button);
+//   expect(container).toHaveTextContent(/Home/);
+// });
