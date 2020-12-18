@@ -5,12 +5,21 @@ const EditClass = (props) => {
   const { store, dispatch } = useGlobalState();
   const { classes } = store;
   const { history } = props;
+  console.log("props.match.params.id=>,", props.match.params.id);
+  const id = props.match.params.id;
   // !extracting history from props
-  console.log("history=>", history);
+  // console.log("history=>", history);
   // !accessing class "c" that is being passed from Classes component
-  const { cl } = props.location.state;
-  console.log("C=>", cl);
-  console.log("props.location.state=>", props.location.state);
+  // const { cl } = props.location.state;
+  // console.log("C=>", cl);
+  // console.log("props.location.state=>", props.location.state);
+  console.log("classes in editClass=>", classes);
+  const getClassFromId = (classes, id) => {
+    const cl = classes && classes.find((cl) => cl._id === id);
+    return cl;
+  };
+  const cl = getClassFromId(classes, id);
+  console.log("cl=>", cl);
   // !set initial form values to empty string
   const initialFormState = {
     title: "",
@@ -21,8 +30,6 @@ const EditClass = (props) => {
   };
   const [formState, setFormState] = useState(initialFormState);
   useEffect(() => {
-    // !When class changes, set the form state to the values of the class's properties after the component mounts
-    console.log("insdeUsestate=>");
     setFormState({
       title: cl.title,
       description: cl.description,
@@ -84,7 +91,7 @@ const EditClass = (props) => {
     console.log("otherClasses=>", otherClasses);
     dispatch({
       type: "setClasses",
-      data: [classes],
+      data: [...otherClasses, updatedClass],
     });
     history.push("/classes");
   };

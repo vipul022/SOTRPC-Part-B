@@ -3,11 +3,15 @@ import React, { useEffect } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
 import { getAllClasses, deleteClass } from "../../services/classesServices";
+import Button from "../Button/Button";
+import EditClass from "../EditClass/EditClass";
 
 const Classes = ({ history }) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
   const { store, dispatch } = useGlobalState();
   const { classes } = store;
+
+  // useSta(localclass, sety) = []]
 
   const fetchClasses = () => {
     getAllClasses()
@@ -55,24 +59,42 @@ const Classes = ({ history }) => {
       .catch((error) => console.log(error));
     history.push("/classes");
   };
+  const handleEdit = (event) => {
+    event.preventDefault();
+    console.log(
+      "event.target.dataset.msg in handleEdit=>",
+      event.target.dataset.id
+    );
+    const id = event.target.dataset.id;
+    history.push(`/classes/edit/${id}`);
+  };
   console.log("classes=>", classes);
   //  !passing an object with pathname and state as properties with Link to, to access class (c) inside EditClass component
-  const content = classes.map((c) => (
-    <div key={c._id}>
-      <Link to={{ pathname: `/classes/edit/${c._id}`, state: { cl: c } }}>
-        <h3>{c.title}</h3>
-      </Link>
-      <p>{c.description}</p>
-      <p>Time: {c.time}</p>
-      <p>Maximum number: {c.maxNumber}</p>
-      <button data-msg={c._id} onClick={handleDelete}>
-        Delete
-      </button>
-      <button onClick={() => history.push("/classes/register")}>
-        Sign up for the class
-      </button>
-    </div>
-  ));
+  const content =
+    classes &&
+    classes.map((c) => {
+      console.log("inside content");
+      console.log("c=> ", c);
+      return (
+        <div key={c._id}>
+          {/* <Link to={{ pathname: `/classes/edit/${c._id}`, state: { cl: c } }}> */}
+          <h3>{c.title}</h3>
+          {/* </Link> */}
+          <p>{c.description}</p>
+          <p>Time: {c.time}</p>
+          <p>Maximum number: {c.maxNumber}</p>
+          <button data-msg={c._id} onClick={handleDelete}>
+            Delete
+          </button>
+          <Button clicked={handleEdit} c={c}>
+            Update
+          </Button>
+          <button onClick={() => history.push("/classes/register")}>
+            Sign up for the class
+          </button>
+        </div>
+      );
+    });
 
   return (
     <div>
