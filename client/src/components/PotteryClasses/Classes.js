@@ -4,7 +4,6 @@ import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
 import { getAllClasses, deleteClass } from "../../services/classesServices";
 import Button from "../Button/Button";
-import EditClass from "../EditClass/EditClass";
 
 const Classes = ({ history }) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
@@ -87,7 +86,7 @@ const Classes = ({ history }) => {
             Delete
           </button>
           <Button clicked={handleEdit} c={c}>
-            Update
+            Edit
           </Button>
           <button onClick={() => history.push("/classes/register")}>
             Sign up for the class

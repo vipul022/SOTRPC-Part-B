@@ -20,4 +20,11 @@ async function deleteClass(id) {
   console.log("response inside deleteClass in class Services=>", response);
   return response;
 }
-export { getAllClasses, addNewClass, deleteClass };
+
+async function updateClass(updatedClass) {
+  console.log("inside updateClass=>");
+  const response = await api.put(`/classes/${updatedClass._id}`, updatedClass);
+  console.log("response inside updateClass in class Services=>", response);
+  return response;
+}
+export { getAllClasses, addNewClass, deleteClass, updateClass };

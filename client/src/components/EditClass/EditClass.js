@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useGlobalState } from "../../config/globalState";
+import { updateClass } from "../../services/classesServices";
 
 const EditClass = (props) => {
   const { store, dispatch } = useGlobalState();
@@ -89,10 +90,16 @@ const EditClass = (props) => {
     console.log("updatedClass=>", updatedClass);
     const otherClasses = classes.filter((c) => c._id !== updatedClass._id);
     console.log("otherClasses=>", otherClasses);
-    dispatch({
-      type: "setClasses",
-      data: [...otherClasses, updatedClass],
-    });
+    updateClass(updatedClass)
+      .then((response) => {
+        console.log("response=>", response);
+
+        dispatch({
+          type: "setClasses",
+          data: [...otherClasses, updatedClass],
+        });
+      })
+      .catch((error) => console.log(error));
     history.push("/classes");
   };
 
