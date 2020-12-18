@@ -6,4 +6,10 @@ const getAllMembers = async () => {
   return response.data;
 };
 
-export { getAllMembers };
+const deleteMember = async (id) => {
+  console.log("inside delete class=>");
+  const response = await api.delete(`/users/${id}`, { params: { id } });
+  console.log("response inside deleteMember in member services=> ", response);
+  return response;
+};
+export { getAllMembers, deleteMember };

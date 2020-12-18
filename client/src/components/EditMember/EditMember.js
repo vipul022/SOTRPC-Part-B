@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useGlobalState } from "../../config/globalState";
+import { deleteMember } from "../../services/membersServices";
 
 const EditMember = (props) => {
   const { store, dispatch } = useGlobalState();
@@ -11,6 +12,8 @@ const EditMember = (props) => {
   // console.log("history=>", history);
   // !accessing member that is being passed from Members component
   const { member } = props.location.state;
+  console.log("member=>", member);
+  console.log("members=>", members);
 
   // const {
   //   history,
@@ -28,7 +31,6 @@ const EditMember = (props) => {
     name: "",
     address: "",
     phone: "",
-    // !username will contain email, need a email field for passport-local-mongoose
     email: "",
     paid: "",
     role: "",
@@ -58,22 +60,31 @@ const EditMember = (props) => {
     });
   }
 
-  const deleteMember = (id) => {
-    const otherMembers = members.filter(
-      (member) => member._id !== parseInt(id)
-    );
-    console.log("otherMembers=>", otherMembers);
-    dispatch({
-      type: "setMembers",
-      data: [otherMembers],
-    });
-  };
+  // const deleteMember = (id) => {
+  //   const otherMembers = members.filter(
+  //     (member) => member._id !== parseInt(id)
+  //   );
+  //   console.log("otherMembers=>", otherMembers);
+  //   dispatch({
+  //     type: "setMembers",
+  //     data: [otherMembers],
+  //   });
+  // };
 
   const handleDelete = (event) => {
     event.preventDefault();
     const id = member._id;
+    const updateMembers = members.filter((member) => member._id !== id);
     // console.log("id=>", id);
-    deleteMember(id);
+    deleteMember(id)
+      .then((response) => {
+        console.log(response);
+        dispatch({
+          type: "setMembers",
+          data: [updateMembers],
+        });
+      })
+      .catch((error) => console.log(error));
     history.push("/users");
   };
 

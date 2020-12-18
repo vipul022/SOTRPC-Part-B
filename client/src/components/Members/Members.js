@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import membersData from "../../data/members_data";
+
 import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
 import { getAllMembers } from "../../services/membersServices";
@@ -20,7 +20,7 @@ const Members = () => {
       })
       .catch((error) => console.log(error));
   };
-  
+
   useEffect(() => {
     console.log("inside Members useEffect");
     fetchMembers();
