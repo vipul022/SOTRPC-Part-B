@@ -1,3 +1,8 @@
+var aws = require('aws-sdk');
+require('dotenv').config(); // Configure dotenv to load in the .env file// Configure aws with your accessKeyId and your secretAccessKey
+const S3_BUCKET = process.env.Bucket
+
+
 const {
     addPhotoToDB,
     getPhotoFromDB,
@@ -9,11 +14,7 @@ const {
 // } = require("../utils/S3_utils");
 const addPhoto = function (req, res) {
 
-    var aws = require('aws-sdk');
-    require('dotenv').config(); // Configure dotenv to load in the .env file// Configure aws with your accessKeyId and your secretAccessKey
-    const S3_BUCKET = process.env.Bucket
     const s3 = new aws.S3();
-    // Create a new instance of S3
     const fileName = req.body.fileName;
     const fileType = req.body.fileType;
     // Set up the payload of what we are sending to the S3 api
@@ -80,14 +81,48 @@ function getPhotos(req, res) {
 };
 
 function deletePhoto(req, res) {
-    deletePhotoFromDB(req.params.id).exec(err => {
+
+    // get the filename from the db
+    getPhotoFromDB(req.params.id).exec((err, photo) => {
         if (err) {
-            res.status(500)
+            res.status(404)
             res.json({
                 error: err.message
             })
+        } else {
+            console.log("photo",photo)
+            const fileName = photo.fileName
+
+            //delete from S3
+            const s3 = new aws.S3({
+                accessKeyId: process.env.AWSAccessKeyId,
+                secretAccessKey: process.env.AWSSecretKey
+            });
+            var params = {
+                Bucket: S3_BUCKET,
+                Key: fileName
+            };
+            s3.deleteObject(params, function (err, data) {
+                if (err) {
+                    res.status(404);
+                    res.json({error: err.message})
+                } else {
+                    console.log(`deleted ${fileName} from S3`, data);
+
+                    //finally, remove photo record from DB
+                    deletePhotoFromDB(req.params.id).exec(err => {
+                        if (err) {
+                            res.status(500)
+                            res.json({
+                                error: err.message
+                            })
+                        }
+                        console.log(`deleted ${fileName} from DB`)
+                        res.sendStatus(204)
+                    })
+                }
+            });
         }
-        res.sendStatus(204)
     })
 };
 
