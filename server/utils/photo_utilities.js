@@ -1,21 +1,21 @@
-const PotteryClass = require("../models/photo")
+const Photo = require("../models/photo")
 
 function getPhotoFromDB(id) {
-    return PotteryClass.findById(id);
+    return Photo.findById(id);
 };
 
 
 function deletePhotoFromDB(id) {
-    return PotteryClass.findByIdAndRemove(id);
+    return Photo.findByIdAndRemove(id);
 };
 
 function getPhotosFromDB() {
-    return PotteryClass.find();
+    return Photo.find();
 };
 
 
 function addPhotoToDB(req) {
-    return new PotteryClass(req.body);
+    return new Photo(req.body);
 };
 
 module.exports = {

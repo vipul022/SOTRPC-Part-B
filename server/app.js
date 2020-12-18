@@ -56,10 +56,21 @@ mongoose.connect(dbConn, {
             console.log("Connected to database", dbConn);
         }
 });
-
+// Passport initialize
 app.use(passport.initialize());
 app.use(passport.session());
 require("./config/passport");
+
+// S3 initialize
+var aws = require('aws-sdk');
+require('dotenv').config(); // Configure dotenv to load in the .env file// Configure aws with your accessKeyId and your secretAccessKey
+aws.config.update({
+  region: 'ap-southeast-2', // Put your aws region here
+  accessKeyId: process.env.AWSAccessKeyId,
+  secretAccessKey: process.env.AWSSecretKey
+})
+
+
 
 
 //Routes
