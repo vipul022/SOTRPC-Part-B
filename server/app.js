@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const userRouter = require("./routes/user_routes");
 const classRouter = require("./routes/pottery_classes_routes");
+const photoRouter = require("./routes/photo_routes");
 const MongoStore = require("connect-mongo")(session)
 const passport = require("passport");
 
@@ -64,6 +65,7 @@ require("./config/passport");
 //Routes
 app.use("/users", userRouter);
 app.use("/classes", classRouter);
+app.use("/photos", photoRouter);
 
 // Home page test
 app.get("/", (req, res) => {
