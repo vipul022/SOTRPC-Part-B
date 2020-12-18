@@ -2,19 +2,28 @@ import React, { useEffect } from "react";
 import membersData from "../../data/members_data";
 import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
+import { getAllMembers } from "../../services/membersServices";
 
 const Members = () => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
   const { store, dispatch } = useGlobalState();
   const { members } = store;
   console.log("members=>", members);
-  // !use membersData to set state on first render
+
+  const fetchMembers = () => {
+    getAllMembers()
+      .then((membersData) => {
+        dispatch({
+          type: "setMembers",
+          data: membersData,
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+  
   useEffect(() => {
     console.log("inside Members useEffect");
-    dispatch({
-      type: "setMembers",
-      data: membersData,
-    });
+    fetchMembers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log("members=>", members);

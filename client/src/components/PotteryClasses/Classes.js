@@ -46,7 +46,7 @@ const Classes = ({ history }) => {
         });
       })
       .catch((error) => console.log(error));
-    history.push("/classes");
+    // history.push("/classes");
   };
   const handleEdit = (event) => {
     event.preventDefault();
