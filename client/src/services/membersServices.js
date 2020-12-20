@@ -15,7 +15,7 @@ const deleteMember = async (id) => {
 
 const updateMember = async (updatedMember) => {
   console.log("inside updateMember=>");
-  const response = await api.put(`/users/${updatedMember._id}`);
+  const response = await api.put(`/users/${updatedMember._id}`, updatedMember);
   console.log("response inside updateMember in member services=>", response);
   return response;
 };
