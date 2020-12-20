@@ -4,8 +4,11 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const userRouter = require("./routes/user_routes");
 const classRouter = require("./routes/pottery_classes_routes");
+const photoRouter = require("./routes/photo_routes");
 const MongoStore = require("connect-mongo")(session)
 const passport = require("passport");
+const aws = require('aws-sdk');
+require('dotenv').config();
 
 const port = 3001;
 
@@ -28,7 +31,7 @@ app.use(cors({
 );
 
 app.use(session({
-    secret: "star wars a new hope", // put this in .env
+    secret: process.env.SESSIONSECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -55,19 +58,29 @@ mongoose.connect(dbConn, {
             console.log("Connected to database", dbConn);
         }
 });
-
+// Passport initialize
 app.use(passport.initialize());
 app.use(passport.session());
 require("./config/passport");
 
+// S3 initialize
+
+aws.config.update({
+  region: 'ap-southeast-2', // Put your aws region here
+  accessKeyId: process.env.AWSAccessKeyId,
+  secretAccessKey: process.env.AWSSecretKey
+})
+
+
+
+
 //Routes
 app.use("/users", userRouter);
 app.use("/classes", classRouter);
+app.use("/photos", photoRouter);
 
 // Home page test
 app.get("/", (req, res) => {
-    // req.session.views = req.session.views? req.session.views +1 : 1;
-    // res.json(req.session.views)
     res.send("Welcome")
 })
 

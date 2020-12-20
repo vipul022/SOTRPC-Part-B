@@ -40,6 +40,7 @@ const userAuthenticated = function (req, res, next) {
     res.send(403, { error: "Not authorised." });
   }
 };
+
 const emailNotExist = async function (req, res, next) {
   const isUser = await User.exists({ email: req.body.email });
   if (isUser) {
