@@ -9,6 +9,7 @@ const Nav = () => {
   console.log("loggedInUser=>", loggedInUser);
 
   const logoutUser = () => {
+    // !logout user from backend
     logoutUserFromBackend()
       .then((data) => {
         console.log("data=>", data);

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { deleteMember } from "../../services/membersServices";
+import { updateMember } from "../../services/membersServices";
 
 const EditMember = (props) => {
   const { store, dispatch } = useGlobalState();
@@ -14,17 +15,6 @@ const EditMember = (props) => {
   const { member } = props.location.state;
   console.log("member=>", member);
   console.log("members=>", members);
-
-  // const {
-  //   history,
-  //   {
-  //     {
-  //       member
-  //     } = state
-  //   }=location,
-
-  // } = props;
-  // console.log("member=>", member);
 
   // !set initial form values to empty string
   const initialFormState = {
@@ -53,23 +43,14 @@ const EditMember = (props) => {
 
   function handleChange(event) {
     const name = event.target.name;
+    console.log("name=>", name);
     const value = event.target.value;
+    console.log("value=>", value);
     setFormState({
       ...formState,
       [name]: value,
     });
   }
-
-  // const deleteMember = (id) => {
-  //   const otherMembers = members.filter(
-  //     (member) => member._id !== parseInt(id)
-  //   );
-  //   console.log("otherMembers=>", otherMembers);
-  //   dispatch({
-  //     type: "setMembers",
-  //     data: [otherMembers],
-  //   });
-  // };
 
   const handleDelete = (event) => {
     event.preventDefault();
@@ -88,15 +69,15 @@ const EditMember = (props) => {
     history.push("/users");
   };
 
-  const updateMember = (updatedMember) => {
-    const otherMembers = members.filter(
-      (member) => member._id !== updatedMember._id
-    );
-    dispatch({
-      type: "setMembers",
-      data: [...otherMembers, updatedMember],
-    });
-  };
+  // const updateMember = (updatedMember) => {
+  //   const otherMembers = members.filter(
+  //     (member) => member._id !== updatedMember._id
+  //   );
+  //   dispatch({
+  //     type: "setMembers",
+  //     data: [...otherMembers, updatedMember],
+  //   });
+  // };
 
   const handleUpdate = (event) => {
     event.preventDefault();
@@ -110,7 +91,20 @@ const EditMember = (props) => {
       role: formState.role,
     };
     console.log("updatedMember=>", updatedMember);
-    updateMember(updatedMember);
+    const otherMembers = members.filter(
+      (member) => member._id !== updatedMember._id
+    );
+    console.log("otherMembers=>", otherMembers);
+    updateMember(updatedMember)
+      .then((response) => {
+        console.log("response=>", response);
+
+        dispatch({
+          type: "setMembers",
+          data: [...otherMembers, updatedMember],
+        });
+      })
+      .catch((error) => console.log(error));
     history.push("/users");
   };
 
@@ -159,14 +153,14 @@ const EditMember = (props) => {
         </div>
         <div>
           <label>Role</label>
-          <select value={formState.role} onChange={handleChange}>
-            <option value="Member">Member</option>
-            <option value="Admin">Admin</option>
+          <select value={formState.role} name="role" onChange={handleChange}>
             <option value="User">User</option>
+            <option value="Admin">Admin</option>
+            <option value="Member">Member</option>
           </select>
 
           <label>Paid</label>
-          <select value={formState.paid} onChange={handleChange}>
+          <select value={formState.paid} name="paid" onChange={handleChange}>
             <option value="Paid">Paid</option>
             <option value="Unpaid">Unpaid</option>
             <option value="Awaiting">Awaiting</option>

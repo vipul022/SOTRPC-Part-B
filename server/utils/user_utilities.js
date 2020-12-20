@@ -20,6 +20,7 @@ const getUsersFromDB = function (req) {
 
 const editUserFromDB = function (req) {
     // new:true to return the updated user rather than the original user
+    console.log("inside editUserFromDB=>")
     return User.findByIdAndUpdate(req.params.id, req.body, {
         new: true
     });

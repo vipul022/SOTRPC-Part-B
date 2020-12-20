@@ -62,6 +62,7 @@ function getClass(req, res) {
 }
 
 function editClass(req, res) {
+  console.log("req inside editClass=>", req)
   editClassFromDB(req).exec((err, pottery_class) => {
     if (err) {
       res.status(500);
