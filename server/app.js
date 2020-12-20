@@ -60,7 +60,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 require("./config/passport");
 
-
 //Routes
 app.use("/users", userRouter);
 app.use("/classes", classRouter);
