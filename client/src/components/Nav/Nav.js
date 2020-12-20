@@ -22,8 +22,8 @@ const Nav = () => {
       .catch((error) => console.log(error));
   };
 
-  const conditionalRender = () => {
-    const links = loggedInUser ? (
+  const showLogOutOrSignUp = () => {
+    return loggedInUser ? (
       <div>
         <h3>Welcome {loggedInUser}</h3>
         <Link onClick={logoutUser} to="/">
@@ -38,7 +38,6 @@ const Nav = () => {
         <Link to="/auth/login">Login</Link>
       </div>
     );
-    return links;
   };
   return (
     <div>
@@ -48,7 +47,7 @@ const Nav = () => {
         <Link to="/classes">Classes</Link>
         {loggedInUserRole === "admin" ? <Link to="/users">Members</Link> : null}
       </div>
-      {conditionalRender()}
+      {showLogOutOrSignUp()}
     </div>
   );
 };
