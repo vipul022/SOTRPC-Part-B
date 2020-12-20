@@ -5,8 +5,9 @@ import { logoutUserFromBackend } from "../../services/authServices";
 
 const Nav = () => {
   const { store, dispatch } = useGlobalState();
-  const { loggedInUser } = store;
+  const { loggedInUser, loggedInUserRole } = store;
   console.log("loggedInUser=>", loggedInUser);
+  console.log("loggedInUserRole=>", loggedInUserRole);
 
   const logoutUser = () => {
     // !logout user from backend
@@ -15,37 +16,39 @@ const Nav = () => {
         console.log("data=>", data);
         dispatch({
           type: "setLoggedInUser",
-          data: null,
+          data: { name: null, role: null },
         });
       })
       .catch((error) => console.log(error));
   };
 
+  const conditionalRender = () => {
+    const links = loggedInUser ? (
+      <div>
+        <h3>Welcome {loggedInUser}</h3>
+        <Link onClick={logoutUser} to="/">
+          Logout
+        </Link>
+      </div>
+    ) : (
+      <div>
+        <Link data-testid="register" to="/auth/register">
+          SignUp
+        </Link>
+        <Link to="/auth/login">Login</Link>
+      </div>
+    );
+    return links;
+  };
   return (
     <div>
       <h1>South of the Rivers Potters Club</h1>
       <div>
         <Link to="/">Home</Link>
         <Link to="/classes">Classes</Link>
-        <Link to="/users">Members</Link>
+        {loggedInUserRole === "admin" ? <Link to="/users">Members</Link> : null}
       </div>
-      {/* <Link to="/auth/register">SignUp</Link> */}
-      {/* <Link to="/auth/login">Login</Link> */}
-      {loggedInUser ? (
-        <div>
-          <h3>Welcome {loggedInUser}</h3>
-          <Link onClick={logoutUser} to="/">
-            Logout
-          </Link>
-        </div>
-      ) : (
-        <div>
-          <Link data-testid="register" to="/auth/register">
-            SignUp
-          </Link>
-          <Link to="/auth/login">Login</Link>
-        </div>
-      )}
+      {conditionalRender()}
     </div>
   );
 };

@@ -51,7 +51,7 @@ const EditMember = (props) => {
       [name]: value,
     });
   }
-
+// !delete function 
   const handleDelete = (event) => {
     event.preventDefault();
     const id = member._id;
@@ -68,17 +68,7 @@ const EditMember = (props) => {
       .catch((error) => console.log(error));
     history.push("/users");
   };
-
-  // const updateMember = (updatedMember) => {
-  //   const otherMembers = members.filter(
-  //     (member) => member._id !== updatedMember._id
-  //   );
-  //   dispatch({
-  //     type: "setMembers",
-  //     data: [...otherMembers, updatedMember],
-  //   });
-  // };
-
+//! update function
   const handleUpdate = (event) => {
     event.preventDefault();
     const updatedMember = {

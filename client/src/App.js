@@ -18,6 +18,7 @@ const App = () => {
     classes: [],
     members: [],
     loggedInUser: null,
+    loggedInUserRole: null,
   };
 
   const [store, dispatch] = useReducer(stateReducer, initialState);
