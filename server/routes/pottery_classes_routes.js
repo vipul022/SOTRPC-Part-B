@@ -1,40 +1,34 @@
 const express = require("express");
 const router = express.Router();
 const {
-    getClasses, 
-    addClass,
-    deleteClass,
-    getClass,
-    editClass
+  getClasses,
+  addClass,
+  deleteClass,
+  getClass,
+  editClass,
 } = require("../controllers/pottery_classes_controller.js");
 const {
-    userAuthenticated,
-    isAdmin,
-    isOwnUserOrAdmin
+  userAuthenticated,
+  isAdmin,
+  isOwnUserOrAdmin,
 } = require("../utils/common_utils");
 
 // list all classes
-router.get("/", getClasses)
+router.get("/", getClasses);
 
 //add one class
-router.post("/",userAuthenticated, isAdmin, addClass)
+router.post("/", userAuthenticated, isAdmin, addClass);
 
 //get one class
-router.get("/:id", getClass)
+router.get("/:id", getClass);
 
 //edit one class
-router.put("/:id",userAuthenticated, isAdmin, editClass)
+router.put("/:id", userAuthenticated, isAdmin, editClass);
 
 //delete one class
-router.delete("/:id",userAuthenticated, isAdmin, deleteClass)
-
+router.delete("/:id", userAuthenticated, isAdmin, deleteClass);
 
 module.exports = router;
-
-
-
-
-
 
 // //route for user login
 // router.post("/login", loginUser);
@@ -42,7 +36,7 @@ module.exports = router;
 // //route for user logout
 // router.get("/logout", logoutUser);
 
-// //show all users (admin only) 
+// //show all users (admin only)
 // router.get("/", userAuthenticated, isAdmin, getUsers);
 // //  router.get("/", getUsers);
 
@@ -60,4 +54,3 @@ module.exports = router;
 // //edit a user
 // router.put("/:id", userAuthenticated, isOwnUserOrAdmin, editUser); // ***change to this route AFTER creating first admin account and for rest of production
 // // router.put("/:id", userAuthenticated, editUser); // *** Change to this route to create the first admin account when setting up
-

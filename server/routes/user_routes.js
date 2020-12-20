@@ -1,20 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const {
-    sendUser,
-    loginUser,
-    logoutUser,
-    getUsers, 
-    addUser,
-    deleteUser,
-    getUser,
-    editUser
-} = require('../controllers/user_controller');
+  sendUser,
+  loginUser,
+  logoutUser,
+  getUsers,
+  addUser,
+  deleteUser,
+  getUser,
+  editUser,
+} = require("../controllers/user_controller");
 const {
-    emailNotExist,
-    userAuthenticated,
-    isAdmin,
-    isOwnUserOrAdmin
+  emailNotExist,
+  userAuthenticated,
+  isAdmin,
+  isOwnUserOrAdmin,
 } = require("../utils/common_utils");
 
 //route for user login
@@ -23,7 +23,7 @@ router.post("/login", loginUser, sendUser);
 //route for user logout
 router.get("/logout", logoutUser);
 
-//show all users (admin only) 
+//show all users (admin only)
 router.get("/", userAuthenticated, isAdmin, getUsers);
 //  router.get("/", getUsers);
 
@@ -40,6 +40,6 @@ router.get("/:id", userAuthenticated, isOwnUserOrAdmin, getUser);
 
 //edit a user
 router.put("/:id", userAuthenticated, isOwnUserOrAdmin, editUser); // ***change to this route AFTER creating first admin account and for rest of production
-// router.put("/:id", userAuthenticated, editUser); // *** Change to this route to create the first admin account when setting up
+// router.put("/:id", editUser); // *** Change to this route to create the first admin account when setting up
 
 module.exports = router;
