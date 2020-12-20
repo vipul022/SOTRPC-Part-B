@@ -14,4 +14,11 @@ async function loginUser(userInfo) {
   console.log("got user back from server", response);
   return response.data;
 }
-export { registerUser, loginUser };
+
+async function logoutUserFromBackend() {
+  console.log("inside logoutUserFromBackend");
+  const response = await api.get("/users/logout");
+  console.log("got user back from server", response);
+  return response.data;
+}
+export { registerUser, loginUser, logoutUserFromBackend };

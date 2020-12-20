@@ -23,6 +23,7 @@ async function deleteClass(id) {
 
 async function updateClass(updatedClass) {
   console.log("inside updateClass=>");
+  console.log("updatedClass=>", updatedClass);
   const response = await api.put(`/classes/${updatedClass._id}`, updatedClass);
   console.log("response inside updateClass in class Services=>", response);
   return response;
@@ -32,4 +33,4 @@ const getClassFromId = (classes, id) => {
   const cl = classes && classes.find((cl) => cl._id === id);
   return cl;
 };
-export { getAllClasses, addNewClass, deleteClass, updateClass,  getClassFromId};
+export { getAllClasses, addNewClass, deleteClass, updateClass, getClassFromId };

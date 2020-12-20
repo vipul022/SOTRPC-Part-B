@@ -25,26 +25,20 @@ const Register = ({ history }) => {
     });
   };
 
-  // const registerUser = () => {
-  //   dispatch({
-  //     type: "setLoggedInUser",
-  //     data: userDetails.name,
-  //   });
-  // };
-
   const handleSubmit = (event) => {
     console.log("hello");
     event.preventDefault();
     //!RegisterUser is a function that hit the backend route and save data to the db
-    console.log("userDetails.email=>", userDetails.email);
+    console.log("userDetails.email inside handleSubmit=>", userDetails.email);
     registerUser(userDetails)
       .then((data) => {
-        console.log("data=>", data);
-        const { name } = data.user;
+        console.log("data in register=>", data);
+        const { name, role } = data.user;
         console.log("name=>", name);
+        // !changing states of loggedInUser and loggedInUserRole
         dispatch({
           type: "setLoggedInUser",
-          data: name,
+          data: { name, role },
         });
         history.push("/");
       })
