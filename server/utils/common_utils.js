@@ -35,7 +35,7 @@ const userAuthenticated = function (req, res, next) {
     if (req.isAuthenticated()) {
         next();
     } else {
-        res.send(403, { error: "Not authorised." });;
+        res.send(403, { error: "Not authorised." });
     }
 }
 const emailNotExist = async function (req, res, next) {

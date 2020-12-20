@@ -9,9 +9,7 @@ const {
     deletePhotoFromDB,
     getPhotosFromDB
 } = require("../utils/photo_utilities");
-// const {
-//     signS3
-// } = require("../utils/S3_utils");
+
 const addPhoto = function (req, res) {
 
     const s3 = new aws.S3();
@@ -25,13 +23,12 @@ const addPhoto = function (req, res) {
         ContentType: fileType,
         ACL: 'public-read'
     };
-    console.log('s3 Params', s3Params);
     // Make a request to the S3 API to get a signed URL which we can use to upload our file
     s3.getSignedUrl('putObject', s3Params, (err, data) => {
         if (err) {
             console.log(err);
             res.json({
-                success: false,
+                signedURLSuccess: false,
                 error: err
             })
         }
@@ -41,25 +38,28 @@ const addPhoto = function (req, res) {
             url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
         };
 
-        // save to db 
-        req.body.url = `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+        // save to db with URL of final image
+        req.body.url = returnData.url
         addPhotoToDB(req).save((err, photo) => {
             if (err) {
                 res.status(500)
                 res.json({
+                    savedToDBSuccess: false,
                     error: err.message
                 })
             }
             console.log("saving photo to DB:", photo)
-        })
 
-        // Send it all back    
-        res.json({
-            success: true,
-            data: {
-                returnData
-            }
-        });
+            // Send it all back    
+            res.json({
+                signedURLSuccess: true,
+                savedToDBSuccess: true,
+                databaseId: photo._id,
+                data: {
+                    returnData
+                }
+            });
+        })
     });
 }
 
@@ -67,7 +67,7 @@ const addPhoto = function (req, res) {
 
 
 function getPhotos(req, res) {
-    getPhotosFromDB().exec((err, classes) => {
+    getPhotosFromDB().exec((err, photos) => {
         if (err) {
             res.status(404)
             res.json({
@@ -75,7 +75,7 @@ function getPhotos(req, res) {
             })
         } else {
             res.status(200)
-            res.send(classes)
+            res.send(photos)
         }
     })
 };
@@ -89,36 +89,53 @@ function deletePhoto(req, res) {
             res.json({
                 error: err.message
             })
+        } else if (!photo) {
+            res.status(404).send({
+                error: "Photo for deletion not found in DB"
+            });
         } else {
-            console.log("photo",photo)
+            console.log("found photo for deletion, commencing S3 deletion")
             const fileName = photo.fileName
 
             //delete from S3
+
+            //Substantiate authority
             const s3 = new aws.S3({
                 accessKeyId: process.env.AWSAccessKeyId,
                 secretAccessKey: process.env.AWSSecretKey
             });
+            //prepare correct params
             var params = {
                 Bucket: S3_BUCKET,
                 Key: fileName
             };
+            //request deletion from S3
             s3.deleteObject(params, function (err, data) {
                 if (err) {
                     res.status(404);
-                    res.json({error: err.message})
+                    res.json({
+                        deleteFromS3Success: false,
+                        error: err.message
+                    })
                 } else {
-                    console.log(`deleted ${fileName} from S3`, data);
+                    console.log(`deleted photo ${fileName} from S3`);
 
                     //finally, remove photo record from DB
                     deletePhotoFromDB(req.params.id).exec(err => {
                         if (err) {
                             res.status(500)
                             res.json({
+                                deleteFromS3Success: true,
+                                deleteFromDBSuccess: false,
                                 error: err.message
                             })
                         }
                         console.log(`deleted ${fileName} from DB`)
-                        res.sendStatus(204)
+                        res.status(204)
+                        res.json({
+                            deleteFromS3Success: true,
+                            deleteFromDBSuccess: true
+                        })
                     })
                 }
             });
