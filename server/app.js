@@ -7,6 +7,8 @@ const classRouter = require("./routes/pottery_classes_routes");
 const photoRouter = require("./routes/photo_routes");
 const MongoStore = require("connect-mongo")(session)
 const passport = require("passport");
+const aws = require('aws-sdk');
+require('dotenv').config();
 
 const port = 3001;
 
@@ -29,7 +31,7 @@ app.use(cors({
 );
 
 app.use(session({
-    secret: "star wars a new hope", // put this in .env
+    secret: process.env.SESSIONSECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -62,8 +64,7 @@ app.use(passport.session());
 require("./config/passport");
 
 // S3 initialize
-var aws = require('aws-sdk');
-require('dotenv').config(); // Configure dotenv to load in the .env file// Configure aws with your accessKeyId and your secretAccessKey
+
 aws.config.update({
   region: 'ap-southeast-2', // Put your aws region here
   accessKeyId: process.env.AWSAccessKeyId,
@@ -80,8 +81,6 @@ app.use("/photos", photoRouter);
 
 // Home page test
 app.get("/", (req, res) => {
-    // req.session.views = req.session.views? req.session.views +1 : 1;
-    // res.json(req.session.views)
     res.send("Welcome")
 })
 
