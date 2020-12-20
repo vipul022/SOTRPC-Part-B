@@ -8,7 +8,8 @@ import Button from "../Button/Button";
 const Classes = ({ history }) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
   const { store, dispatch } = useGlobalState();
-  const { classes } = store;
+  const { classes, loggedInUserRole } = store;
+  console.log("loggedInUserRole=>", loggedInUserRole);
 
   // useSta(localclass, sety) = []]
 
@@ -58,7 +59,19 @@ const Classes = ({ history }) => {
     history.push(`/classes/edit/${id}`);
   };
   console.log("classes=>", classes);
-
+  // ! function for conditionally rendering delete and edit buttons
+  const showDeleteEdit = (c) => {
+    return loggedInUserRole === "admin" ? (
+      <div>
+        <button data-msg={c._id} onClick={handleDelete}>
+          Delete
+        </button>
+        <Button clicked={handleEdit} c={c}>
+          Edit
+        </Button>
+      </div>
+    ) : null;
+  };
   const content =
     classes &&
     classes.map((c) => {
@@ -67,16 +80,11 @@ const Classes = ({ history }) => {
       return (
         <div key={c._id}>
           <h3>{c.title}</h3>
-
           <p>{c.description}</p>
           <p>Time: {c.time}</p>
           <p>Maximum number: {c.maxNumber}</p>
-          <button data-msg={c._id} onClick={handleDelete}>
-            Delete
-          </button>
-          <Button clicked={handleEdit} c={c}>
-            Edit
-          </Button>
+
+          {showDeleteEdit(c)}
           <button onClick={() => history.push("/classes/register")}>
             Sign up for the class
           </button>
@@ -88,11 +96,14 @@ const Classes = ({ history }) => {
     <div>
       <h1>Classes</h1>
       <button onClick={() => history.goBack()}>Back</button>
-      <Link to="/classes/new">
-        <button>New</button>
-      </Link>
+      {loggedInUserRole === "admin" ? (
+        <Link to="/classes/new">
+          <button>New</button>
+        </Link>
+      ) : null}
       {content}
     </div>
   );
 };
 export default Classes;
+// {loggedInUserRole === "admin" ? <Link to="/users">Members</Link> : null}
