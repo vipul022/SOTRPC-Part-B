@@ -33,9 +33,9 @@ const Classes = ({ history }) => {
 
   const handleDelete = (event) => {
     event.preventDefault();
-    console.log("event.target=>", event.target.dataset.msg);
-    // !event.target.dataset.msg is used to retrieve the id of the particular class
-    const id = event.target.dataset.msg;
+    console.log("event.target=>", event.target.dataset.id);
+    // !event.target.dataset.id is used to retrieve the id of the particular class
+    const id = event.target.dataset.id;
     const updatedClasses = classes.filter((c) => c._id !== id);
     console.log("updatedclasses=>", updatedClasses);
     deleteClass(id)
@@ -63,9 +63,9 @@ const Classes = ({ history }) => {
   const showDeleteEdit = (c) => {
     return loggedInUserRole === "admin" ? (
       <div>
-        <button data-msg={c._id} onClick={handleDelete}>
+        <Button clicked={handleDelete} c={c}>
           Delete
-        </button>
+        </Button>
         <Button clicked={handleEdit} c={c}>
           Edit
         </Button>

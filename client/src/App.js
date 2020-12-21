@@ -38,6 +38,7 @@ const App = () => {
             <Route path="/users/edit/:id" component={EditMember} />
             <Route exact path="/auth/register" component={Register} />
             <Route path="/auth/login" component={SignIn} />
+            {/* <Route  exact path="/photos" component={Gallery} /> */}
           </Switch>
         </Router>
       </StateContext.Provider>
