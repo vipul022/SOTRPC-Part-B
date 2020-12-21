@@ -1,10 +1,10 @@
 let User = require("../models/user");
 
 const checkPaid = function (paid) {
-  return paid === "paid" || paid === "awaiting";
+  return paid === "Paid" || paid === "Awaiting";
 };
 const checkAdmin = function (role) {
-  return role === "admin";
+  return role === "Admin";
 };
 
 const isMember = function (req, res, next) {
@@ -45,8 +45,9 @@ const emailNotExist = async function (req, res, next) {
   const isUser = await User.exists({ email: req.body.email });
   if (isUser) {
     res.send(403, { error: "Email already exists." });
+  } else {
+    next();
   }
-  next();
 };
 module.exports = {
   emailNotExist,

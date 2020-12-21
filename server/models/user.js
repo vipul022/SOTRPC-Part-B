@@ -26,11 +26,11 @@ const User = new Schema({
     },
     paid:{
         type: String,
-        default: 'not paid'
+        default: 'Unpaid'
     },
     role: {
         type: String,
-        default: 'user'
+        default: 'User'
     }
 })
 

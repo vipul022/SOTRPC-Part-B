@@ -98,6 +98,7 @@ const Classes = ({ history }) => {
       <h1>Classes</h1>
 
       <BackButton history={history} />
+
       {loggedInUserRole === "Admin" ? (
         <Link to="/classes/new">
           <button>New</button>
