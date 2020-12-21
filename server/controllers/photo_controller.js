@@ -14,6 +14,7 @@ const addPhoto = function (req, res) {
   const s3 = new aws.S3();
   const fileName = req.body.fileName;
   const fileType = req.body.fileType;
+  console.log("S3_BUCKET=>", S3_BUCKET);
   // Set up the payload of what we are sending to the S3 api
   const s3Params = {
     Bucket: S3_BUCKET,
