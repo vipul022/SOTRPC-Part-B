@@ -24,24 +24,23 @@ const SignIn = ({ history }) => {
     });
   };
   console.log("userDetails>", userDetails);
-  // const loginUser = () => {
-  //   console.log("userDetails>", userDetails);
-  //   dispatch({
-  //     type: "setLoggedInUser",
-  //     data: userDetails.email,
-  //   });
-  // };
+
   //!loginUser is a function that hit the backend route and save data to the db
   const handleSubmit = (event) => {
     event.preventDefault();
     loginUser(userDetails)
       .then((data) => {
-        const { name } = data.user;
+        console.log("data=>", data);
+        const { name, role } = data.user;
+
         console.log("name=>", name);
+        console.log("role=>", role);
+        // !changing states of loggedInUser and loggedInUserRole
         dispatch({
           type: "setLoggedInUser",
-          data: name,
+          data: { name, role },
         });
+
         history.push("/");
       })
       .catch((error) => {

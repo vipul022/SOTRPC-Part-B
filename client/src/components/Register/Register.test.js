@@ -96,7 +96,7 @@ describe("Register component creates a user as expected", () => {
   // //! clean up once the tests are done
   // afterAll(() => server.close());
 
-  test("on click 'Create Account' button, Register component should create a new user and redirect to home page ", async () => {
+  test.only("on click 'Create Account' button, Register component should create a new user and redirect to home page ", async () => {
     const { container, getByTestId } = render(
       <StateContext.Provider value="">
         <BrowserRouter>
