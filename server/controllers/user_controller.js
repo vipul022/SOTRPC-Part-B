@@ -96,18 +96,15 @@ function getUser(req, res) {
     }
   });
 }
+
+  //check if changing role or paid and if so, has admin rights
 const authToChange = async function (req) {
-  console.log("in authToChange")
-  const userToChange = await User.findById(req.params.id)
-  console.log ("userToChange.role=",userToChange.role)
-  console.log ("userToChange.paid=",userToChange.paid)
-  console.log ("req.body.role=",req.body.role)
-  console.log ("req.body.paid=",req.body.paid)
   // check if requesting user is admin
   if (req.user.role === "Admin") {
     return true;
   } else {
     // if not admin, then check if role or paid has changed
+    const userToChange = await User.findById(req.params.id)
     if (userToChange.role != req.body.role || userToChange.paid != req.body.paid) {
       return false;
     } else {
@@ -118,7 +115,6 @@ const authToChange = async function (req) {
 
 async function editUser(req, res) {
   if (await authToChange(req)) {
-    console.log("inside editUser, authToChange = ", await authToChange(req))
     editUserFromDB(req).exec((err, user) => {
       if (err) {
         res.status(500);
@@ -133,7 +129,7 @@ async function editUser(req, res) {
   } else {
     res.status(404);
     res.json({
-      error: "Not authorised to update this field",
+      error: "Not authorised to update role or paid status",
     });
   };
 };

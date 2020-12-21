@@ -25,9 +25,6 @@ const getUsersFromDB = function (req) {
     return User.find()
 }
 
-
-
-
 const editUserFromDB = function (req) {
     // new:true to return the updated user rather than the original user
     return User.findByIdAndUpdate(req.params.id, req.body, {
