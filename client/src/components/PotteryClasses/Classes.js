@@ -4,6 +4,7 @@ import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
 import { getAllClasses, deleteClass } from "../../services/classesServices";
 import Button from "../Button/Button";
+import BackButton from "../Button/BackButton";
 
 const Classes = ({ history }) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
@@ -95,7 +96,8 @@ const Classes = ({ history }) => {
   return (
     <div>
       <h1>Classes</h1>
-      <button onClick={() => history.goBack()}>Back</button>
+      {/* <button onClick={() => history.goBack()}>Back</button> */}
+      <BackButton history={history}>Back</BackButton>
       {loggedInUserRole === "admin" ? (
         <Link to="/classes/new">
           <button>New</button>

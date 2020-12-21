@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { registerUser } from "../../services/authServices";
+import BackButton from "../Button/BackButton";
 
 const Register = ({ history }) => {
   const initialFormState = {
@@ -116,8 +117,7 @@ const Register = ({ history }) => {
           ></input>
         </div>
         <div>
-          <button onClick={() => history.goBack()}>Back</button>
-
+          <BackButton history={history}>Back</BackButton>
           <input type="submit" value="Create Account"></input>
         </div>
       </form>

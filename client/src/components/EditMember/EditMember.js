@@ -3,6 +3,7 @@ import { useGlobalState } from "../../config/globalState";
 import { deleteMember } from "../../services/membersServices";
 import { updateMember } from "../../services/membersServices";
 import Button from "../Button/Button";
+import BackButton from "../Button/BackButton";
 
 const EditMember = (props) => {
   const { store, dispatch } = useGlobalState();
@@ -158,8 +159,7 @@ const EditMember = (props) => {
           </select>
         </div>
         <div>
-          <button onClick={() => history.goBack()}>Back</button>
-
+          <BackButton history={history}>Back</BackButton>
           <Button clicked={handleUpdate} c={member}>
             Update
           </Button>
