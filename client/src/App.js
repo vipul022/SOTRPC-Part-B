@@ -12,6 +12,7 @@ import EditMember from "./components/EditMember/EditMember";
 import Register from "./components/Register/Register";
 import SignIn from "./components/SignIn/SignIn";
 import EditClass from "./components/EditClass/EditClass";
+import Gallery from "./components/Gallery/Gallery";
 
 const App = () => {
   const initialState = {
@@ -38,7 +39,7 @@ const App = () => {
             <Route path="/users/edit/:id" component={EditMember} />
             <Route exact path="/auth/register" component={Register} />
             <Route path="/auth/login" component={SignIn} />
-            {/* <Route  exact path="/photos" component={Gallery} /> */}
+            <Route exact path="/photos" component={Gallery} />
           </Switch>
         </Router>
       </StateContext.Provider>
