@@ -1,5 +1,5 @@
 const passport = require("passport");
-// const User = require('../models/user')
+const User = require('../models/user')
 
 const {
   userExists,
@@ -96,21 +96,47 @@ function getUser(req, res) {
     }
   });
 }
-
-function editUser(req, res) {
-  console.log("inside editUser=>");
-  editUserFromDB(req).exec((err, user) => {
-    if (err) {
-      res.status(500);
-      res.json({
-        error: err.message,
-      });
+const authToChange = async function (req) {
+  console.log("in authToChange")
+  const userToChange = await User.findById(req.params.id)
+  console.log ("userToChange.role=",userToChange.role)
+  console.log ("userToChange.paid=",userToChange.paid)
+  console.log ("req.body.role=",req.body.role)
+  console.log ("req.body.paid=",req.body.paid)
+  // check if requesting user is admin
+  if (req.user.role === "Admin") {
+    return true;
+  } else {
+    // if not admin, then check if role or paid has changed
+    if (userToChange.role != req.body.role || userToChange.paid != req.body.paid) {
+      return false;
     } else {
-      res.status(200);
-      res.send(user);
-    }
-  });
-}
+      return true;
+    };
+  };
+};
+
+async function editUser(req, res) {
+  if (await authToChange(req)) {
+    console.log("inside editUser, authToChange = ", await authToChange(req))
+    editUserFromDB(req).exec((err, user) => {
+      if (err) {
+        res.status(500);
+        res.json({
+          error: err.message,
+        });
+      } else {
+        res.status(200);
+        res.send(user);
+      }
+    });
+  } else {
+    res.status(404);
+    res.json({
+      error: "Not authorised to update this field",
+    });
+  };
+};
 
 module.exports = {
   sendUser,

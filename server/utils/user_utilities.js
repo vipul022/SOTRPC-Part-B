@@ -3,7 +3,14 @@ const passport = require('passport');
 
 
 const addUserToDB = function (req, res) {
-    return new User(req.body);
+    const newUser = {
+        address: req.body.address,
+        phone: req.body.phone,
+        email: req.body.email,
+        name: req.body.name,
+        password: req.body.password
+    }
+    return new User(newUser);
 };
 
 const getUserFromDB = function (id) {
@@ -18,9 +25,11 @@ const getUsersFromDB = function (req) {
     return User.find()
 }
 
+
+
+
 const editUserFromDB = function (req) {
     // new:true to return the updated user rather than the original user
-    console.log("inside editUserFromDB=>")
     return User.findByIdAndUpdate(req.params.id, req.body, {
         new: true
     });
