@@ -61,7 +61,7 @@ const Classes = ({ history }) => {
   console.log("classes=>", classes);
   // ! function for conditionally rendering delete and edit buttons
   const showDeleteEdit = (c) => {
-    return loggedInUserRole === "admin" ? (
+    return loggedInUserRole === "Admin" ? (
       <div>
         <button data-msg={c._id} onClick={handleDelete}>
           Delete
@@ -96,7 +96,7 @@ const Classes = ({ history }) => {
     <div>
       <h1>Classes</h1>
       <button onClick={() => history.goBack()}>Back</button>
-      {loggedInUserRole === "admin" ? (
+      {loggedInUserRole === "Admin" ? (
         <Link to="/classes/new">
           <button>New</button>
         </Link>
