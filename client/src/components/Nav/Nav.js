@@ -45,6 +45,7 @@ const Nav = () => {
       <div>
         <Link to="/">Home</Link>
         <Link to="/classes">Classes</Link>
+        <Link to="/photos">Gallery</Link>
         {loggedInUserRole === "admin" ? <Link to="/users">Members</Link> : null}
       </div>
       {showLogOutOrSignUp()}

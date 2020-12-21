@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { deleteMember } from "../../services/membersServices";
 import { updateMember } from "../../services/membersServices";
+import Button from "../Button/Button";
+import BackButton from "../Button/BackButton";
 
 const EditMember = (props) => {
   const { store, dispatch } = useGlobalState();
@@ -51,7 +53,7 @@ const EditMember = (props) => {
       [name]: value,
     });
   }
-// !delete function 
+  // !delete function
   const handleDelete = (event) => {
     event.preventDefault();
     const id = member._id;
@@ -68,7 +70,7 @@ const EditMember = (props) => {
       .catch((error) => console.log(error));
     history.push("/users");
   };
-//! update function
+  //! update function
   const handleUpdate = (event) => {
     event.preventDefault();
     const updatedMember = {
@@ -144,22 +146,27 @@ const EditMember = (props) => {
         <div>
           <label>Role</label>
           <select value={formState.role} name="role" onChange={handleChange}>
-            <option value="User">User</option>
-            <option value="Admin">Admin</option>
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
             <option value="Member">Member</option>
           </select>
 
           <label>Paid</label>
           <select value={formState.paid} name="paid" onChange={handleChange}>
-            <option value="Paid">Paid</option>
-            <option value="Unpaid">Unpaid</option>
-            <option value="Awaiting">Awaiting</option>
+            <option value="paid">Paid</option>
+            <option value="unpaid">Unpaid</option>
+            <option value="awaiting">Awaiting</option>
           </select>
         </div>
         <div>
-          <button onClick={() => history.goBack()}>Back</button>
-          <button onClick={handleUpdate}>Update</button>
-          <button onClick={handleDelete}>Delete</button>
+          <BackButton history={history} />
+          <Button clicked={handleUpdate} c={member}>
+            Update
+          </Button>
+
+          <Button clicked={handleDelete} c={member}>
+            Delete
+          </Button>
         </div>
       </form>
     </div>

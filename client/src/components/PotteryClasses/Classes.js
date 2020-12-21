@@ -4,6 +4,7 @@ import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
 import { getAllClasses, deleteClass } from "../../services/classesServices";
 import Button from "../Button/Button";
+import BackButton from "../Button/BackButton";
 
 const Classes = ({ history }) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
@@ -33,9 +34,9 @@ const Classes = ({ history }) => {
 
   const handleDelete = (event) => {
     event.preventDefault();
-    console.log("event.target=>", event.target.dataset.msg);
-    // !event.target.dataset.msg is used to retrieve the id of the particular class
-    const id = event.target.dataset.msg;
+    console.log("event.target=>", event.target.dataset.id);
+    // !event.target.dataset.id is used to retrieve the id of the particular class
+    const id = event.target.dataset.id;
     const updatedClasses = classes.filter((c) => c._id !== id);
     console.log("updatedclasses=>", updatedClasses);
     deleteClass(id)
@@ -63,9 +64,9 @@ const Classes = ({ history }) => {
   const showDeleteEdit = (c) => {
     return loggedInUserRole === "admin" ? (
       <div>
-        <button data-msg={c._id} onClick={handleDelete}>
+        <Button clicked={handleDelete} c={c}>
           Delete
-        </button>
+        </Button>
         <Button clicked={handleEdit} c={c}>
           Edit
         </Button>
@@ -95,7 +96,8 @@ const Classes = ({ history }) => {
   return (
     <div>
       <h1>Classes</h1>
-      <button onClick={() => history.goBack()}>Back</button>
+      
+      <BackButton history={history}/>
       {loggedInUserRole === "admin" ? (
         <Link to="/classes/new">
           <button>New</button>
