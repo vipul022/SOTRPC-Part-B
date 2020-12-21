@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import api from "../../config/api";
 import { addNewPhoto } from "../../services/photoServices";
-// import axios from "axios";
+import axios from "axios";
 
 class NewPhoto extends Component {
   constructor(props) {
@@ -41,8 +41,7 @@ class NewPhoto extends Component {
             "Content-Type": fileType,
           },
         };
-        api
-          .put(signedRequest, file, options)
+        axios.put(signedRequest, file, options)
           .then((result) => {
             console.log("Response from s3=>", result);
             this.setState({ success: true });

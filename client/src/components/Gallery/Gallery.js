@@ -9,7 +9,7 @@ const Gallery = ({ history }) => {
   return (
     <div>
       <BackButton history={history} />
-      {loggedInUserRole === "admin" ? (
+      {loggedInUserRole === "Admin" ? (
         <Link to="/photos/new">
           <button>New</button>
         </Link>
