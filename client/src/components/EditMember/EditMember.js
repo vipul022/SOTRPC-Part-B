@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { deleteMember } from "../../services/membersServices";
 import { updateMember } from "../../services/membersServices";
+import Button from "../Button/Button";
 
 const EditMember = (props) => {
   const { store, dispatch } = useGlobalState();
@@ -51,7 +52,7 @@ const EditMember = (props) => {
       [name]: value,
     });
   }
-// !delete function 
+  // !delete function
   const handleDelete = (event) => {
     event.preventDefault();
     const id = member._id;
@@ -68,7 +69,7 @@ const EditMember = (props) => {
       .catch((error) => console.log(error));
     history.push("/users");
   };
-//! update function
+  //! update function
   const handleUpdate = (event) => {
     event.preventDefault();
     const updatedMember = {
@@ -158,8 +159,14 @@ const EditMember = (props) => {
         </div>
         <div>
           <button onClick={() => history.goBack()}>Back</button>
-          <button onClick={handleUpdate}>Update</button>
-          <button onClick={handleDelete}>Delete</button>
+
+          <Button clicked={handleUpdate} c={member}>
+            Update
+          </Button>
+
+          <Button clicked={handleDelete} c={member}>
+            Delete
+          </Button>
         </div>
       </form>
     </div>
