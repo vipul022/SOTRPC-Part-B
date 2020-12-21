@@ -117,7 +117,7 @@ const Register = ({ history }) => {
           ></input>
         </div>
         <div>
-          <BackButton history={history}>Back</BackButton>
+          <BackButton history={history} />
           <input type="submit" value="Create Account"></input>
         </div>
       </form>

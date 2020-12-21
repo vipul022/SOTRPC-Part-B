@@ -13,6 +13,7 @@ import Register from "./components/Register/Register";
 import SignIn from "./components/SignIn/SignIn";
 import EditClass from "./components/EditClass/EditClass";
 import Gallery from "./components/Gallery/Gallery";
+import NewPhoto from "./components/NewPhoto/NewPhoto"
 
 const App = () => {
   const initialState = {
@@ -40,6 +41,7 @@ const App = () => {
             <Route exact path="/auth/register" component={Register} />
             <Route path="/auth/login" component={SignIn} />
             <Route exact path="/photos" component={Gallery} />
+            <Route path="/photos/new" component={NewPhoto} />
           </Switch>
         </Router>
       </StateContext.Provider>

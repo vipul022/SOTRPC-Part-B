@@ -1,10 +1,7 @@
 import React from "react";
 
-const BackButton = ({ children, history }) => {
-  return (
-  
-    <button onClick={() => history.goBack()}>{children}</button>
-  );
+const BackButton = ({ history }) => {
+  return <button onClick={() => history.goBack()}>Back</button>;
 };
 
 export default BackButton;

@@ -96,8 +96,8 @@ const Classes = ({ history }) => {
   return (
     <div>
       <h1>Classes</h1>
-      {/* <button onClick={() => history.goBack()}>Back</button> */}
-      <BackButton history={history}>Back</BackButton>
+      
+      <BackButton history={history}/>
       {loggedInUserRole === "admin" ? (
         <Link to="/classes/new">
           <button>New</button>

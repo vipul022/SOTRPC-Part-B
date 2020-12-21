@@ -159,7 +159,7 @@ const EditMember = (props) => {
           </select>
         </div>
         <div>
-          <BackButton history={history}>Back</BackButton>
+        <BackButton history={history}/>
           <Button clicked={handleUpdate} c={member}>
             Update
           </Button>
