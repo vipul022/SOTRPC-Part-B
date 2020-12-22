@@ -32,17 +32,19 @@ const Gallery = ({ history }) => {
       return (
         <div key={photo._id}>
           <Link
-          to={{
-            pathname: `/photos/${photo._id}`,
-            state: {photo: photo}
-          }}
+            to={{
+              pathname: `/photos/${photo._id}`,
+              state: { photo: photo },
+              // !sending photo as to the pathname
+            }}
           >
-          <img src={photo.url} alt="" />
+            <img src={photo.url} alt="" />
           </Link>
+          <p>{photo.description}</p>
         </div>
       );
     });
-  
+
   return (
     <div>
       <BackButton history={history} />
