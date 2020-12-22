@@ -96,7 +96,9 @@ const Classes = ({ history }) => {
   return (
     <div>
       <h1>Classes</h1>
-      <button onClick={() => history.goBack()}>Back</button>
+
+      <BackButton history={history} />
+
       {loggedInUserRole === "Admin" ? (
         <Link to="/classes/new">
           <button>New</button>
@@ -107,4 +109,4 @@ const Classes = ({ history }) => {
   );
 };
 export default Classes;
-// {loggedInUserRole === "admin" ? <Link to="/users">Members</Link> : null}
+

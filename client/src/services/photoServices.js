@@ -6,4 +6,10 @@ const addNewPhoto = async ({ fileName, fileType }) => {
   console.log("response inside addNewPhoto=>", response);
   return response;
 };
-export { addNewPhoto };
+
+const getAllPhotos = async () => {
+  const response = await api.get("/photos");
+  console.log("response inside getAllPhotos=>", response);
+  return response.data;
+};
+export { addNewPhoto, getAllPhotos };

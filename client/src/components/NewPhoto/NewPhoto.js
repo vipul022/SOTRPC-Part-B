@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import api from "../../config/api";
 import { addNewPhoto } from "../../services/photoServices";
-// import axios from "axios";
-
+import axios from "axios";
+// ! reference taken from https://medium.com/@khelif96/uploading-files-from-a-react-app-to-aws-s3-the-right-way-541dd6be689
 class NewPhoto extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +41,8 @@ class NewPhoto extends Component {
             "Content-Type": fileType,
           },
         };
-        api
+        // !axios  call to s3
+        axios
           .put(signedRequest, file, options)
           .then((result) => {
             console.log("Response from s3=>", result);

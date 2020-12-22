@@ -13,12 +13,14 @@ import Register from "./components/Register/Register";
 import SignIn from "./components/SignIn/SignIn";
 import EditClass from "./components/EditClass/EditClass";
 import Gallery from "./components/Gallery/Gallery";
-import NewPhoto from "./components/NewPhoto/NewPhoto"
+import NewPhoto from "./components/NewPhoto/NewPhoto";
+import Photo from "./components/Photo/Photo";
 
 const App = () => {
   const initialState = {
     classes: [],
     members: [],
+    photos: [],
     loggedInUser: null,
     loggedInUserRole: null,
   };
@@ -42,6 +44,7 @@ const App = () => {
             <Route path="/auth/login" component={SignIn} />
             <Route exact path="/photos" component={Gallery} />
             <Route path="/photos/new" component={NewPhoto} />
+            <Route path="/photos/:id" component={Photo} />
           </Switch>
         </Router>
       </StateContext.Provider>
