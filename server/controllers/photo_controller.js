@@ -37,9 +37,10 @@ const addPhoto = function (req, res) {
       signedRequest: data,
       url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
     };
-
+    console.log("returnData=>", returnData);
     // save to db with URL of final image
     req.body.url = returnData.url;
+    console.log("req.body.url=>", req.body.url);
     addPhotoToDB(req).save((err, photo) => {
       if (err) {
         res.status(500);

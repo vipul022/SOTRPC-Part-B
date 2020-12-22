@@ -19,6 +19,7 @@ const App = () => {
   const initialState = {
     classes: [],
     members: [],
+    photos: [],
     loggedInUser: null,
     loggedInUserRole: null,
   };
