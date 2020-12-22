@@ -31,7 +31,10 @@ const Gallery = ({ history }) => {
       console.log("photo inside content=>", photo);
       return (
         <div key={photo._id}>
-          <img src={photo.url} alt="" />
+      <img src={photo.url} alt="" />
+     
+
+
         </div>
       );
     });
