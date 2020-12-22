@@ -14,6 +14,7 @@ const addPhoto = function (req, res) {
   const s3 = new aws.S3();
   const fileName = req.body.fileName;
   const fileType = req.body.fileType;
+
   console.log("S3_BUCKET=>", S3_BUCKET);
   // Set up the payload of what we are sending to the S3 api
   const s3Params = {
@@ -36,7 +37,6 @@ const addPhoto = function (req, res) {
     const returnData = {
       signedRequest: data,
       url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
-
     };
     console.log("returnData=>", returnData);
     // save to db with URL of final image
