@@ -31,14 +31,18 @@ const Gallery = ({ history }) => {
       console.log("photo inside content=>", photo);
       return (
         <div key={photo._id}>
-      <img src={photo.url} alt="" />
-     
-
-
+          <Link
+          to={{
+            pathname: `/photos/${photo._id}`,
+            state: {photo: photo}
+          }}
+          >
+          <img src={photo.url} alt="" />
+          </Link>
         </div>
       );
     });
-
+  
   return (
     <div>
       <BackButton history={history} />
