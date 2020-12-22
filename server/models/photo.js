@@ -12,6 +12,9 @@ const Photo = new Schema({
     },
     url:{
         type: String
+    },
+    description: {
+        type: String
     }
 })
 
