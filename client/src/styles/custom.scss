@@ -1,0 +1,8 @@
+/* make the customizations */
+$theme-colors: (
+        "info": tomato,
+        "danger": teal
+);
+$navbar-padding-y: 50px;
+/* import bootstrap to set changes */
+@import "~bootstrap/scss/bootstrap";
