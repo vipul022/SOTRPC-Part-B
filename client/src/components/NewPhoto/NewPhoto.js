@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 
-import { deletePhotoFromDb } from "../../services/photoServices";
+import { uploadPhotoToS3 } from "../../services/photoServices";
 
 import { addNewPhoto } from "../../services/photoServices";
-import axios from "axios";
 
 // ! reference taken from https://medium.com/@khelif96/uploading-files-from-a-react-app-to-aws-s3-the-right-way-541dd6be689
 class NewPhoto extends Component {
@@ -15,7 +14,6 @@ class NewPhoto extends Component {
       description: "",
     };
     console.log("description=>", this.state.description);
-    
   }
   handleChange = (ev) => {
     const { name, value } = ev.target;
@@ -28,7 +26,9 @@ class NewPhoto extends Component {
   };
 
   handleUpload = (ev) => {
-    const description = this.state.description;
+    const { success, description } = this.state;
+    console.log("success=>", success);
+
     console.log("uploadInput.files=>", this.uploadInput.files);
     let file = this.uploadInput.files[0];
     console.log("file=>", file);
@@ -56,18 +56,13 @@ class NewPhoto extends Component {
             "Content-Type": fileType,
           },
         };
-        // !axios  call to S3
-        axios
-          .put(signedRequest, file, options)
+        // !upload the photo to s3 bucket and incase of error delete the photo from db
+        uploadPhotoToS3(signedRequest, file, options, id)
           .then((result) => {
-            console.log("Response from s3=>", result);
+            console.log("result=>", result);
             this.setState({ success: true });
           })
-          // !delete photo from db incase S3 bucket throws an error while saving the photo
-          .catch((error) => {
-            deletePhotoFromDb(id);
-            alert("ERROR " + JSON.stringify(error));
-          });
+          .catch((error) => console.log(error));
       })
       .catch((error) => {
         alert(JSON.stringify(error));
