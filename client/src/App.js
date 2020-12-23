@@ -44,6 +44,11 @@ const App = () => {
             <Route path="/auth/login" component={SignIn} />
             <Route exact path="/photos" component={Gallery} />
             <Route path="/photos/new" component={NewPhoto} />
+
+            {/* <Route
+              path="/photos/new"
+              render={() => <NewPhoto photos={photos} />}
+            /> */}
             <Route path="/photos/:id" component={Photo} />
           </Switch>
         </Router>
