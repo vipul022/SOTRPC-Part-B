@@ -1,4 +1,5 @@
 import api from "../config/api";
+// import { useGlobalState } from "../config/globalState";
 
 const addNewPhoto = async ({ fileName, fileType, description }) => {
   console.log("fileName=>", fileName);
@@ -23,4 +24,14 @@ const deletePhoto = async (id) => {
   console.log("response inside deletePhoto in photo services=> ", response);
   return response;
 };
-export { addNewPhoto, getAllPhotos, deletePhoto };
+// ! this function will delete photo from db incase s3 bucket returns an error while saving the photo
+const deletePhotoFromDb = (id) => {
+  console.log("inside deletePhotoFromDb=>");
+
+  deletePhoto(id)
+    .then((response) => {
+      console.log("response=>", response);
+    })
+    .catch((error) => console.log(error));
+};
+export { addNewPhoto, getAllPhotos, deletePhoto, deletePhotoFromDb };
