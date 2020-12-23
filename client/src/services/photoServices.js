@@ -16,4 +16,11 @@ const getAllPhotos = async () => {
   console.log("response inside getAllPhotos=>", response);
   return response.data;
 };
-export { addNewPhoto, getAllPhotos };
+
+const deletePhoto = async (id) => {
+  console.log("inside deletePhoto=>");
+  const response = await api.delete(`/photos/${id}`, { params: { id } });
+  console.log("response inside deletePhoto in photo services=> ", response);
+  return response;
+};
+export { addNewPhoto, getAllPhotos, deletePhoto };
