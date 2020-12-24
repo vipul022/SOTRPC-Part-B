@@ -35,7 +35,7 @@ const Gallery = ({ history }) => {
             to={{
               pathname: `/photos/${photo._id}`,
               state: { photo: photo },
-              // !sending photo as to the pathname
+              // !sending photo as photo  to the pathname
             }}
           >
             <img src={photo.url} alt="" />

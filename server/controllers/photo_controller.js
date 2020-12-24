@@ -19,7 +19,8 @@ const addPhoto = function (req, res) {
   // Set up the payload of what we are sending to the S3 api
   const s3Params = {
     Bucket: S3_BUCKET,
-    Key: `photos/${fileName}`,
+    // Key: `photos/${fileName}`,
+    Key: fileName,
     Expires: 500,
     ContentType: fileType,
     ACL: "public-read",

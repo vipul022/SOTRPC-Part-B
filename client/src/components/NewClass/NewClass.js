@@ -29,15 +29,7 @@ const NewClass = ({ history }) => {
       [name]: value,
     });
   };
-  // ! Adding a new class
-  // const addClass = (c) => {
-  //   console.log("class=>", c);
-  //   console.log("classes inside NewClass=>", classes);
-  //   dispatch({
-  //     type: "setClasses",
-  //     data: [...classes, c],
-  //   });
-  // };
+
   // !creating nextId for add a new class
   // function getNextId() {
   //   // console.log("classes in getNextId=>", classes);
