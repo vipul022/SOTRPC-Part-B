@@ -23,7 +23,7 @@ const Photo = (props) => {
         console.log("response=>", response);
         dispatch({
           type: "setPhotos",
-          data: [updatedPhotos],
+          data: updatedPhotos,
         });
       })
       .catch((error) => console.log(error));

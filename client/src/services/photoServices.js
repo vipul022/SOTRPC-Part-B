@@ -1,5 +1,5 @@
 import api from "../config/api";
-// import { useGlobalState } from "../config/globalState";
+import axios from "axios";
 
 const addNewPhoto = async ({ fileName, fileType, description }) => {
   console.log("fileName=>", fileName);
@@ -34,4 +34,22 @@ const deletePhotoFromDb = (id) => {
     })
     .catch((error) => console.log(error));
 };
-export { addNewPhoto, getAllPhotos, deletePhoto, deletePhotoFromDb };
+
+const uploadPhotoToS3 = async (signedRequest, file, options, id) => {
+  // !axios  call to S3
+  let res = false;
+  await axios
+    .put(signedRequest, file, options)
+    .then((result) => {
+      console.log("Response from s3=>", result);
+
+      res = true;
+    })
+    // !delete photo from db incase S3 bucket throws an error while saving the photo
+    .catch((error) => {
+      deletePhotoFromDb(id);
+      alert("ERROR " + JSON.stringify(error));
+    });
+  return res;
+};
+export { addNewPhoto, getAllPhotos, deletePhoto, uploadPhotoToS3 };
