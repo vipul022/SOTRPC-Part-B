@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
 // import classData from "../../../src/data/class_data";
 import { addNewClass } from "../../services/classesServices";
+import BackButton from "../Button/BackButton";
 const NewClass = ({ history }) => {
   // !accessing current state of classes from store
   const { store, dispatch } = useGlobalState();
@@ -117,7 +118,8 @@ const NewClass = ({ history }) => {
           onChange={handleChange}
         ></input>
       </div>
-      <button onClick={() => history.goBack()}>Back</button>
+
+      <BackButton history={history} />
       <input type="submit" value="Create Class"></input>
     </form>
   );

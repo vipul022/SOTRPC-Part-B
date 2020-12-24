@@ -89,3 +89,5 @@ describe("NewClass component renders as expected", () => {
     // console.log("name=>", input);
   });
 });
+
+describe("NewClass component creates a class as expected")
