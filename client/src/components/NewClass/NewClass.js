@@ -63,6 +63,7 @@ const NewClass = ({ history }) => {
       // console
       //   .log(" newClass inside addNewClass in NewClass=>", newClass)
       .then((newClassData) => {
+        console.log("newClassData=>", newClassData);
         dispatch({
           type: "setClasses",
           data: [...classes, newClassData],

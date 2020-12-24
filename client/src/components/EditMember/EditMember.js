@@ -64,7 +64,7 @@ const EditMember = (props) => {
         console.log(response);
         dispatch({
           type: "setMembers",
-          data: [updateMembers],
+          data: updateMembers,
         });
       })
       .catch((error) => console.log(error));

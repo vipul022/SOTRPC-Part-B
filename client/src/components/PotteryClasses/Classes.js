@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
@@ -10,13 +10,14 @@ const Classes = ({ history }) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
   const { store, dispatch } = useGlobalState();
   const { classes, loggedInUserRole } = store;
+  console.log("classes initially=> ", classes);
   console.log("loggedInUserRole=>", loggedInUserRole);
 
-  // useSta(localclass, sety) = []]
-
   const fetchClasses = () => {
+    console.log("in fetchClasses");
     getAllClasses()
       .then((classData) => {
+        console.log("inside fetchClasses classData=> ", classData);
         dispatch({
           type: "setClasses",
           data: classData,
@@ -26,8 +27,10 @@ const Classes = ({ history }) => {
   };
 
   useEffect(() => {
-    console.log("inside useEffect");
+    console.log("inside useEffect before fetchClasses()");
     fetchClasses();
+
+    console.log("inside useEffect after fetchClasses()");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log("classes=>", classes);
@@ -39,16 +42,16 @@ const Classes = ({ history }) => {
     const id = event.target.dataset.id;
     const updatedClasses = classes.filter((c) => c._id !== id);
     console.log("updatedclasses=>", updatedClasses);
+
     deleteClass(id)
       .then((response) => {
         console.log("res=>", response);
         dispatch({
           type: "setClasses",
-          data: [updatedClasses],
+          data: updatedClasses,
         });
       })
       .catch((error) => console.log(error));
-    // history.push("/classes");
   };
   const handleEdit = (event) => {
     event.preventDefault();
@@ -77,7 +80,8 @@ const Classes = ({ history }) => {
     classes &&
     classes.map((c) => {
       console.log("inside content");
-      console.log("c=> ", c);
+      // console.log("c=> ", c);
+
       return (
         <div key={c._id}>
           <h3>{c.title}</h3>
@@ -109,4 +113,3 @@ const Classes = ({ history }) => {
   );
 };
 export default Classes;
-
