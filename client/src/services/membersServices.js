@@ -1,6 +1,7 @@
 import api from "../config/api";
 
 const getAllMembers = async () => {
+  console.log("inside getAllMembers=>");
   const response = await api.get("/users");
   console.log("response inside membersServices=>", response);
   return response.data;

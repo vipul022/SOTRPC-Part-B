@@ -19,6 +19,7 @@ const isAdmin = function (req, res, next) {
 };
 
 const isOwnUserOrAdmin = function (req, res, next) {
+  console.log("req.user.role=>, ", req.user.role);
   // console.log('in isOwnUserOrAdmin')
   // console.log('req.user._id', req.user._id)
   // console.log('req.params.id', req.params.id)
