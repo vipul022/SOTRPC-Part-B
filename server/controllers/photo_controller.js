@@ -19,8 +19,8 @@ const addPhoto = function (req, res) {
   // Set up the payload of what we are sending to the S3 api
   const s3Params = {
     Bucket: S3_BUCKET,
-    // Key: `photos/${fileName}`,
-    Key: fileName,
+    Key: `photos/${fileName}`,
+    // Key: fileName,
     Expires: 500,
     ContentType: fileType,
     ACL: "public-read",
@@ -37,7 +37,7 @@ const addPhoto = function (req, res) {
     // Data payload of what we are sending back, the url of the signedRequest and a URL where we can access the content after its saved.
     const returnData = {
       signedRequest: data,
-      url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
+      url: `https://${S3_BUCKET}.s3.amazonaws.com/photos/${fileName}`,
     };
     console.log("returnData=>", returnData);
     // save to db with URL of final image
