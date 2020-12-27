@@ -6,12 +6,12 @@ async function getAllClasses() {
   return response.data;
 }
 
-async function addNewClass(newClass) {
+const addNewClass = async (newClass) => {
   console.log("inside addNewClass");
   const response = await api.post("/classes", newClass);
   console.log("response inside addNewClass in classServices=>", response);
   return response.data;
-}
+};
 
 async function deleteClass(id) {
   console.log("inside deleteClass");

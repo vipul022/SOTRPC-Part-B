@@ -14,11 +14,13 @@ const addPhoto = function (req, res) {
   const s3 = new aws.S3();
   const fileName = req.body.fileName;
   const fileType = req.body.fileType;
+
   console.log("S3_BUCKET=>", S3_BUCKET);
   // Set up the payload of what we are sending to the S3 api
   const s3Params = {
     Bucket: S3_BUCKET,
-    Key: `photos/${fileName}`,
+    // Key: `photos/${fileName}`,
+    Key: fileName,
     Expires: 500,
     ContentType: fileType,
     ACL: "public-read",
@@ -36,11 +38,11 @@ const addPhoto = function (req, res) {
     const returnData = {
       signedRequest: data,
       url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`,
-
     };
-
+    console.log("returnData=>", returnData);
     // save to db with URL of final image
     req.body.url = returnData.url;
+    console.log("req.body.url=>", req.body.url);
     addPhotoToDB(req).save((err, photo) => {
       if (err) {
         res.status(500);

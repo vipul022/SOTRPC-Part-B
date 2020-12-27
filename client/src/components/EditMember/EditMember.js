@@ -64,7 +64,7 @@ const EditMember = (props) => {
         console.log(response);
         dispatch({
           type: "setMembers",
-          data: [updateMembers],
+          data: updateMembers,
         });
       })
       .catch((error) => console.log(error));
@@ -146,16 +146,16 @@ const EditMember = (props) => {
         <div>
           <label>Role</label>
           <select value={formState.role} name="role" onChange={handleChange}>
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
+            <option value="User">User</option>
+            <option value="Admin">Admin</option>
             <option value="Member">Member</option>
           </select>
 
           <label>Paid</label>
           <select value={formState.paid} name="paid" onChange={handleChange}>
-            <option value="paid">Paid</option>
-            <option value="unpaid">Unpaid</option>
-            <option value="awaiting">Awaiting</option>
+            <option value="Paid">Paid</option>
+            <option value="Unpaid">Unpaid</option>
+            <option value="Awaiting">Awaiting</option>
           </select>
         </div>
         <div>
