@@ -15,8 +15,6 @@ import EditClass from "./components/EditClass/EditClass";
 import Gallery from "./components/Gallery/Gallery";
 import NewPhoto from "./components/NewPhoto/NewPhoto";
 import Photo from "./components/Photo/Photo";
-
-import NewPhoto from "./components/NewPhoto/NewPhoto"
 import "./styles/app.scss";
 const App = () => {
   const initialState = {
