@@ -1,9 +1,10 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import NewClass from "./NewClass";
 import { StateContext } from "../../config/globalState";
-// import { useGlobalState } from "../../config/globalState";
+import { BrowserRouter, Route } from "react-router-dom";
+import Classes from "../PotteryClasses/Classes";
 
 const store = {
   classes: [
@@ -82,7 +83,7 @@ describe("NewClass component renders as expected", () => {
     // !as there are multiple text boxes, therefore  getByTestId id used to target a specific textbox
     // userEvent.type(screen.getByTestId("name", "Vipul"));
     // expect((screen.getByTestId("name").value).toBe("Vipul"));
-    const input = screen.getByTestId("name");
+    const input = screen.getByTestId("title");
     // !"vipul" is passed a value to the text box
     userEvent.type(input, "vipul");
     expect(input.value).toBe("vipul");
@@ -90,4 +91,34 @@ describe("NewClass component renders as expected", () => {
   });
 });
 
-describe("NewClass component creates a class as expected")
+// describe("On clicking 'create class' button, component should create a new class and redirect to 'Classes' component", () => {
+//   beforeEach(() => {
+//     render(
+//       <StateContext.Provider value={{ store }}>
+//         <BrowserRouter>
+//           <NewClass />
+
+//           <Route exact path="/classes" component={Classes} />
+//         </BrowserRouter>
+//       </StateContext.Provider>
+//     );
+//   });
+//   test.only("On clicking 'Create Class' button, component should create a new class and redirect to 'Classes' component", async () => {
+//     // ! Fill the form
+//     userEvent.type(screen.getByTestId("title"), "This is a new class");
+//     userEvent.type(
+//       screen.getByTestId("description"),
+//       "This is the description of new class"
+//     );
+//     userEvent.type(screen.getByTestId("time"), "Every Monday, 06:00 pm");
+//     userEvent.type(screen.getByTestId("maxNumber"), "8");
+//     userEvent.type(screen.getByTestId("teacher"), "Jane");
+//     // const button = screen.getByRole("button", { name: /create class/i });
+//     const button = screen.getAllByRole("button")[1];
+//     // console.log("button=>", button);
+//     // fireEvent.click(button);
+//     userEvent.click(button);
+//     expect(await screen.getByRole("heading", { name: /classes/i }));
+//     // expect(await screen.getByRole("heading", { name: /home/i }));
+//   });
+// });

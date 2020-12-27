@@ -14,7 +14,6 @@ import "@testing-library/jest-dom/extend-expect";
 
 import { BrowserRouter, Route } from "react-router-dom";
 import Home from "../Home/Home";
-import App from "../../App";
 
 const renderComponent = () => {
   render(

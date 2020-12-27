@@ -61,9 +61,11 @@ const NewClass = ({ history }) => {
           type: "setClasses",
           data: [...classes, newClassData],
         });
+        console.log("before routing");
+        history.push("/classes");
+        // history.push("/");
       })
       .catch((error) => console.log(error));
-    history.push("/classes");
   };
 
   return (
@@ -77,7 +79,7 @@ const NewClass = ({ history }) => {
           name="title"
           placeholder="Enter class name..."
           onChange={handleChange}
-          data-testid="name"
+          data-testid="title"
         ></input>
       </div>
       <div>
@@ -87,6 +89,7 @@ const NewClass = ({ history }) => {
           name="description"
           placeholder="Enter description..."
           onChange={handleChange}
+          data-testid="description"
         ></textarea>
       </div>
       <div>
@@ -97,6 +100,7 @@ const NewClass = ({ history }) => {
           name="time"
           placeholder="Enter class timings..."
           onChange={handleChange}
+          data-testid="time"
         ></input>
       </div>
       <div>
@@ -106,6 +110,7 @@ const NewClass = ({ history }) => {
           type="number"
           name="maxNumber"
           onChange={handleChange}
+          data-testid="maxNumber"
         ></input>
       </div>
       <div>
@@ -116,11 +121,14 @@ const NewClass = ({ history }) => {
           name="teacher"
           placeholder="Enter teacher's name..."
           onChange={handleChange}
+          data-testid="teacher"
         ></input>
       </div>
 
       <BackButton history={history} />
-      <input type="submit" value="Create Class"></input>
+      <button type="submit" value="Create Class">
+        Create Class
+      </button>
     </form>
   );
 };
