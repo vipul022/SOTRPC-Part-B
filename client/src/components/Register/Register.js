@@ -36,7 +36,7 @@ const Register = ({ history }) => {
         console.log("data in register=>", data);
         const { name, role } = data.user;
         console.log("name=>", name);
-        console.log("role=>", role)
+        console.log("role=>", role);
         // !changing states of loggedInUser and loggedInUserRole
         dispatch({
           type: "setLoggedInUser",

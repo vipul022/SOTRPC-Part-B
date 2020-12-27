@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
 // import classData from "../../../src/data/class_data";
 import { addNewClass } from "../../services/classesServices";
+import BackButton from "../Button/BackButton";
 const NewClass = ({ history }) => {
   // !accessing current state of classes from store
   const { store, dispatch } = useGlobalState();
@@ -60,9 +61,11 @@ const NewClass = ({ history }) => {
           type: "setClasses",
           data: [...classes, newClassData],
         });
+        console.log("before routing");
+        history.push("/classes");
+        // history.push("/");
       })
       .catch((error) => console.log(error));
-    history.push("/classes");
   };
 
   return (
@@ -76,7 +79,7 @@ const NewClass = ({ history }) => {
           name="title"
           placeholder="Enter class name..."
           onChange={handleChange}
-          data-testid="name"
+          data-testid="title"
         ></input>
       </div>
       <div>
@@ -86,6 +89,7 @@ const NewClass = ({ history }) => {
           name="description"
           placeholder="Enter description..."
           onChange={handleChange}
+          data-testid="description"
         ></textarea>
       </div>
       <div>
@@ -96,6 +100,7 @@ const NewClass = ({ history }) => {
           name="time"
           placeholder="Enter class timings..."
           onChange={handleChange}
+          data-testid="time"
         ></input>
       </div>
       <div>
@@ -105,6 +110,7 @@ const NewClass = ({ history }) => {
           type="number"
           name="maxNumber"
           onChange={handleChange}
+          data-testid="maxNumber"
         ></input>
       </div>
       <div>
@@ -115,10 +121,14 @@ const NewClass = ({ history }) => {
           name="teacher"
           placeholder="Enter teacher's name..."
           onChange={handleChange}
+          data-testid="teacher"
         ></input>
       </div>
-      <button onClick={() => history.goBack()}>Back</button>
-      <input type="submit" value="Create Class"></input>
+
+      <BackButton history={history} />
+      <button type="submit" value="Create Class">
+        Create Class
+      </button>
     </form>
   );
 };
