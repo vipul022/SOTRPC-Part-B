@@ -1,1 +1,52 @@
 @import "custom";
+
+// Title font
+@import url('https://fonts.googleapis.com/css2?family=Crushed&display=swap');
+
+// Global Colors
+$brown: #682C0E;
+$beige: #F2E6D9;
+$orange: #D77D4E;
+
+// Navbar
+
+#navbar-wrapper {
+    .nav-link{
+        color: $orange !important; // all navbar links
+    }
+    #navbar-top-half {     
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        #logo {
+            margin: 20px 0px 0px 20px;
+        }
+        #title {
+            color: $orange;
+            font-family: 'Crushed', cursive;
+            text-align: center;
+            margin: auto;
+        }
+        #signup-login {
+            color: $orange;
+            margin: 20px 20px 0px 0px;
+        }
+    }
+    #navbar-custom-links {
+        margin:auto; // main navbar links
+    }  
+    .navbar-custom {
+        border-bottom: 3px $brown solid; // line indicating end of navbar
+    }
+}
+
+// Media Queries
+.disappear-class {
+    display: none;
+  }
+
+  @include media-breakpoint-up(lg) {
+    .disappear-class {
+      display: block;
+    }
+  }
