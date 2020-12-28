@@ -74,7 +74,7 @@ class NewPhoto extends Component {
     const SuccessMessage = () => (
       <div style={{ padding: 50 }}>
         <h3 style={{ color: "green" }}>SUCCESSFUL UPLOAD</h3>
-        <a href={this.state.url}>Access the file here</a>
+        {/* <a href={this.state.url}>Access the file here</a> */}
         <br />
       </div>
     );

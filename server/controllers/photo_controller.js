@@ -57,7 +57,7 @@ const addPhoto = function (req, res) {
       res.json({
         signedURLSuccess: true,
         savedToDBSuccess: true,
-        databaseId: photo._id,
+        photo: photo,
         data: {
           returnData,
         },

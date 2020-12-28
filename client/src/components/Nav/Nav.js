@@ -59,7 +59,6 @@ const Navi = () => {
         </Nav>
 
         <Navbar className="navbar-custom" expand="lg">
-          <div></div>
           <Navbar.Collapse id="basic-navbar-nav">
             <div id="navbar-middle-container">
             </div>
