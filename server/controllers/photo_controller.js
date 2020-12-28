@@ -20,7 +20,6 @@ const addPhoto = function (req, res) {
   const s3Params = {
     Bucket: S3_BUCKET,
     Key: `photos/${fileName}`,
-    // Key: fileName,
     Expires: 500,
     ContentType: fileType,
     ACL: "public-read",
