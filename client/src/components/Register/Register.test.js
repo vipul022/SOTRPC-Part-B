@@ -1,17 +1,35 @@
 import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import {
+  render,
+  fireEvent,
+  screen,
+  getByTestId,
+  container,
+} from "@testing-library/react";
 import Register from "./Register";
 import { StateContext } from "../../config/globalState";
+import { server, rest } from "../../test/server";
 
 import "@testing-library/jest-dom/extend-expect";
 
 import { BrowserRouter, Route } from "react-router-dom";
 import Home from "../Home/Home";
-import App from "../../App";
 
+const renderComponent = () => {
+  render(
+    <StateContext.Provider value="">
+      <BrowserRouter>
+        <Register />
+
+        {/* user is redirected to home page after successfully creating the user, therefore home component is passed below  */}
+        <Route exact path="/" component={Home} />
+      </BrowserRouter>
+    </StateContext.Provider>
+  );
+};
 // ! // import API mocking utilities from Mock Service Worker.
-import { rest } from "msw";
-import { setupServer } from "msw/node";
+// import { rest } from "msw";
+// import { setupServer } from "msw/node";
 
 // const store = { loggedInUser: "vipul" };
 // const fakeData = { name: "vipul" };
@@ -28,7 +46,6 @@ import { setupServer } from "msw/node";
 describe("Register component renders as expected", () => {
   // !beforeEach render the app before every test
   beforeEach(() => {
-    // !passing value as store with StateContext.Provider as it is passed in app.js
     render(
       <StateContext.Provider value={""}>
         <Register />
@@ -96,96 +113,145 @@ describe("Register component creates a user as expected", () => {
   // //! clean up once the tests are done
   // afterAll(() => server.close());
 
-  test.only("on click 'Create Account' button, Register component should create a new user and redirect to home page ", async () => {
-    const { container, getByTestId } = render(
-      <StateContext.Provider value="">
-        <BrowserRouter>
-          <Register />
+  // render(
+  //   <StateContext.Provider value="">
+  //     <BrowserRouter>
+  //       <Register />
 
-          {/* user is redirected to home page after successfully creating the user, therefore home component is passed below  */}
-          <Route exact path="/" component={Home} />
-        </BrowserRouter>
-      </StateContext.Provider>
-    );
+  //       {/* user is redirected to home page after successfully creating the user, therefore home component is passed below  */}
+  //       <Route exact path="/" component={Home} />
+  //     </BrowserRouter>
+  //   </StateContext.Provider>
+  // );
 
+  test("on click 'Create Account' button, Register component should create a new user and redirect to home page ", async () => {
     // const { getByTestId, container } = render(<App />);
     // const signUpLink = getByTestId("register");
     // fireEvent.click(signUpLink);
     //! fill out the form for testing
-    fireEvent.change(getByTestId("name"), {
+    renderComponent();
+
+    fireEvent.change(screen.getByTestId("name"), {
       target: { value: "vipul" },
     });
-    fireEvent.change(getByTestId("address"), {
+    fireEvent.change(screen.getByTestId("address"), {
       target: { value: "123 fake street, Melbourne" },
     });
-    fireEvent.change(getByTestId("phone"), {
+    fireEvent.change(screen.getByTestId("phone"), {
       target: { value: "0999999999" },
     });
-    fireEvent.change(getByTestId("email"), {
+    fireEvent.change(screen.getByTestId("email"), {
       target: { value: "vipul@test.com" },
     });
-    fireEvent.change(getByTestId("password"), {
+    fireEvent.change(screen.getByTestId("password"), {
       target: { value: "123456" },
     });
 
     const button = screen.getByRole("button", { name: /create account/i });
     fireEvent.click(button);
 
-    // !if user is redirected to home page, that implies that user has been successfully created
+    //   // !if user is redirected to home page, that implies that user has been successfully created
 
-    expect(container).toHaveTextContent(/Home/);
-    // expect(heading).toHaveTextContent(/welcome/i);
-
-    // ctonsole.log("container=>", container);
-    // expect(container).toHaveTextContent(/Welcome vipul/);
-    // await waitFor(() => screen.getByRole("heading"));
-    // expect(screen.getByRole("heading")).toHaveTextContent("Welcome vipul");
-    // });
-    // test("should handle server error", async () => {
-    // server.use(
-    //   rest.post("/users", (req, res, ctx) => {
-    //     return res(
-    //       ctx.status(409),
-    //       ctx.json({
-    //         error: "Authentication failed, please check user name and password",
-    //       })
-    //     );
-    //   })
-    // );
-    // const { container } = render(
-    //   <StateContext.Provider value="">
-    //     <Register />
-    //   </StateContext.Provider>
-    // );
-
-    // fireEvent.click(signUpLink);
-    // //! fill out the form for testing
-    // fireEvent.change(screen.getByTestId("name"), {
-    //   target: { value: "vipul" },
-    // });
-    // fireEvent.change(screen.getByTestId("address"), {
-    //   target: { value: "123 fake street, Melbourne" },
-    // });
-    // fireEvent.change(screen.getByTestId("phone"), {
-    //   target: { value: "0999999999" },
-    // });
-    // fireEvent.change(screen.getByTestId("email"), {
-    //   target: { value: "vipul@test.com" },
-    // });
-    // fireEvent.change(screen.getByTestId("password"), {
-    //   target: { value: "123456" },
-    // });
-
-    // // const button = screen.getByRole("button", { name: /create account/i });
-    // fireEvent.click(button);
-    // const error = await screen.getByText("error");
-    // expect(error).toHaveTextContent(
-    //   /Authentication failed, please check user name and password/i
-    // );
-    // expect(container).toHaveTextContent(
-    //   /Authentication failed, please check user name and password/i
-    // );
+    // expect(await container).toHaveTextContent(/Home/);
+    //   expect(await screen.findByText(/home/i)).toBeInTheDocument();
+    expect(await screen.getByRole("heading", { name: /home/i }));
   });
+  // test.only("should display server error if request fails", async () => {
+  //   const testErrorMessage =
+  //     "Authentication failed, please check user name and password";
+  //   console.log("inside server.use=>");
+  //   server.use(
+  //     rest.post("/users", async (req, res, ctx) => {
+  //       return res(
+  //         ctx.status(409),
+  //         ctx.json({ errorMessage: testErrorMessage })
+  //       );
+  //     })
+  //   );
+  //   // renderComponent();
+  //   render(
+  //     <StateContext.Provider value={""}>
+  //       <Register />
+  //     </StateContext.Provider>
+  //   );
+  //   fireEvent.change(screen.getByTestId("name"), {
+  //     target: { value: "vipul" },
+  //   });
+  //   fireEvent.change(screen.getByTestId("address"), {
+  //     target: { value: "123 fake street, Melbourne" },
+  //   });
+  //   fireEvent.change(screen.getByTestId("phone"), {
+  //     target: { value: "0999999999" },
+  //   });
+  //   fireEvent.change(screen.getByTestId("email"), {
+  //     target: { value: "vipul@test.com" },
+  //   });
+  //   fireEvent.change(screen.getByTestId("password"), {
+  //     target: { value: "123456" },
+  //   });
+  //   const button = screen.getByRole("button", { name: /create account/i });
+  //   fireEvent.click(button);
+  //   expect(await screen.getByTestId("errorMessage")).toHaveTextContent(
+  //     testErrorMessage
+  //   );
+  // expect(
+  //   await screen.getByText(
+  //     /there may be a problem with the server please try later/i
+  //   )
+  // );
+  // });
+
+  // expect(heading).toHaveTextContent(/welcome/i);
+
+  // ctonsole.log("container=>", container);
+  // expect(container).toHaveTextContent(/Welcome vipul/);
+  // await waitFor(() => screen.getByRole("heading"));
+  // expect(screen.getByRole("heading")).toHaveTextContent("Welcome vipul");
+  // });
+  // test("should handle server error", async () => {
+  // server.use(
+  //   rest.post("/users", (req, res, ctx) => {
+  //     return res(
+  //       ctx.status(409),
+  //       ctx.json({
+  //         error: "Authentication failed, please check user name and password",
+  //       })
+  //     );
+  //   })
+  // );
+  // const { container } = render(
+  //   <StateContext.Provider value="">
+  //     <Register />
+  //   </StateContext.Provider>
+  // );
+
+  // fireEvent.click(signUpLink);
+  // //! fill out the form for testing
+  // fireEvent.change(screen.getByTestId("name"), {
+  //   target: { value: "vipul" },
+  // });
+  // fireEvent.change(screen.getByTestId("address"), {
+  //   target: { value: "123 fake street, Melbourne" },
+  // });
+  // fireEvent.change(screen.getByTestId("phone"), {
+  //   target: { value: "0999999999" },
+  // });
+  // fireEvent.change(screen.getByTestId("email"), {
+  //   target: { value: "vipul@test.com" },
+  // });
+  // fireEvent.change(screen.getByTestId("password"), {
+  //   target: { value: "123456" },
+  // });
+
+  // // const button = screen.getByRole("button", { name: /create account/i });
+  // fireEvent.click(button);
+  // const error = await screen.getByText("error");
+  // expect(error).toHaveTextContent(
+  //   /Authentication failed, please check user name and password/i
+  // );
+  // expect(container).toHaveTextContent(
+  //   /Authentication failed, please check user name and password/i
+  // );
 });
 // expect(container).toHaveTextContent(/Home/);
 

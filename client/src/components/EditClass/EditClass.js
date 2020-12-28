@@ -8,8 +8,8 @@ const EditClass = (props) => {
   // !extracting history from props
   const { history } = props;
   console.log("props.match.params.id=>,", props.match.params.id);
+  // !extracting id from props
   const id = props.match.params.id;
-  // !extracting history from props
 
   console.log("classes in editClass=>", classes);
 
@@ -59,7 +59,7 @@ const EditClass = (props) => {
     console.log("updatedClass=>", updatedClass);
     const otherClasses = classes.filter((c) => c._id !== updatedClass._id);
     console.log("otherClasses=>", otherClasses);
-    
+
     updateClass(updatedClass)
       .then((response) => {
         console.log("response=>", response);

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 import { uploadPhotoToS3 } from "../../services/photoServices";
 
 import { addNewPhoto } from "../../services/photoServices";
@@ -12,6 +12,7 @@ class NewPhoto extends Component {
       success: false,
       url: "",
       description: "",
+      photo: {},
     };
     console.log("description=>", this.state.description);
   }
@@ -45,8 +46,10 @@ class NewPhoto extends Component {
         var returnData = response.data.data.returnData;
         var signedRequest = returnData.signedRequest;
         // !Extracting id from response
-        const id = response.data.databaseId;
-        console.log("id=>", id);
+        // const id = response.data.databaseId;
+        this.setState({ photo: response.data.photo });
+        const id = this.state.photo._id;
+        // console.log("id=>", id);
         var url = returnData.url;
         this.setState({ url: url });
         console.log("Recieved a signed request=> " + signedRequest);
@@ -74,7 +77,16 @@ class NewPhoto extends Component {
     const SuccessMessage = () => (
       <div style={{ padding: 50 }}>
         <h3 style={{ color: "green" }}>SUCCESSFUL UPLOAD</h3>
-        {/* <a href={this.state.url}>Access the file here</a> */}
+
+        <Link
+          to={{
+            pathname: `/photos/${this.state.photo._id}`,
+            state: { photo: this.state.photo },
+            // !sending photo as photo  to the pathname
+          }}
+        >
+          Access the file here
+        </Link>
         <br />
       </div>
     );
