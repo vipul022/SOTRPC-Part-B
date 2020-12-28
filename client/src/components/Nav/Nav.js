@@ -11,8 +11,6 @@ const Navi = () => {
   const { store, dispatch } = useGlobalState();
   const { LoggedInUser } = store;
   const { name, role, _id } = LoggedInUser;
-  // console.log("loggedInUser=>", loggedInUser);
-  // console.log("loggedInUserRole=>", loggedInUserRole);
 
   const logoutUser = () => {
     // !logout user from backend
@@ -21,7 +19,7 @@ const Navi = () => {
         console.log("data=>", data);
         dispatch({
           type: "setLoggedInUser",
-          // data: { name: null, role: null },
+
           data: {},
         });
       })
