@@ -68,7 +68,7 @@ const EditMember = (props) => {
         });
       })
       .catch((error) => console.log(error));
-    history.push("/users");
+    role === "Admin" ? history.push("/users") : history.push("/");
   };
   //! update function
   const handleUpdate = (event) => {
@@ -97,7 +97,7 @@ const EditMember = (props) => {
         });
       })
       .catch((error) => console.log(error));
-    history.push("/users");
+    role === "Admin" ? history.push("/users") : history.push("/");
   };
 
   const handleSubmit = (event) => {
