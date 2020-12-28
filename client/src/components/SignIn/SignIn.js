@@ -31,14 +31,13 @@ const SignIn = ({ history }) => {
     loginUser(userDetails)
       .then((data) => {
         console.log("data=>", data);
-        const { name, role } = data.user;
 
-        console.log("name=>", name);
-        console.log("role=>", role);
+        const LoggedInUser = data.user;
+
         // !changing states of loggedInUser and loggedInUserRole
         dispatch({
           type: "setLoggedInUser",
-          data: { name, role },
+          data: LoggedInUser,
         });
 
         history.push("/");

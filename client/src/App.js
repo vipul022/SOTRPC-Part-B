@@ -21,8 +21,10 @@ const App = () => {
     classes: [],
     members: [],
     photos: [],
-    loggedInUser: null,
-    loggedInUserRole: null,
+    // loggedInUser: null,
+    // loggedInUserRole: null,
+    // loggedInUserId: null,
+    LoggedInUser: {},
   };
 
   const [store, dispatch] = useReducer(stateReducer, initialState);
