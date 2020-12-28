@@ -6,7 +6,8 @@ import { getAllPhotos } from "../../services/photoServices";
 
 const Gallery = ({ history }) => {
   const { store, dispatch } = useGlobalState();
-  const { photos, loggedInUserRole } = store;
+  const { photos, LoggedInUser } = store;
+  const { role } = LoggedInUser;
   console.log("photos=>", photos);
 
   const fetchPhotos = () => {
@@ -48,7 +49,7 @@ const Gallery = ({ history }) => {
   return (
     <div>
       <BackButton history={history} />
-      {loggedInUserRole === "Admin" ? (
+      {role === "Admin" ? (
         <Link to="/photos/new">
           <button>New</button>
         </Link>
