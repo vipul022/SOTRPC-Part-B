@@ -6,8 +6,7 @@ import Container from "react-bootstrap/Container"
 const Home = () => {
   return (
     <div>
-      <Container className = "main-container">
-      {Heading("Home")}
+      <Container className = "content-container">
       <h5>“E Concrematio. Confirmatio - </h5>
       <h5>out ot the fire comes firmness, 
         through stress we pass to strength.”</h5>
