@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useGlobalState } from "../../config/globalState";
 import BackButton from "../Button/BackButton";
+import ButtonComponent from "../Button/Button";
 import { getAllPhotos } from "../../services/photoServices";
 
 const Gallery = ({ history }) => {
@@ -49,9 +50,9 @@ const Gallery = ({ history }) => {
     <div>
       <BackButton history={history} />
       {loggedInUserRole === "Admin" ? (
-        <Link to="/photos/new">
-          <button>New</button>
-        </Link>
+        <ButtonComponent clicked={()=> history.push("/photos/new")}>
+          New
+        </ButtonComponent>
       ) : null}
       <h1>Gallery</h1>
       {content}

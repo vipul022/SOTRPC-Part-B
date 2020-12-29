@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { deleteMember } from "../../services/membersServices";
 import { updateMember } from "../../services/membersServices";
-import Button from "../Button/Button";
+import ButtonComponent from "../Button/Button";
 import BackButton from "../Button/BackButton";
 
 const EditMember = (props) => {
@@ -160,13 +160,13 @@ const EditMember = (props) => {
         </div>
         <div>
           <BackButton history={history} />
-          <Button clicked={handleUpdate} c={member}>
+          <ButtonComponent clicked={handleUpdate} c={member}>
             Update
-          </Button>
+          </ButtonComponent>
 
-          <Button clicked={handleDelete} c={member}>
+          <ButtonComponent clicked={handleDelete} c={member}>
             Delete
-          </Button>
+          </ButtonComponent>
         </div>
       </form>
     </div>

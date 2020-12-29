@@ -1,6 +1,6 @@
 import React from "react";
 import BackButton from "../Button/BackButton";
-import Button from "../Button/Button";
+import ButtonComponent from "../Button/Button";
 import { deletePhoto } from "../../services/photoServices";
 import { useGlobalState } from "../../config/globalState";
 
@@ -38,9 +38,9 @@ const Photo = (props) => {
         <h4>{photo.description}</h4>
         <BackButton history={history} />
         {loggedInUserRole === "Admin" ? (
-          <Button clicked={handleDelete} c={photo}>
+          <ButtonComponent clicked={handleDelete} c={photo}>
             Delete
-          </Button>
+          </ButtonComponent>
         ) : null}
       </div>
     </div>

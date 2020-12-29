@@ -1,14 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Button from "react-bootstrap/Button"
+import ButtonComponent from "react-bootstrap/Button"
+import Container from "react-bootstrap/Container"
+
 
 const FindClass = () => {
   return (
     <div>
-      <h4>Lorem ipsum dolor sit.</h4>
+    <Container>
       <Link to="/classes">
-        <Button variant="primary">Find a Class</Button>
+        <ButtonComponent variant="primary">Find a Class</ButtonComponent>
       </Link>
+    </Container>
     </div>
   );
 };
