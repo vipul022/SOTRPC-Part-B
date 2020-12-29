@@ -7,8 +7,8 @@ import BackButton from "../Button/BackButton";
 
 const EditMember = (props) => {
   const { store, dispatch } = useGlobalState();
-  const { members } = store;
-
+  const { members, LoggedInUser } = store;
+  const { role } = LoggedInUser;
   // console.log("PROPS=>", props);
   const { history } = props;
   // !extracting history from props
@@ -68,7 +68,7 @@ const EditMember = (props) => {
         });
       })
       .catch((error) => console.log(error));
-    history.push("/users");
+    role === "Admin" ? history.push("/users") : history.push("/");
   };
   //! update function
   const handleUpdate = (event) => {
@@ -97,7 +97,7 @@ const EditMember = (props) => {
         });
       })
       .catch((error) => console.log(error));
-    history.push("/users");
+    role === "Admin" ? history.push("/users") : history.push("/");
   };
 
   const handleSubmit = (event) => {
@@ -143,21 +143,23 @@ const EditMember = (props) => {
             onChange={handleChange}
           ></input>
         </div>
-        <div>
-          <label>Role</label>
-          <select value={formState.role} name="role" onChange={handleChange}>
-            <option value="User">User</option>
-            <option value="Admin">Admin</option>
-            <option value="Member">Member</option>
-          </select>
+        {role === "Admin" && (
+          <div>
+            <label>Role</label>
+            <select value={formState.role} name="role" onChange={handleChange}>
+              <option value="User">User</option>
+              <option value="Admin">Admin</option>
+              <option value="Member">Member</option>
+            </select>
 
-          <label>Paid</label>
-          <select value={formState.paid} name="paid" onChange={handleChange}>
-            <option value="Paid">Paid</option>
-            <option value="Unpaid">Unpaid</option>
-            <option value="Awaiting">Awaiting</option>
-          </select>
-        </div>
+            <label>Paid</label>
+            <select value={formState.paid} name="paid" onChange={handleChange}>
+              <option value="Paid">Paid</option>
+              <option value="Unpaid">Unpaid</option>
+              <option value="Awaiting">Awaiting</option>
+            </select>
+          </div>
+        )}
         <div>
           <BackButton history={history} />
           <ButtonComponent clicked={handleUpdate} c={member}>

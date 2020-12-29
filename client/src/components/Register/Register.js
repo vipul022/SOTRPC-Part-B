@@ -15,8 +15,9 @@ const Register = ({ history }) => {
   const [userDetails, setUserDetails] = useState(initialFormState);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const { dispatch } = useGlobalState();
-
+  const { store, dispatch } = useGlobalState();
+  const { LoggedInUser } = store;
+  console.log("user inside register=>", LoggedInUser);
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -34,13 +35,14 @@ const Register = ({ history }) => {
     registerUser(userDetails)
       .then((data) => {
         console.log("data in register=>", data);
-        const { name, role } = data.user;
-        console.log("name=>", name);
-        console.log("role=>", role);
-        // !changing states of loggedInUser and loggedInUserRole
+
+        const LoggedInUser = data.user;
+        console.log("LoggedInUser inside handle submit=>", LoggedInUser);
+
         dispatch({
           type: "setLoggedInUser",
-          data: { name, role },
+
+          data: LoggedInUser,
         });
         history.push("/");
       })
@@ -61,7 +63,7 @@ const Register = ({ history }) => {
       <h1>Create Account</h1>
       <form onSubmit={handleSubmit}>
         {errorMessage && <p data-testid="errorMessage">{errorMessage}</p>}
-        {/* {<p data-testid="error">{errorMessage}</p>} */}
+
         <div>
           <label for="name">Name</label>
           <input

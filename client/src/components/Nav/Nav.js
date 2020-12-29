@@ -9,9 +9,8 @@ import Logo from "../../data/logo-circle-sm.png";
 
 const Navi = () => {
   const { store, dispatch } = useGlobalState();
-  const { loggedInUser, loggedInUserRole } = store;
-  console.log("loggedInUser=>", loggedInUser);
-  console.log("loggedInUserRole=>", loggedInUserRole);
+  const { LoggedInUser } = store;
+  const { name, role, _id } = LoggedInUser;
 
   const logoutUser = () => {
     // !logout user from backend
@@ -20,21 +19,29 @@ const Navi = () => {
         console.log("data=>", data);
         dispatch({
           type: "setLoggedInUser",
-          data: { name: null, role: null },
+
+          data: {},
         });
       })
       .catch((error) => console.log(error));
   };
 
-  const showLogOutOrSignUp = (loggedInUser) => {
-    if (loggedInUser) {
+  const showLogOutOrSignUp = (name) => {
+    if (name) {
       return (
         <Nav>
           <Navbar.Text>Welcome</Navbar.Text>
-          <NavDropdown title={loggedInUser} id="basic-nav-dropdown">
-            <NavDropdown.Item as={Link} to={`/users/${loggedInUser._id}`}>
+          <NavDropdown title={name} id="basic-nav-dropdown">
+            <NavDropdown.Item
+              as={Link}
+              to={{
+                pathname: `/users/edit/${_id}`,
+                state: { member: LoggedInUser },
+              }}
+            >
               Account
             </NavDropdown.Item>
+
             <NavDropdown.Item as={Link} onClick={logoutUser} to="/">
               Logout
             </NavDropdown.Item>
@@ -65,7 +72,7 @@ const Navi = () => {
           <h1 className="disappear-class" id="title">
             South of the River Potters Club
           </h1>
-          <div id="signup-login">{showLogOutOrSignUp(loggedInUser)}</div>
+          <div id="signup-login">{showLogOutOrSignUp(name)}</div>
         </Nav>
 
         <Navbar className="navbar-custom" expand="lg">
@@ -81,7 +88,7 @@ const Navi = () => {
               <Nav.Link as={Link} to="/photos">
                 Gallery
               </Nav.Link>
-              {loggedInUserRole === "Admin" ? (
+              {role === "Admin" ? (
                 <Nav.Link as={Link} to="/users">
                   Members
                 </Nav.Link>

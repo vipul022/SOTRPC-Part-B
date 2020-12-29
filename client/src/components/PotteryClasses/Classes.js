@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
@@ -9,10 +9,11 @@ import BackButton from "../Button/BackButton";
 const Classes = ({ history }) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
   const { store, dispatch } = useGlobalState();
-  const { classes, loggedInUserRole } = store;
+  const { classes, LoggedInUser } = store;
   console.log("classes initially=> ", classes);
-  console.log("loggedInUserRole=>", loggedInUserRole);
-
+  console.log("loggedInUser=>", LoggedInUser);
+  const { role } = LoggedInUser;
+  console.log("role=>", role);
   const fetchClasses = () => {
     console.log("in fetchClasses");
     getAllClasses()
@@ -65,7 +66,8 @@ const Classes = ({ history }) => {
   console.log("classes=>", classes);
   // ! function for conditionally rendering delete and edit buttons
   const showDeleteEdit = (c) => {
-    return loggedInUserRole === "Admin" ? (
+    console.log("Logged=> ", LoggedInUser);
+    return role === "Admin" ? (
       <div>
         <ButtonComponent clicked={handleDelete} c={c}>
           Delete
@@ -106,10 +108,8 @@ const Classes = ({ history }) => {
   return (
     <div>
       <h1>Classes</h1>
-
       <BackButton history={history} />
-
-      {loggedInUserRole === "Admin" ? (
+      {role === "Admin" ? (
         <ButtonComponent clicked={()=> history.push("/classes/new")}>
           New
         </ButtonComponent>

@@ -6,7 +6,8 @@ import { useGlobalState } from "../../config/globalState";
 
 const Photo = (props) => {
   const { store, dispatch } = useGlobalState();
-  const { photos, loggedInUserRole } = store;
+  const { photos, LoggedInUser } = store;
+  const { role } = LoggedInUser;
   // !accessing photo that is being passed from Gallery component
   console.log("props=>", props);
   const { history } = props;
@@ -37,7 +38,7 @@ const Photo = (props) => {
         <img src={photo.url} alt="" />
         <h4>{photo.description}</h4>
         <BackButton history={history} />
-        {loggedInUserRole === "Admin" ? (
+        {role === "Admin" ? (
           <ButtonComponent clicked={handleDelete} c={photo}>
             Delete
           </ButtonComponent>
