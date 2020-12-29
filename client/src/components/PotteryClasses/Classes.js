@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
 import { getAllClasses, deleteClass } from "../../services/classesServices";
-import Button from "../Button/Button";
+import ButtonComponent from "../Button/Button";
 import BackButton from "../Button/BackButton";
 
 const Classes = ({ history }) => {
@@ -69,20 +69,26 @@ const Classes = ({ history }) => {
     console.log("Logged=> ", LoggedInUser);
     return role === "Admin" ? (
       <div>
-        <Button clicked={handleDelete} c={c}>
+        <ButtonComponent clicked={handleDelete} c={c}>
           Delete
-        </Button>
-        <Button clicked={handleEdit} c={c}>
+        </ButtonComponent>
+        <ButtonComponent clicked={handleEdit} c={c}>
           Edit
-        </Button>
+        </ButtonComponent>
       </div>
     ) : null;
   };
+
+  const handleClick = () => {
+    history.push("/classes/register")
+  }
+
   const content =
     classes &&
     classes.map((c) => {
       console.log("inside content");
       // console.log("c=> ", c);
+
 
       return (
         <div key={c._id}>
@@ -92,9 +98,9 @@ const Classes = ({ history }) => {
           <p>Maximum number: {c.maxNumber}</p>
 
           {showDeleteEdit(c)}
-          <button onClick={() => history.push("/classes/register")}>
+          <ButtonComponent clicked={handleClick} c={c}>
             Sign up for the class
-          </button>
+          </ButtonComponent>
         </div>
       );
     });
@@ -102,13 +108,11 @@ const Classes = ({ history }) => {
   return (
     <div>
       <h1>Classes</h1>
-
       <BackButton history={history} />
-
       {role === "Admin" ? (
-        <Link to="/classes/new">
-          <button>New</button>
-        </Link>
+        <ButtonComponent clicked={()=> history.push("/classes/new")}>
+          New
+        </ButtonComponent>
       ) : null}
       {content}
     </div>

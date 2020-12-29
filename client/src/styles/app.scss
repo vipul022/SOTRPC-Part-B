@@ -8,9 +8,16 @@ $brown: #682C0E;
 $beige: #F2E6D9;
 $orange: #D77D4E;
 
+
+body {
+    // background-image: url("");
+}
+
 // Navbar
 
 #navbar-wrapper {
+    background-color: white;
+
     .nav-link{
         color: $orange !important; // all navbar links
     }
@@ -49,4 +56,15 @@ $orange: #D77D4E;
     .disappear-class {
       display: block;
     }
+  }
+
+  //all headings
+  .heading {
+      font-size: 2em;
+      margin: auto;
+      color: $orange;
+  }
+
+  .main-container {
+      text-align: center;
   }
