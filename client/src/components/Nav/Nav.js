@@ -10,6 +10,7 @@ import Logo from "../../data/logo-circle-sm.png";
 const Navi = () => {
   const { store, dispatch } = useGlobalState();
   const { LoggedInUser } = store;
+  console.log("LoggedInUser=>", LoggedInUser);
   const { name, role, _id } = LoggedInUser;
 
   const logoutUser = () => {

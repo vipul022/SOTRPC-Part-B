@@ -4,6 +4,7 @@ import { deleteMember } from "../../services/membersServices";
 import { updateMember } from "../../services/membersServices";
 import Button from "../Button/Button";
 import BackButton from "../Button/BackButton";
+import { logoutUserFromBackend } from "../../services/authServices";
 
 const EditMember = (props) => {
   const { store, dispatch } = useGlobalState();
@@ -68,7 +69,23 @@ const EditMember = (props) => {
         });
       })
       .catch((error) => console.log(error));
-    role === "Admin" ? history.push("/users") : history.push("/");
+    // role === "Admin" ? history.push("/users") : history.push("/");
+    if (role === "Admin") {
+      history.push("/users");
+    } else {
+      // !logout user from backend
+      logoutUserFromBackend()
+        .then((data) => {
+          console.log("data=>", data);
+          dispatch({
+            type: "setLoggedInUser",
+
+            data: {},
+          });
+        })
+        .catch((error) => console.log(error));
+      history.push("/");
+    }
   };
   //! update function
   const handleUpdate = (event) => {
