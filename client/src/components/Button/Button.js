@@ -1,11 +1,14 @@
 import React from "react";
+import Button from "react-bootstrap/Button"
 
-const Button = ({ children, clicked, c }) => {
-  return (
-    <button data-id={c._id} onClick={clicked}>
+const ButtonComponent = ({ children, clicked, c={} }) => {
+    return (
+    <Button variant = 'primary' data-id={c._id} onClick={clicked}>
       {children}
-    </button>
+    </Button>
   );
+
+  
 };
 
-export default Button;
+export default ButtonComponent;
