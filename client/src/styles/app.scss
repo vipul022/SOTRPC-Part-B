@@ -8,11 +8,12 @@ $brown: #682C0E;
 $beige: #F2E6D9;
 $orange: #D77D4E;
 
-
+// background image
 body {
     background-image: url("../data/images/bg_image.png");
     background-size: cover;
     background-position: center;
+    z-index: 0;
 }
 
 // Navbar
@@ -20,53 +21,64 @@ body {
 #navbar-wrapper {
     background-color: white;
 
-    .nav-link{
+    .nav-link {
         color: $orange !important; // all navbar links
     }
-    #navbar-top-half {     
+
+    #navbar-top-half {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+
         #logo {
             margin: 20px 0px 0px 20px;
         }
+
         #title {
             color: $orange;
             font-family: 'Crushed', cursive;
             text-align: center;
             margin: auto;
         }
+
         #signup-login {
             color: $orange;
             margin: 20px 20px 0px 0px;
         }
     }
+
     #navbar-custom-links {
-        margin:auto; // main navbar links
-    }  
+        margin: auto; // main navbar links
+    }
+
     .navbar-custom {
         border-bottom: 3px $brown solid; // line indicating end of navbar
     }
 }
 
+.border {
+    border: purple 1px solid;
+}
+.content-container {
+    margin-top: 10px;
+}
+
+//all headings
+.heading {
+    padding: 0px 5px;
+    font-size: 2em;
+    color: $orange;
+    background-color: $beige;
+    border-radius: 5px;
+}
+
 // Media Queries
 .disappear-class {
     display: none;
-  }
+}
 
-  @include media-breakpoint-up(lg) {
+@include media-breakpoint-up(lg) {
     .disappear-class {
-      display: block;
+        display: block;
     }
-  }
-
-  //all headings
-  .heading {
-      font-size: 2em;
-      margin: auto;
-      color: $orange;
-  }
-
-  .main-container {
-      text-align: center;
-  }
+}

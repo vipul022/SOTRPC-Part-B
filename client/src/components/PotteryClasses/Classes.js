@@ -1,10 +1,13 @@
 import React, { useEffect } from "react";
 
 import { useGlobalState } from "../../config/globalState";
-import { Link } from "react-router-dom";
 import { getAllClasses, deleteClass } from "../../services/classesServices";
 import ButtonComponent from "../Button/Button";
 import BackButton from "../Button/BackButton";
+import Heading from "../Heading/Heading";
+import Container from "react-bootstrap/Container"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
 
 const Classes = ({ history }) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
@@ -107,14 +110,23 @@ const Classes = ({ history }) => {
 
   return (
     <div>
-      <h1>Classes</h1>
-      <BackButton history={history} />
-      {role === "Admin" ? (
-        <ButtonComponent clicked={()=> history.push("/classes/new")}>
-          New
-        </ButtonComponent>
-      ) : null}
-      {content}
+      <Container className="content-container">
+        <Row className="justify-content-between">
+          <Col xs="auto"><BackButton history={history} /></Col>
+          <Col xs="auto"><Heading title={"Classes"} /></Col>
+          <Col xs="auto">
+            {
+              role === "Admin" ? 
+              (
+                <ButtonComponent clicked={() => history.push("/classes/new")}>
+                  New
+                </ButtonComponent>    
+              ) : <div></div> //empty div for correct alignment in justify-content-between
+            }
+          </Col>
+        </Row>
+        {content}
+      </Container>
     </div>
   );
 };
