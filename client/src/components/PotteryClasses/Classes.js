@@ -5,9 +5,9 @@ import { getAllClasses, deleteClass } from "../../services/classesServices";
 import ButtonComponent from "../Button/Button";
 import BackButton from "../Button/BackButton";
 import Heading from "../Heading/Heading";
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const Classes = ({ history }) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
@@ -72,10 +72,10 @@ const Classes = ({ history }) => {
     console.log("Logged=> ", LoggedInUser);
     return role === "Admin" ? (
       <div>
-        <ButtonComponent clicked={handleDelete} c={c}>
+        <ButtonComponent clicked={handleDelete} record={c}>
           Delete
         </ButtonComponent>
-        <ButtonComponent clicked={handleEdit} c={c}>
+        <ButtonComponent clicked={handleEdit} record={c}>
           Edit
         </ButtonComponent>
       </div>
@@ -83,15 +83,14 @@ const Classes = ({ history }) => {
   };
 
   const handleClick = () => {
-    history.push("/classes/register")
-  }
+    history.push("/classes/register");
+  };
 
   const content =
     classes &&
     classes.map((c) => {
       console.log("inside content");
       // console.log("c=> ", c);
-
 
       return (
         <div key={c._id}>
@@ -101,7 +100,7 @@ const Classes = ({ history }) => {
           <p>Maximum number: {c.maxNumber}</p>
 
           {showDeleteEdit(c)}
-          <ButtonComponent clicked={handleClick} c={c}>
+          <ButtonComponent clicked={handleClick} record={c}>
             Sign up for the class
           </ButtonComponent>
         </div>
@@ -112,16 +111,21 @@ const Classes = ({ history }) => {
     <div>
       <Container className="content-container">
         <Row className="justify-content-between">
-          <Col xs="auto"><BackButton history={history} /></Col>
-          <Col xs="auto"><Heading title={"Classes"} /></Col>
+          <Col xs="auto">
+            <BackButton history={history} />
+          </Col>
+          <Col xs="auto">
+            <Heading title={"Classes"} />
+          </Col>
           <Col xs="auto">
             {
-              role === "Admin" ? 
-              (
+              role === "Admin" ? (
                 <ButtonComponent clicked={() => history.push("/classes/new")}>
                   New
-                </ButtonComponent>    
-              ) : <div></div> //empty div for correct alignment in justify-content-between
+                </ButtonComponent>
+              ) : (
+                <div></div>
+              ) //empty div for correct alignment in justify-content-between
             }
           </Col>
         </Row>
