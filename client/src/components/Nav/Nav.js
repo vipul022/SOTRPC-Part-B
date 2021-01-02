@@ -5,7 +5,7 @@ import { logoutUserFromBackend } from "../../services/authServices";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Navbar from "react-bootstrap/Navbar";
-import Logo from "../../data/logo-circle-sm.png";
+import Logo from "../../data/images/logo-circle-sm.png";
 
 const Navi = () => {
   const { store, dispatch } = useGlobalState();
