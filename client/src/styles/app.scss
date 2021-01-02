@@ -79,18 +79,29 @@ body {
         margin:100px auto;
 
     }
+    
+}
+
+.find-a-class-image {
+    width:300px;
+    padding:20px;
+
+}
+.gallery-image {
+    width: 300px;
+    margin:auto;
+    display:block;
+    padding:20px;
+
 }
 
 .main-container {
-
+    margin: 100px 0px;
     text-align: center;
     padding: 20px;
     background-color: $beige;
 }
-.find-a-class-image {
-    padding:20px;
 
-}
 
 // Media Queries
 .disappear-class {
