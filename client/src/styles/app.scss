@@ -63,13 +63,17 @@ body {
 }
 
 //all headings
-.heading {
-    padding: 0px 5px;
-    font-size: 2em;
-    color: $orange;
-    background-color: $beige;
-    border-radius: 5px;
+.heading-container {
+    margin: 20px 0px;
+    .heading {
+        padding: 0px 5px;
+        font-size: 2em;
+        color: $orange;
+        background-color: $beige;
+        border-radius: 5px;   
+    }
 }
+
 // home
 .home-quote-container {
     margin-top: 50px;
@@ -96,10 +100,20 @@ body {
 }
 
 .main-container {
-    margin: 100px 0px;
+    margin: 100px auto;
     text-align: center;
     padding: 20px;
     background-color: $beige;
+}
+.small-container {
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+
+}
+.spacer {
+    width: 61px;
 }
 
 
