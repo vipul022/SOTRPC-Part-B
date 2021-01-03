@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { registerUser } from "../../services/authServices";
 import BackButton from "../Button/BackButton";
+import Form from "react-bootstrap/Form";
+import ButtonComponent from "../Button/Button";
+import Heading from "../Heading/Heading";
+import Container from "react-bootstrap/Container";
+import Col from "react-bootstrap/Col"
+import Row from "react-bootstrap/Row"
+import Button from "react-bootstrap/Button"
 
 const Register = ({ history }) => {
   const initialFormState = {
@@ -60,8 +67,8 @@ const Register = ({ history }) => {
   };
   return (
     <div>
-      <h1>Create Account</h1>
-      <form onSubmit={handleSubmit}>
+      {/* <h1>Create Account</h1> */}
+      {/* <form onSubmit={handleSubmit}>
         {errorMessage && <p data-testid="errorMessage">{errorMessage}</p>}
 
         <div>
@@ -123,7 +130,78 @@ const Register = ({ history }) => {
           <BackButton history={history} />
           <input type="submit" value="Create Account"></input>
         </div>
-      </form>
+      </form> */}
+      <Container className = "small-container">
+        <Row className="justify-content-between heading-container">
+          <Col xs="auto"><BackButton history={history} /></Col>
+          <Col xs="auto"><Heading title={"Create Account"} /></Col>
+          <Col xs="auto"><div className="spacer"></div></Col>
+        </Row>
+        <Form onSubmit={handleSubmit}>
+          {errorMessage && <p data-testid="errorMessage">{errorMessage}</p>}
+          <Form.Group controlId="formBasicName">
+            <Form.Label>Full Name</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              name="name"
+              placeholder="Enter your full name..."
+              data-testid="name"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicAddress">
+            <Form.Label>Address</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              name="address"
+              placeholder="Enter your address..."
+              data-testid="address"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicAddress">
+            <Form.Label>Phone</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              name="phone"
+              placeholder="Enter your phone number..."
+              data-testid="phone"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              required
+              type="email"
+              name="email"
+              placeholder="Enter your email..."
+              onChange={handleChange}
+              data-testid="email"
+            />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+          </Form.Text>
+          </Form.Group>
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              required
+              type="password"
+              name="password"
+              placeholder="Enter your password..."
+              onChange={handleChange}
+              data-testid="password"
+            />
+          </Form.Group>
+          <Button type="submit">
+            Submit
+          </Button>
+        </Form>
+      </Container>
     </div>
   );
 };
