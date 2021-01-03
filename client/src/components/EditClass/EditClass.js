@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { updateClass, getClassFromId } from "../../services/classesServices";
+import BackButton from "../Button/BackButton";
+import ButtonComponent from "../Button/Button";
 
 const EditClass = (props) => {
   const { store, dispatch } = useGlobalState();
@@ -123,8 +125,12 @@ const EditClass = (props) => {
           ></input>
         </div>
         <div>
-          <button onClick={() => history.goBack()}>Back</button>
-          <button onClick={handleUpdate}>Update</button>
+          {/* <button onClick={() => history.goBack()}>Back</button> */}
+          <BackButton history={history} />
+          {/* <button onClick={handleUpdate}>Update</button> */}
+          <ButtonComponent clicked={handleUpdate} record={cl}>
+            Update
+          </ButtonComponent>
         </div>
       </form>
     </div>
