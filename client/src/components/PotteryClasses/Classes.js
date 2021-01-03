@@ -111,7 +111,7 @@ const Classes = ({ history }) => {
   return (
     <div>
       <Container className="content-container">
-        <Row className="justify-content-between">
+        <Row className="justify-content-between heading-container">
           <Col xs="auto"><BackButton history={history} /></Col>
           <Col xs="auto"><Heading title={"Classes"} /></Col>
           <Col xs="auto">
@@ -121,7 +121,7 @@ const Classes = ({ history }) => {
                 <ButtonComponent clicked={() => history.push("/classes/new")}>
                   New
                 </ButtonComponent>    
-              ) : <div></div> //empty div for correct alignment in justify-content-between
+              ) : <div className="spacer"></div> //empty div for correct alignment in justify-content-between
             }
           </Col>
         </Row>
