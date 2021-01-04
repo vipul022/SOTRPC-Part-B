@@ -2,13 +2,15 @@ import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { registerUser } from "../../services/authServices";
 import BackButton from "../Button/BackButton";
-import Form from "react-bootstrap/Form";
+// import Form from "react-bootstrap/Form";
 import ButtonComponent from "../Button/Button";
 import Heading from "../Heading/Heading";
-import Container from "react-bootstrap/Container";
-import Col from "react-bootstrap/Col"
-import Row from "react-bootstrap/Row"
-import Button from "react-bootstrap/Button"
+// import Container from "react-bootstrap/Container";
+// import Col from "react-bootstrap/Col";
+// import Row from "react-bootstrap/Row";
+// import Button from "react-bootstrap/Button";
+// import Alert from 'react-bootstrap/Alert'
+import { Form, Container, Col, Row, Button, Alert } from "react-bootstrap";
 
 const Register = ({ history }) => {
   const initialFormState = {
@@ -131,11 +133,17 @@ const Register = ({ history }) => {
           <input type="submit" value="Create Account"></input>
         </div>
       </form> */}
-      <Container className = "small-container">
+      <Container className="small-container">
         <Row className="justify-content-between heading-container">
-          <Col xs="auto"><BackButton history={history} /></Col>
-          <Col xs="auto"><Heading title={"Create Account"} /></Col>
-          <Col xs="auto"><div className="spacer"></div></Col>
+          <Col xs="auto">
+            <BackButton history={history} />
+          </Col>
+          <Col xs="auto">
+            <Heading title={"Create Account"} />
+          </Col>
+          <Col xs="auto">
+            <div className="spacer"></div>
+          </Col>
         </Row>
         <Form onSubmit={handleSubmit}>
           {errorMessage && <p data-testid="errorMessage">{errorMessage}</p>}
@@ -184,7 +192,7 @@ const Register = ({ history }) => {
             />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
-          </Form.Text>
+            </Form.Text>
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
@@ -197,9 +205,7 @@ const Register = ({ history }) => {
               data-testid="password"
             />
           </Form.Group>
-          <Button type="submit">
-            Submit
-          </Button>
+          <Button type="submit">Submit</Button>
         </Form>
       </Container>
     </div>
