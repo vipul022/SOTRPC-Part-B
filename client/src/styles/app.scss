@@ -110,6 +110,21 @@ body {
   width: 61px;
 }
 
+// footer
+
+#footer-wrapper {
+  background-color: $beige;
+
+  .footer-custom {
+    border-top: 3px $brown solid;
+  }
+  .nav-link {
+    color: $brown !important; // all navbar links
+  }
+  #footer-custom-links {
+    margin: auto;
+  }
+}
 // Media Queries
 .disappear-class {
   display: none;
