@@ -146,7 +146,11 @@ const Register = ({ history }) => {
           </Col>
         </Row>
         <Form onSubmit={handleSubmit}>
-          {errorMessage && <p data-testid="errorMessage">{errorMessage}</p>}
+          {errorMessage && (
+            <Alert variant="danger">
+              <p data-testid="errorMessage">{errorMessage}</p>{" "}
+            </Alert>
+          )}
           <Form.Group controlId="formBasicName">
             <Form.Label>Full Name</Form.Label>
             <Form.Control

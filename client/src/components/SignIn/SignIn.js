@@ -9,7 +9,7 @@ import Heading from "../Heading/Heading";
 // import Col from "react-bootstrap/Col";
 // import Row from "react-bootstrap/Row";
 // import Button from "react-bootstrap/Button";
-import { Form, Container, Col, Row, Button } from "react-bootstrap";
+import { Form, Container, Col, Row, Button, Alert } from "react-bootstrap";
 
 const SignIn = ({ history }) => {
   // !extracting dispatch from global state(store)
@@ -107,7 +107,11 @@ const SignIn = ({ history }) => {
           </Col>
         </Row>
         <Form onSubmit={handleSubmit}>
-          {errorMessage && <p>{errorMessage}</p>}
+          {errorMessage && (
+            <Alert variant="danger">
+              <p>{errorMessage}</p>
+            </Alert>
+          )}
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
