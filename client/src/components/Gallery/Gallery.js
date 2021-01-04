@@ -4,6 +4,12 @@ import { useGlobalState } from "../../config/globalState";
 import BackButton from "../Button/BackButton";
 import ButtonComponent from "../Button/Button";
 import { getAllPhotos } from "../../services/photoServices";
+import Heading from "../Heading/Heading";
+import Container from "react-bootstrap/Container"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
+import Image from "react-bootstrap/Image"
+import Card from "react-bootstrap/Card"
 
 const Gallery = ({ history }) => {
   const { store, dispatch } = useGlobalState();
@@ -33,30 +39,43 @@ const Gallery = ({ history }) => {
       // console.log("photo inside content=>", photo);
       return (
         <div key={photo._id}>
-          <Link
-            to={{
-              pathname: `/photos/${photo._id}`,
-              state: { photo: photo },
-              // !sending photo as photo  to the pathname
-            }}
-          >
-            <img src={photo.url} alt="" />
-          </Link>
-          <p>{photo.description}</p>
+          <Container className="photo-container">
+            <Link
+              to={{
+                pathname: `/photos/${photo._id}`,
+                state: { photo: photo },
+                // !sending photo as photo  to the pathname
+              }}
+            >
+              <Image className="photo" src={photo.url} alt=""/>
+            </Link>
+            <p className="photo-description">{photo.description}</p>
+          </Container>
         </div>
       );
     });
 
   return (
     <div>
-      <BackButton history={history} />
-      {role === "Admin" ? (
-        <ButtonComponent clicked={()=> history.push("/photos/new")}>
-          New
-        </ButtonComponent>
-      ) : null}
-      <h1>Gallery</h1>
-      {content}
+      <Container className="main-container">
+        <Row className="justify-content-between heading-container">
+          <Col xs="auto"><BackButton history={history} /></Col>
+          <Col xs="auto"><Heading title={"Gallery"} /></Col>
+          <Col xs="auto">
+            {
+              role === "Admin" ?
+                (
+                  <ButtonComponent clicked={() => history.push("/photos/new")}>
+                    New
+                  </ButtonComponent>
+                ) : <div className="spacer"></div> //empty div for correct alignment in justify-content-between
+            }
+          </Col>
+        </Row>
+        <Container className="content-container">
+          {content}
+        </Container>
+      </Container>
     </div>
   );
 };
