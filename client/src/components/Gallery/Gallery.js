@@ -9,7 +9,7 @@ import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Image from "react-bootstrap/Image"
-import Card from "react-bootstrap/Card"
+
 
 const Gallery = ({ history }) => {
   const { store, dispatch } = useGlobalState();
@@ -35,7 +35,7 @@ const Gallery = ({ history }) => {
   }, []);
   const content =
     photos &&
-    photos.map((photo) => {
+    photos.map((photo, index) => {
       // console.log("photo inside content=>", photo);
       return (
         <div key={photo._id}>
@@ -43,11 +43,11 @@ const Gallery = ({ history }) => {
             <Link
               to={{
                 pathname: `/photos/${photo._id}`,
-                state: { photo: photo },
+                state: { photo: photo, index: index },
                 // !sending photo as photo  to the pathname
               }}
             >
-              <Image className="photo" src={photo.url} alt=""/>
+              <Image className="photo" src={photo.url} alt="" />
             </Link>
             <p className="photo-description">{photo.description}</p>
           </Container>

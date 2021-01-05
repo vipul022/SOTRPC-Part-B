@@ -3,16 +3,20 @@ import BackButton from "../Button/BackButton";
 import ButtonComponent from "../Button/Button";
 import { deletePhoto } from "../../services/photoServices";
 import { useGlobalState } from "../../config/globalState";
+import Heading from "../Heading/Heading";
+import ControlledCarousel from "../ControlledCarousel/ControlledCarousel"
+import { Container, Row, Col } from "react-bootstrap";
 
 const Photo = (props) => {
+  // console.log("props.location.state: ",props.location.state)
   const { store, dispatch } = useGlobalState();
   const { photos, LoggedInUser } = store;
   const { role } = LoggedInUser;
   // !accessing photo that is being passed from Gallery component
   console.log("props=>", props);
   const { history } = props;
-  const { photo } = props.location.state;
-  // console.log("photo=>", photo);
+  const { photo, index } = props.location.state;
+   // console.log("photo=>", photo);
 
   const handleDelete = (event) => {
     event.preventDefault();
@@ -33,7 +37,7 @@ const Photo = (props) => {
 
   return (
     <div>
-      <h1>Gallery</h1>
+      {/* <h1>Gallery</h1>
       <div>
         <img src={photo.url} alt="" />
         <h4>{photo.description}</h4>
@@ -42,8 +46,27 @@ const Photo = (props) => {
           <ButtonComponent clicked={handleDelete} c={photo}>
             Delete
           </ButtonComponent>
-        ) : null}
-      </div>
+        ) : null} */}
+      {/* </div> */}
+      <Container className="main-container">
+        <Row className="justify-content-between heading-container">
+          <Col xs="auto"><BackButton history={history} /></Col>
+          <Col xs="auto"><Heading title={"Gallery"} /></Col>
+          <Col xs="auto">
+            {
+              role === "Admin" ?
+                (
+                  <ButtonComponent clicked={handleDelete} c={photo}>
+                    Delete
+                  </ButtonComponent>
+                ) : <div className="spacer"></div> //empty div for correct alignment in justify-content-between
+            }
+          </Col>
+        </Row>
+        <Container className="content-container">
+            <ControlledCarousel index = {index} photos = {photos}/>
+        </Container>
+      </Container>
     </div>
   );
 };
