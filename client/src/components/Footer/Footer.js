@@ -11,15 +11,14 @@ const Footer = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-footer" />
         <Navbar.Collapse id="basic-navbar-footer">
           <Nav className="mr-auto" id="footer-custom-links">
-            <Nav.Link href="tel: +61473837804">
-              Phone
-            </Nav.Link>
+            <Nav.Link href="tel: +6108 9332 8397">Phone</Nav.Link>
 
-            <Nav.Link as={Link} to="/classes">
-              Classes
-            </Nav.Link>
-            <Nav.Link as={Link} to="/photos">
-              Gallery
+            <Nav.Link href="mailto: sorpotters@hotmail.com">Email</Nav.Link>
+            <Nav.Link
+              href="https://www.facebook.com/southriverpotters/
+"
+            >
+              Facebook
             </Nav.Link>
           </Nav>
         </Navbar.Collapse>
