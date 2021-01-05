@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { loginUser } from "../../services/authServices";
-// import Form from "react-bootstrap/Form";
-import ButtonComponent from "../Button/Button";
+
 import BackButton from "../Button/BackButton";
 import Heading from "../Heading/Heading";
-// import Container from "react-bootstrap/Container";
-// import Col from "react-bootstrap/Col";
-// import Row from "react-bootstrap/Row";
-// import Button from "react-bootstrap/Button";
+
 import { Form, Container, Col, Row, Button, Alert } from "react-bootstrap";
 
 const SignIn = ({ history }) => {

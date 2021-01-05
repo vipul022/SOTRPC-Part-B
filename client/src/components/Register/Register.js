@@ -2,14 +2,9 @@ import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { registerUser } from "../../services/authServices";
 import BackButton from "../Button/BackButton";
-// import Form from "react-bootstrap/Form";
-import ButtonComponent from "../Button/Button";
+
 import Heading from "../Heading/Heading";
-// import Container from "react-bootstrap/Container";
-// import Col from "react-bootstrap/Col";
-// import Row from "react-bootstrap/Row";
-// import Button from "react-bootstrap/Button";
-// import Alert from 'react-bootstrap/Alert'
+
 import { Form, Container, Col, Row, Button, Alert } from "react-bootstrap";
 
 const Register = ({ history }) => {
