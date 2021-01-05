@@ -72,6 +72,9 @@ body {
         background-color: $beige;
         border-radius: 5px;   
     }
+    .spacer {
+        width: 61px;
+    }
 }
 
 // home
@@ -83,7 +86,13 @@ body {
         margin:100px auto;
 
     }
-    
+}
+.home-container {
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+    background-color: $beige;
+    margin-bottom: 100px;
 }
 
 .find-a-class-image {
@@ -99,12 +108,14 @@ body {
 
 }
 
+
+//generic container
 .main-container {
     margin: auto;
     text-align: center;
     padding: 10px;
-    
 }
+
 .small-container {
     max-width: 500px;
     margin: auto;
@@ -112,15 +123,24 @@ body {
     padding: 20px;
 
 }
-.spacer {
-    width: 61px;
+
+
+//classes page
+.classes-container {
+    justify-content: center;
+    // display: inline-flex;
+    flex-wrap: wrap;
+    background-color: $beige;
 }
+
+
 
 .content-container {
     justify-content: center;
     display: inline-flex;
     flex-wrap: wrap;
-    .photo-container {
+    background-color: $beige;
+    .thumb-container {
         display:flex;
         flex-direction: column;
         justify-content: space-between;
@@ -128,7 +148,7 @@ body {
         background-color: $beige;
         width: 150px;
         height: 250px;
-        .photo {
+        .thumb {
             margin-top:10px;
             max-width: 100%;
             max-height: 100%;

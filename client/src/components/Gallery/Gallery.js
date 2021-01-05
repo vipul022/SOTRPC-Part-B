@@ -39,7 +39,7 @@ const Gallery = ({ history }) => {
       // console.log("photo inside content=>", photo);
       return (
         <div key={photo._id}>
-          <Container className="photo-container">
+          <Container className="thumb-container">
             <Link
               to={{
                 pathname: `/photos/${photo._id}`,
@@ -47,7 +47,7 @@ const Gallery = ({ history }) => {
                 // !sending photo as photo  to the pathname
               }}
             >
-              <Image className="photo" src={photo.url} alt="" />
+              <Image className="thumb" src={photo.url} alt="" />
             </Link>
             <p className="photo-description">{photo.description}</p>
           </Container>

@@ -110,7 +110,7 @@ const Classes = ({ history }) => {
 
   return (
     <div>
-      <Container className="content-container">
+      <Container>
         <Row className="justify-content-between heading-container">
           <Col xs="auto"><BackButton history={history} /></Col>
           <Col xs="auto"><Heading title={"Classes"} /></Col>
@@ -125,6 +125,8 @@ const Classes = ({ history }) => {
             }
           </Col>
         </Row>
+        </Container>
+        <Container className="classes-container">
         {content}
       </Container>
     </div>

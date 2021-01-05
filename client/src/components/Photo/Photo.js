@@ -48,7 +48,7 @@ const Photo = (props) => {
           </ButtonComponent>
         ) : null} */}
       {/* </div> */}
-      <Container className="main-container">
+      <Container >
         <Row className="justify-content-between heading-container">
           <Col xs="auto"><BackButton history={history} /></Col>
           <Col xs="auto"><Heading title={"Gallery"} /></Col>
@@ -63,10 +63,10 @@ const Photo = (props) => {
             }
           </Col>
         </Row>
+        </Container>
         <Container className="content-container">
             <ControlledCarousel index = {index} photos = {photos}/>
         </Container>
-      </Container>
     </div>
   );
 };
