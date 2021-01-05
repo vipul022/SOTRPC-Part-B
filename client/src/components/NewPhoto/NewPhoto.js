@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { uploadPhotoToS3 } from "../../services/photoServices";
 
 import { addNewPhoto } from "../../services/photoServices";
+import ButtonComponent from "../Button/Button";
 
 // ! reference taken from https://medium.com/@khelif96/uploading-files-from-a-react-app-to-aws-s3-the-right-way-541dd6be689
 class NewPhoto extends Component {
@@ -114,7 +115,7 @@ class NewPhoto extends Component {
             />
           </div>
           <br />
-          <button onClick={this.handleUpload}>UPLOAD</button>
+          <ButtonComponent clicked={this.handleUpload}>UPLOAD</ButtonComponent>
         </center>
       </div>
     );

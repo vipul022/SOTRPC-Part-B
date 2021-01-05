@@ -179,11 +179,11 @@ const EditMember = (props) => {
         )}
         <div>
           <BackButton history={history} />
-          <ButtonComponent clicked={handleUpdate} c={member}>
+          <ButtonComponent clicked={handleUpdate} record={member}>
             Update
           </ButtonComponent>
 
-          <ButtonComponent clicked={handleDelete} c={member}>
+          <ButtonComponent clicked={handleDelete} record={member}>
             Delete
           </ButtonComponent>
         </div>

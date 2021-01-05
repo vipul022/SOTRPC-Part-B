@@ -43,7 +43,7 @@ const Photo = (props) => {
         <h4>{photo.description}</h4>
         <BackButton history={history} />
         {role === "Admin" ? (
-          <ButtonComponent clicked={handleDelete} c={photo}>
+          <ButtonComponent clicked={handleDelete} record={photo}>
             Delete
           </ButtonComponent>
         ) : null} */}

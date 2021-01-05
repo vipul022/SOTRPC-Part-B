@@ -68,7 +68,7 @@ const Navi = () => {
       <div id="navbar-wrapper">
         <Nav id="navbar-top-half">
           <Nav.Link as={Link} to="/">
-            <img id="logo" src={Logo} />
+            <img id="logo" src={Logo} alt="logo" />
           </Nav.Link>
           <h1 className="disappear-class" id="title">
             South of the River Potters Club

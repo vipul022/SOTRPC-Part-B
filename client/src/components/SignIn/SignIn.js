@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { loginUser } from "../../services/authServices";
-import Form from "react-bootstrap/Form";
-import ButtonComponent from "../Button/Button";
+
 import BackButton from "../Button/BackButton";
 import Heading from "../Heading/Heading";
-import Container from "react-bootstrap/Container";
-import Col from "react-bootstrap/Col"
-import Row from "react-bootstrap/Row"
-import Button from "react-bootstrap/Button"
+
+import { Form, Container, Col, Row, Button, Alert } from "react-bootstrap";
 
 const SignIn = ({ history }) => {
   // !extracting dispatch from global state(store)
@@ -93,14 +90,24 @@ const SignIn = ({ history }) => {
         <input type="submit" value="Log in"></input>
       </div>
     </form> */}
-      <Container className = "small-container">
+      <Container className="small-container">
         <Row className="justify-content-between heading-container">
-          <Col xs="auto"><BackButton history={history} /></Col>
-          <Col xs="auto"><Heading title={"Login"} /></Col>
-          <Col xs="auto"><div className="spacer"></div></Col>
+          <Col xs="auto">
+            <BackButton history={history} />
+          </Col>
+          <Col xs="auto">
+            <Heading title={"Login"} />
+          </Col>
+          <Col xs="auto">
+            <div className="spacer"></div>
+          </Col>
         </Row>
         <Form onSubmit={handleSubmit}>
-          {errorMessage && <p>{errorMessage}</p>}
+          {errorMessage && (
+            <Alert variant="danger">
+              <p>{errorMessage}</p>
+            </Alert>
+          )}
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
@@ -113,7 +120,7 @@ const SignIn = ({ history }) => {
             />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
-          </Form.Text>
+            </Form.Text>
           </Form.Group>
           <Form.Group controlId="formBasicPassword">
             <Form.Label>Password</Form.Label>
@@ -126,9 +133,7 @@ const SignIn = ({ history }) => {
               data-testid="password"
             />
           </Form.Group>
-          <Button type="submit">
-            Submit
-          </Button>
+          <Button type="submit">Submit</Button>
         </Form>
       </Container>
     </div>

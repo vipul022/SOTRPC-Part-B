@@ -15,6 +15,7 @@ import EditClass from "./components/EditClass/EditClass";
 import Gallery from "./components/Gallery/Gallery";
 import NewPhoto from "./components/NewPhoto/NewPhoto";
 import Photo from "./components/Photo/Photo";
+import Footer from "./components/Footer/Footer";
 import "./styles/app.scss";
 const App = () => {
   const initialState = {
@@ -46,6 +47,7 @@ const App = () => {
 
             <Route path="/photos/:id" component={Photo} />
           </Switch>
+          <Footer />
         </Router>
       </StateContext.Provider>
     </div>
