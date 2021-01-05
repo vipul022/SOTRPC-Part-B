@@ -63,35 +63,34 @@ body {
 
 //all headings
 .heading-container {
-    margin: 20px 0px;
-    .heading {
-        padding: 0px 5px;
-        font-size: 2em;
-        color: $orange;
-        background-color: $beige;
-        border-radius: 5px;   
-    }
-    .spacer {
-        width: 61px;
-    }
+  margin: 20px 0px;
+  .heading {
+    padding: 0px 5px;
+    font-size: 2em;
+    color: $orange;
+    background-color: $beige;
+    border-radius: 5px;
+  }
+  .spacer {
+    width: 61px;
+  }
 }
 
 // home
 .home-quote-container {
-    margin-top: 50px;
-    margin-bottom: 50px;
-    .quote {
-        width:300px;
-        margin:100px auto;
-
-    }
+  margin-top: 50px;
+  margin-bottom: 50px;
+  .quote {
+    width: 300px;
+    margin: 100px auto;
+  }
 }
 .home-container {
-    margin: auto;
-    text-align: center;
-    padding: 10px;
-    background-color: $beige;
-    margin-bottom: 100px;
+  margin: auto;
+  text-align: center;
+  padding: 10px;
+  background-color: $beige;
+  margin-bottom: 100px;
 }
 
 .find-a-class-image {
@@ -105,55 +104,50 @@ body {
   padding: 20px;
 }
 
-
 //generic container
 .main-container {
-    margin: auto;
-    text-align: center;
-    padding: 10px;
+  margin: auto;
+  text-align: center;
+  padding: 10px;
 }
 
 .small-container {
   max-width: 500px;
   margin: auto;
-  text-align: center;
+  // text-align: center;
   padding: 20px;
 }
 
-
 //classes page
 .classes-container {
-    justify-content: center;
-    // display: inline-flex;
-    flex-wrap: wrap;
-    background-color: $beige;
+  justify-content: center;
+  // display: inline-flex;
+  flex-wrap: wrap;
+  background-color: $beige;
 }
 
-
-
 .content-container {
-    justify-content: center;
-    display: inline-flex;
-    flex-wrap: wrap;
+  justify-content: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  background-color: $beige;
+  .thumb-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px;
     background-color: $beige;
-    .thumb-container {
-        display:flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin: 10px;
-        background-color: $beige;
-        width: 150px;
-        height: 250px;
-        .thumb {
-            margin-top:10px;
-            max-width: 100%;
-            max-height: 100%;
-        }
-        .photo-description {
-        }
+    width: 150px;
+    height: 250px;
+    .thumb {
+      margin-top: 10px;
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .photo-description {
     }
   }
-
+}
 
 // Media Queries
 .disappear-class {
