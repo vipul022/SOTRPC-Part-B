@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Nav, Navbar } from "react-bootstrap";
+import { FaFacebookSquare, FaEnvelope } from "react-icons/fa";
+import { ImPhone } from "react-icons/im";
 
 const Footer = () => {
   return (
@@ -8,20 +10,24 @@ const Footer = () => {
       {/* <h1>I am a Footer</h1> */}
 
       <Navbar className=" footer-custom">
-        <Navbar.Toggle aria-controls="responsive-navbar-footer" />
-        <Navbar.Collapse id="basic-navbar-footer">
-          <Nav className="mr-auto" id="footer-custom-links">
-            <Nav.Link href="tel: +6108 9332 8397">Phone</Nav.Link>
+        {/* <Navbar.Toggle aria-controls="responsive-navbar-footer" /> */}
+        {/* <Navbar.Collapse id="basic-navbar-footer"> */}
+        <Nav className="mr-auto" id="footer-custom-links">
+          <Nav.Link href="tel: +6108 9332 8397">
+            <ImPhone />
+          </Nav.Link>
 
-            <Nav.Link href="mailto: sorpotters@hotmail.com">Email</Nav.Link>
-            <Nav.Link
-              href="https://www.facebook.com/southriverpotters/
+          <Nav.Link href="mailto: sorpotters@hotmail.com">
+            <FaEnvelope />
+          </Nav.Link>
+          <Nav.Link
+            href="https://www.facebook.com/southriverpotters/
 "
-            >
-              Facebook
-            </Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
+          >
+            <FaFacebookSquare />
+          </Nav.Link>
+        </Nav>
+        {/* </Navbar.Collapse> */}
       </Navbar>
     </div>
   );
