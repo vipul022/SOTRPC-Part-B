@@ -18,11 +18,11 @@ const Home = () => {
           <p>― Charles F. Binns </p>
         </div>
       </Container>
-      <Container fluid className="main-container">
+      <Container fluid className="home-container">
         <Image className="find-a-class-image" src={findAClassImage}/>
         <FindClass />
       </Container>
-      <Container fluid className="main-container">
+      <Container fluid className="home-container">
         <Image className="gallery-image" src={galleryImage}/>
         <Link to="/photos">
         <ButtonComponent variant="primary">Gallery</ButtonComponent>
