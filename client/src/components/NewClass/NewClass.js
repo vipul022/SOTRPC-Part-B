@@ -145,6 +145,64 @@ const NewClass = ({ history }) => {
             <div className="spacer"></div>
           </Col>
         </Row>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="formBasicTitle">
+            <Form.Label>Title</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              name="title"
+              placeholder="Enter class name..."
+              data-testid="title"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicDescription">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              required
+              name="description"
+              placeholder="Enter description..."
+              onChange={handleChange}
+              data-testid="description"
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicTime">
+            <Form.Label>Time</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              name="time"
+              placeholder="Enter class timings..."
+              onChange={handleChange}
+              data-testid="time"
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicMaxNumber">
+            <Form.Label>Max Number</Form.Label>
+            <Form.Control
+              required
+              type="number"
+              name="maxNumber"
+              onChange={handleChange}
+              data-testid="maxNumber"
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicTeacher">
+            <Form.Label>Teacher</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              name="teacher"
+              placeholder="Enter teacher's name..."
+              onChange={handleChange}
+              data-testid="teacher"
+            />
+          </Form.Group>
+          <Button type="submit">Create Class</Button>
+        </Form>
       </Container>
     </div>
   );
