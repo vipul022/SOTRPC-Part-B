@@ -4,7 +4,7 @@ import { Carousel, Image } from "react-bootstrap";
 
 function ControlledCarousel({ index, photos }) {
   console.log("index is ", index);
-  const [photoIndex, setPhotoIndex] = useState(0);
+  const [photoIndex, setPhotoIndex] = useState(index);
 
   const handleSelect = (index, e) => {
     setPhotoIndex(index);
@@ -15,17 +15,17 @@ function ControlledCarousel({ index, photos }) {
     photos.map((photo) => {
       console.log("photo inside content=>", photo);
       return (
-        <Carousel.Item key={photo._id}>
-          <Image className="photo" src={photo.url} alt={photo.description} />
-          <Carousel.Caption>
-            <p>{photo.description}</p>
+        <Carousel.Item key={photo._id} className = "carousel-photo-container" >
+          <Image className="photo" src={photo.url} alt={photo.description}/>
+          <Carousel.Caption className = "caption">
+          <p className = "photo-desc">{photo.description}</p>
           </Carousel.Caption>
         </Carousel.Item>
       );
     });
 
   return (
-    <Carousel activeIndex={photoIndex} onSelect={handleSelect}>
+    <Carousel activeIndex={photoIndex} onSelect={handleSelect} interval = {null}>
       {content}
     </Carousel>
   );

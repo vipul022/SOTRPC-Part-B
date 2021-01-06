@@ -8,8 +8,14 @@ $brown: #682c0e;
 $beige: #f2e6d9;
 $orange: #d77d4e;
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 // background image
 body {
+  margin-bottom: 62px;
   background-image: url("../data/images/bg_image.png");
   background-size: cover;
   background-position: center;
@@ -64,6 +70,7 @@ body {
 //all headings
 .heading-container {
   margin: 20px 0px;
+
   .heading {
     padding: 0px 5px;
     font-size: 2em;
@@ -71,6 +78,7 @@ body {
     background-color: $beige;
     border-radius: 5px;
   }
+
   .spacer {
     width: 61px;
   }
@@ -80,11 +88,13 @@ body {
 .home-quote-container {
   margin-top: 50px;
   margin-bottom: 50px;
+
   .quote {
     width: 300px;
     margin: 100px auto;
   }
 }
+
 .home-container {
   margin: auto;
   text-align: center;
@@ -97,6 +107,7 @@ body {
   width: 300px;
   padding: 20px;
 }
+
 .gallery-image {
   width: 300px;
   margin: auto;
@@ -126,11 +137,13 @@ body {
   background-color: $beige;
 }
 
-.content-container {
+//gallery
+.gallery-container {
   justify-content: center;
   display: inline-flex;
   flex-wrap: wrap;
   background-color: $beige;
+
   .thumb-container {
     display: flex;
     flex-direction: column;
@@ -139,12 +152,62 @@ body {
     background-color: $beige;
     width: 150px;
     height: 250px;
+
     .thumb {
       margin-top: 10px;
       max-width: 100%;
       max-height: 100%;
     }
-    .photo-description {
+
+    .photo-description {}
+  }
+}
+
+//photo
+.carousel-container {
+  background-color: $beige;
+
+  .carousel-photo-container {
+    margin: 20px auto 50px;
+
+    .photo {
+      display: block;
+      margin: auto;
+      width: 80%;
+    }
+    .photo-desc {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+// members
+.members-container {
+  justify-content: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  background-color: $beige;
+}
+//footer
+
+#footer-wrapper {
+  background-color: $beige;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 62px; //same height as the margin to the bottom of the body
+
+  .footer-custom {
+    border-top: 3px $brown solid;
+  }
+
+  .nav-link {
+    color: $brown !important; // all navbar links
+  }
+
+  #footer-custom-links {
+    margin: auto;
+    .footer-link {
+      padding: 10px 20px;
     }
   }
 }
@@ -157,19 +220,5 @@ body {
 @include media-breakpoint-up(lg) {
   .disappear-class {
     display: block;
-  }
-}
-
-#footer-wrapper {
-  background-color: $beige;
-
-  .footer-custom {
-    border-top: 3px $brown solid;
-  }
-  .nav-link {
-    color: $brown !important; // all navbar links
-  }
-  #footer-custom-links {
-    margin: auto;
   }
 }

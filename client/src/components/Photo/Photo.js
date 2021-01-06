@@ -64,7 +64,7 @@ const Photo = (props) => {
           </Col>
         </Row>
         </Container>
-        <Container className="content-container">
+        <Container className="carousel-container">
             <ControlledCarousel index = {index} photos = {photos}/>
         </Container>
     </div>

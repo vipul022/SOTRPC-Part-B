@@ -72,7 +72,7 @@ const Gallery = ({ history }) => {
             }
           </Col>
         </Row>
-        <Container className="content-container">
+        <Container className="gallery-container">
           {content}
         </Container>
       </Container>
