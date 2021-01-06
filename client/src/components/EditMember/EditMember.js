@@ -4,7 +4,10 @@ import { deleteMember } from "../../services/membersServices";
 import { updateMember } from "../../services/membersServices";
 import ButtonComponent from "../Button/Button";
 import BackButton from "../Button/BackButton";
+import Heading from "../Heading/Heading"
 import { logoutUserFromBackend } from "../../services/authServices";
+
+import { Form, Container, Row, Col } from "react-bootstrap"
 
 const EditMember = (props) => {
   const { store, dispatch } = useGlobalState();
@@ -121,74 +124,92 @@ const EditMember = (props) => {
     event.preventDefault();
   };
   return (
-    <div>
-      <h1>Edit Member</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name</label>
-          <input
+    <Container className="small-container">
+      <Row className="justify-content-between heading-container">
+        <Col xs="auto">
+          <BackButton history={history} />
+        </Col>
+        <Col xs="auto">
+          <Heading title={"Edit Account"} />
+        </Col>
+        <Col xs="auto">
+          <ButtonComponent clicked={handleDelete} record={member}>
+            Delete
+          </ButtonComponent>
+        </Col>
+      </Row>
+
+
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="formBasicName">
+          <Form.Label>Full Name</Form.Label>
+          <Form.Control
+            required
             type="text"
             name="name"
             value={formState.name}
             onChange={handleChange}
-          ></input>
-        </div>
-        <div>
-          <label>Address</label>
-          <input
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicAddress">
+          <Form.Label>Address</Form.Label>
+          <Form.Control
+            required
             type="text"
             name="address"
             value={formState.address}
             onChange={handleChange}
-          ></input>
-        </div>
-        <div>
-          <label>Phone</label>
-          <input
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicAddress">
+          <Form.Label>Phone</Form.Label>
+          <Form.Control
+            required
             type="text"
             name="phone"
             value={formState.phone}
             onChange={handleChange}
-          ></input>
-        </div>
-        <div>
-          <label>Email</label>
-          <input
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            required
             type="email"
             name="email"
             value={formState.email}
             onChange={handleChange}
-          ></input>
-        </div>
+          />
+        </Form.Group>
+
         {role === "Admin" && (
           <div>
-            <label>Role</label>
-            <select value={formState.role} name="role" onChange={handleChange}>
-              <option value="User">User</option>
-              <option value="Admin">Admin</option>
-              <option value="Member">Member</option>
-            </select>
+                  <Form.Group controlId="formBasicRole">
+                  <Form.Label>Role</Form.Label>
+                  <Form.Control as="select"  value={formState.role} name="role" onChange={handleChange}>
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                    <option value="Member">Member</option>
+                  </Form.Control>
+                </Form.Group>
 
-            <label>Paid</label>
-            <select value={formState.paid} name="paid" onChange={handleChange}>
-              <option value="Paid">Paid</option>
-              <option value="Unpaid">Unpaid</option>
-              <option value="Awaiting">Awaiting</option>
-            </select>
+                <Form.Group controlId="formBasicPaid">
+                  <Form.Label>Paid</Form.Label>
+                  <Form.Control as="select"  value={formState.paid} name="paid" onChange={handleChange}>
+                    <option value="Paid">Paid</option>
+                    <option value="Unpaid">Unpaid</option>
+                    <option value="Awaiting">Awaiting</option>
+                  </Form.Control>
+                </Form.Group>
           </div>
         )}
         <div>
-          <BackButton history={history} />
           <ButtonComponent clicked={handleUpdate} record={member}>
             Update
           </ButtonComponent>
-
-          <ButtonComponent clicked={handleDelete} record={member}>
-            Delete
-          </ButtonComponent>
         </div>
-      </form>
-    </div>
+      </Form>
+    </Container>
   );
 };
 
