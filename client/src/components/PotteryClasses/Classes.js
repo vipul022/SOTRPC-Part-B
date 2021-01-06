@@ -71,14 +71,14 @@ const Classes = ({ history }) => {
   const showDeleteEdit = (c) => {
     console.log("Logged=> ", LoggedInUser);
     return role === "Admin" ? (
-      <div>
+      <>
         <ButtonComponent clicked={handleDelete} record={c}>
           Delete
         </ButtonComponent>
         <ButtonComponent clicked={handleEdit} record={c}>
           Edit
         </ButtonComponent>
-      </div>
+      </>
     ) : null;
   };
 
@@ -86,6 +86,7 @@ const Classes = ({ history }) => {
     history.push("/classes/register");
   };
 
+  const classButtons = role === "Admin" ? "class-buttons" : null;
   const content =
     classes &&
     classes.map((c) => {
@@ -94,38 +95,49 @@ const Classes = ({ history }) => {
 
       return (
         <div key={c._id}>
-          <h3>{c.title}</h3>
-          <p>{c.description}</p>
-          <p>Time: {c.time}</p>
-          <p>Maximum number: {c.maxNumber}</p>
-
-          {showDeleteEdit(c)}
-          <ButtonComponent clicked={handleClick} record={c}>
-            Sign up for the class
-          </ButtonComponent>
+          <Container className="class-card">
+            <h3>{c.title}</h3>
+            <p className="class-description">{c.description}</p>
+            <p>Time: {c.time}</p>
+            <p>Maximum number: {c.maxNumber}</p>
+            <div className={classButtons}>
+              {showDeleteEdit(c)}
+              <ButtonComponent
+                // className="sign-up-button"
+                clicked={handleClick}
+                record={c}
+              >
+                Sign up for the class
+              </ButtonComponent>
+            </div>
+          </Container>
         </div>
       );
     });
 
   return (
     <div>
-      <Container>
+      <Container className="main-container">
         <Row className="justify-content-between heading-container">
-          <Col xs="auto"><BackButton history={history} /></Col>
-          <Col xs="auto"><Heading title={"Classes"} /></Col>
+          <Col xs="auto">
+            <BackButton history={history} />
+          </Col>
+          <Col xs="auto">
+            <Heading title={"Classes"} />
+          </Col>
           <Col xs="auto">
             {
               role === "Admin" ? (
                 <ButtonComponent clicked={() => history.push("/classes/new")}>
                   New
-                </ButtonComponent>    
-              ) : <div className="spacer"></div> //empty div for correct alignment in justify-content-between
+                </ButtonComponent>
+              ) : (
+                <div className="spacer"></div>
+              ) //empty div for correct alignment in justify-content-between
             }
           </Col>
         </Row>
-        </Container>
-        <Container className="classes-container">
-        {content}
+        <Container className="classes-container">{content}</Container>
       </Container>
     </div>
   );

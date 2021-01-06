@@ -56,8 +56,8 @@ describe("NewClass component renders as expected", () => {
   test("should select input element by placeholder text", () => {
     screen.getAllByPlaceholderText("Enter class timings...");
   });
-  test("should render 'Max number' label", () => {
-    screen.getByText(/max number/i);
+  test("should render 'Max Number' label", () => {
+    screen.getByText(/max Number/i);
   });
   test("should render 'Teacher' label", () => {
     screen.getByText(/teacher/i);

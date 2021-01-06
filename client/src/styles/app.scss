@@ -131,10 +131,29 @@ body {
 
 //classes page
 .classes-container {
-  justify-content: center;
-  // display: inline-flex;
+  justify-content: space-between;
+  display: flex;
   flex-wrap: wrap;
-  background-color: $beige;
+  // background-color: $beige;
+
+  .class-card {
+    background-color: #f2e6d9;
+    width: 400px;
+    height: 300px;
+    margin-bottom: 20px;
+    padding: 20px;
+
+    .class-description {
+      background: white;
+      height: 30%;
+      padding: 10px;
+    }
+    .class-buttons {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+    }
+  }
 }
 
 //gallery
@@ -159,7 +178,8 @@ body {
       max-height: 100%;
     }
 
-    .photo-description {}
+    .photo-description {
+    }
   }
 }
 
