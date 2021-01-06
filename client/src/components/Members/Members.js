@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
-
+import BackButton from "../Button/BackButton";
 import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
 import { getAllMembers } from "../../services/membersServices";
+import Heading from "../Heading/Heading"
+import { Table, Container, Row, Col } from "react-bootstrap"
 
-const Members = () => {
+const Members = (props) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
   const { store, dispatch } = useGlobalState();
-  const { members } = store;
+  const { members, LoggedInUser } = store;
+  const { role } = LoggedInUser;
+  const { history } = props;
   console.log("members=>", members);
 
   const fetchMembers = () => {
@@ -29,26 +33,46 @@ const Members = () => {
   console.log("members=>", members);
 
   //  !passing an object with pathname and state as properties with Link to, to access member inside Editmember component
-  const content = members.map((member) => (
-    <div key={member._id}>
-      <Link
-        to={{
-          pathname: `/users/edit/${member._id}`,
-          state: { member: member },
-        }}
-      >
-        <p>{member.name}</p>
-      </Link>
-      <p>{member.paid}</p>
-      <p>{member.role}</p>
-    </div>
+  const content = members.map((member) => (   
+    <tr key={member._id}>        
+      <td>{member._id}</td>
+      <td><Link 
+          to={{
+            pathname: `/users/edit/${member._id}`,
+            state: { member: member },
+          }}
+        >{member.name}
+        </Link></td>
+      <td>{member.paid}</td>
+      <td>{member.role}</td>  
+    </tr>
   ));
 
   return (
-    <div>
-      <h1>Members</h1>
-      {content}
-    </div>
+    <Container className="main-container">
+      <Row className="justify-content-between heading-container">
+        <Col xs="auto"><BackButton history={history} /></Col>
+        <Col xs="auto"><Heading title={"Members"} /></Col>
+        <Col xs="auto">
+          <div className="spacer"></div> {/* empty div for correct alignment in justify-content-between */}
+        </Col>
+      </Row>
+      <Container className="members-container">
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Paid</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            {content}
+          </tbody>
+        </Table>
+      </Container>
+    </Container>
   );
 };
 

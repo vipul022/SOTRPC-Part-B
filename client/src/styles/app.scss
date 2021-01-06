@@ -132,7 +132,6 @@ body {
 }
 
 //gallery
-
 .gallery-container {
   justify-content: center;
   display: inline-flex;
@@ -175,7 +174,13 @@ body {
     }
   }
 }
-
+// members
+.members-container {
+  justify-content: center;
+  display: inline-flex;
+  flex-wrap: wrap;
+  background-color: $beige;
+}
 //footer
 #footer-wrapper {
   background-color: $beige;
