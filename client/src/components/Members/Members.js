@@ -9,8 +9,7 @@ import { Table, Container, Row, Col } from "react-bootstrap"
 const Members = (props) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
   const { store, dispatch } = useGlobalState();
-  const { members, LoggedInUser } = store;
-  const { role } = LoggedInUser;
+  const { members} = store;
   const { history } = props;
   console.log("members=>", members);
 
