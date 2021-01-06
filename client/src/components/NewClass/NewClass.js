@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
-// import classData from "../../../src/data/class_data";
 import { addNewClass } from "../../services/classesServices";
 import BackButton from "../Button/BackButton";
+import Heading from "../Heading/Heading";
+
+import { Form, Container, Col, Row, Button } from "react-bootstrap";
 const NewClass = ({ history }) => {
   // !accessing current state of classes from store
   const { store, dispatch } = useGlobalState();
@@ -69,11 +71,12 @@ const NewClass = ({ history }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div>
+      {/* <form onSubmit={handleSubmit}>
       <h1>Add New Class</h1>
       <div>
         <label>Title</label>
-        <input
+         <input
           required
           type="text"
           name="title"
@@ -129,7 +132,21 @@ const NewClass = ({ history }) => {
       <button type="submit" value="Create Class">
         Create Class
       </button>
-    </form>
+    </form> */}
+      <Container className="small-container">
+        <Row className="justify-content-between heading-container">
+          <Col xs="auto">
+            <BackButton history={history} />
+          </Col>
+          <Col xs="auto">
+            <Heading title={"Add New Class"} />
+          </Col>
+          <Col xs="auto">
+            <div className="spacer"></div>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 };
 
