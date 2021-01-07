@@ -1,11 +1,11 @@
 import React from "react";
-import BackButton from "../Button/BackButton";
-import ButtonComponent from "../Button/Button";
+
 import { deletePhoto } from "../../services/photoServices";
 import { useGlobalState } from "../../config/globalState";
-import Heading from "../Heading/Heading";
+
 import ControlledCarousel from "../ControlledCarousel/ControlledCarousel";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import Header from "../Header/Header";
 
 const Photo = (props) => {
   // console.log("props.location.state: ",props.location.state)
@@ -48,26 +48,10 @@ const Photo = (props) => {
           </ButtonComponent>
         ) : null} */}
       {/* </div> */}
-      <Container>
-        <Row className="justify-content-between heading-container">
-          <Col xs="auto">
-            <BackButton history={history} />
-          </Col>
-          <Col xs="auto">
-            <Heading title={"Gallery"} />
-          </Col>
-          <Col xs="auto">
-            {
-              role === "Admin" ? (
-                <ButtonComponent clicked={handleDelete} record={photo}>
-                  Delete
-                </ButtonComponent>
-              ) : (
-                <div className="spacer"></div>
-              ) //empty div for correct alignment in justify-content-between
-            }
-          </Col>
-        </Row>
+      <Container className="main-container">
+        <Header history={history} showDelete clicked={handleDelete}>
+          Gallery
+        </Header>
       </Container>
       <Container className="carousel-container">
         <ControlledCarousel index={index} photos={photos} />

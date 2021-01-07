@@ -135,17 +135,7 @@ const NewClass = ({ history }) => {
     </form> */}
       <Container className="small-container">
         <Header history={history}>Add New Class</Header>
-        {/* <Row className="justify-content-between heading-container">
-          <Col xs="auto">
-            <BackButton history={history} />
-          </Col>
-          <Col xs="auto">
-            <Heading title={"Add New Class"} />
-          </Col>
-          <Col xs="auto">
-            <div className="spacer"></div>
-          </Col>
-        </Row> */}
+
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicTitle">
             <Form.Label>Title</Form.Label>

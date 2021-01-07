@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { registerUser } from "../../services/authServices";
-import BackButton from "../Button/BackButton";
 
-import Heading from "../Heading/Heading";
+import Header from "../Header/Header";
 
 import { Form, Container, Col, Row, Button, Alert } from "react-bootstrap";
 
@@ -64,17 +63,8 @@ const Register = ({ history }) => {
   };
   return (
     <Container className="small-container">
-      <Row className="justify-content-between heading-container">
-        <Col xs="auto">
-          <BackButton history={history} />
-        </Col>
-        <Col xs="auto">
-          <Heading title={"Create Account"} />
-        </Col>
-        <Col xs="auto">
-          <div className="spacer"></div>
-        </Col>
-      </Row>
+      <Header history={history}>Create Account</Header>
+
       <Form onSubmit={handleSubmit}>
         {errorMessage && (
           <Alert variant="danger">
@@ -126,7 +116,7 @@ const Register = ({ history }) => {
           />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
-            </Form.Text>
+          </Form.Text>
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>

@@ -3,12 +3,10 @@ import React, { useEffect } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { getAllClasses, deleteClass } from "../../services/classesServices";
 import ButtonComponent from "../Button/Button";
-// import BackButton from "../Button/BackButton";
-// import Heading from "../Heading/Heading";
+
 import Container from "react-bootstrap/Container";
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
-import Heading2 from "../Heading2/Heading2";
+
+import Header from "../Header/Header";
 
 const Classes = ({ history }) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
@@ -119,13 +117,13 @@ const Classes = ({ history }) => {
   return (
     <div>
       <Container className="main-container">
-        <Heading2
+        <Header
           history={history}
           role={role}
           clicked={() => history.push("/classes/new")}
         >
           Classes
-        </Heading2>
+        </Header>
 
         <Container className="classes-container">{content}</Container>
       </Container>
