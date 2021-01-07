@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { addNewClass } from "../../services/classesServices";
 
-import Heading2 from "../Heading2/Heading2";
+import Header from "../Header/Header";
 
-import { Form, Container, Col, Row, Button } from "react-bootstrap";
+import { Form, Container, Button } from "react-bootstrap";
 const NewClass = ({ history }) => {
   // !accessing current state of classes from store
   const { store, dispatch } = useGlobalState();
@@ -134,7 +134,7 @@ const NewClass = ({ history }) => {
       </button>
     </form> */}
       <Container className="small-container">
-        <Heading2 history={history}>Add New Class</Heading2>
+        <Header history={history}>Add New Class</Header>
         {/* <Row className="justify-content-between heading-container">
           <Col xs="auto">
             <BackButton history={history} />

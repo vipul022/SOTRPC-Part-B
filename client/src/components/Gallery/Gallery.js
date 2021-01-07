@@ -7,7 +7,7 @@ import { getAllPhotos } from "../../services/photoServices";
 import Container from "react-bootstrap/Container";
 
 import Image from "react-bootstrap/Image";
-import Heading2 from "../Heading2/Heading2";
+import Header from "../Header/Header";
 
 const Gallery = ({ history }) => {
   const { store, dispatch } = useGlobalState();
@@ -56,13 +56,13 @@ const Gallery = ({ history }) => {
   return (
     <div>
       <Container className="main-container">
-        <Heading2
+        <Header
           history={history}
           role={role}
           clicked={() => history.push("/photos/new")}
         >
           Gallery
-        </Heading2>
+        </Header>
         {/* <Row className="justify-content-between heading-container">
           <Col xs="auto"><BackButton history={history} /></Col>
           <Col xs="auto"><Heading title={"Gallery"} /></Col>

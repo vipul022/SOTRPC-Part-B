@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import BackButton from "../Button/BackButton";
+// import BackButton from "../Button/BackButton";
 import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
 import { getAllMembers } from "../../services/membersServices";
 
-import Heading2 from "../Heading2/Heading2";
-import { Table, Container, Row, Col } from "react-bootstrap";
+import Header from "../Header/Header";
+import { Table, Container } from "react-bootstrap";
 
 const Members = (props) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
@@ -53,7 +53,7 @@ const Members = (props) => {
 
   return (
     <Container className="main-container">
-      <Heading2 history={history}>Members</Heading2>
+      <Header history={history}>Members</Header>
       {/* <Row className="justify-content-between heading-container">
         <Col xs="auto">
           <BackButton history={history} />

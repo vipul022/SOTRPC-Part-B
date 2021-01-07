@@ -3,12 +3,12 @@ import { useGlobalState } from "../../config/globalState";
 import { deleteMember } from "../../services/membersServices";
 import { updateMember } from "../../services/membersServices";
 import ButtonComponent from "../Button/Button";
-import BackButton from "../Button/BackButton";
-import Heading from "../Heading/Heading";
+// import BackButton from "../Button/BackButton";
+// import Heading from "../Heading/Heading";
 import { logoutUserFromBackend } from "../../services/authServices";
-// import Heading2 from "../Heading2/Heading2";
+import Header from "../Header/Header";
 
-import { Form, Container, Row, Col } from "react-bootstrap";
+import { Form, Container } from "react-bootstrap";
 
 const EditMember = (props) => {
   const { store, dispatch } = useGlobalState();
@@ -126,8 +126,10 @@ const EditMember = (props) => {
   };
   return (
     <Container className="small-container">
-      {/* <Heading2 history={history}>s</Heading2> */}
-      <Row className="justify-content-between heading-container">
+      <Header history={history} record={member} clicked={handleDelete}>
+        Edit Account
+      </Header>
+      {/* <Row className="justify-content-between heading-container">
         <Col xs="auto">
           <BackButton history={history} />
         </Col>
@@ -139,7 +141,7 @@ const EditMember = (props) => {
             Delete
           </ButtonComponent>
         </Col>
-      </Row>
+      </Row> */}
 
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicName">
