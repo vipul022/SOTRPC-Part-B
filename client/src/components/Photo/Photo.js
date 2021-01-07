@@ -4,7 +4,7 @@ import ButtonComponent from "../Button/Button";
 import { deletePhoto } from "../../services/photoServices";
 import { useGlobalState } from "../../config/globalState";
 import Heading from "../Heading/Heading";
-import ControlledCarousel from "../ControlledCarousel/ControlledCarousel"
+import ControlledCarousel from "../ControlledCarousel/ControlledCarousel";
 import { Container, Row, Col } from "react-bootstrap";
 
 const Photo = (props) => {
@@ -16,7 +16,7 @@ const Photo = (props) => {
   console.log("props=>", props);
   const { history } = props;
   const { photo, index } = props.location.state;
-   // console.log("photo=>", photo);
+  // console.log("photo=>", photo);
 
   const handleDelete = (event) => {
     event.preventDefault();
@@ -48,25 +48,30 @@ const Photo = (props) => {
           </ButtonComponent>
         ) : null} */}
       {/* </div> */}
-      <Container >
+      <Container>
         <Row className="justify-content-between heading-container">
-          <Col xs="auto"><BackButton history={history} /></Col>
-          <Col xs="auto"><Heading title={"Gallery"} /></Col>
+          <Col xs="auto">
+            <BackButton history={history} />
+          </Col>
+          <Col xs="auto">
+            <Heading title={"Gallery"} />
+          </Col>
           <Col xs="auto">
             {
-              role === "Admin" ?
-                (
-                  <ButtonComponent clicked={handleDelete} c={photo}>
-                    Delete
-                  </ButtonComponent>
-                ) : <div className="spacer"></div> //empty div for correct alignment in justify-content-between
+              role === "Admin" ? (
+                <ButtonComponent clicked={handleDelete} record={photo}>
+                  Delete
+                </ButtonComponent>
+              ) : (
+                <div className="spacer"></div>
+              ) //empty div for correct alignment in justify-content-between
             }
           </Col>
         </Row>
-        </Container>
-        <Container className="carousel-container">
-            <ControlledCarousel index = {index} photos = {photos}/>
-        </Container>
+      </Container>
+      <Container className="carousel-container">
+        <ControlledCarousel index={index} photos={photos} />
+      </Container>
     </div>
   );
 };
