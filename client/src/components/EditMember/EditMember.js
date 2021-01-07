@@ -3,8 +3,7 @@ import { useGlobalState } from "../../config/globalState";
 import { deleteMember } from "../../services/membersServices";
 import { updateMember } from "../../services/membersServices";
 import ButtonComponent from "../Button/Button";
-// import BackButton from "../Button/BackButton";
-// import Heading from "../Heading/Heading";
+
 import { logoutUserFromBackend } from "../../services/authServices";
 import Header from "../Header/Header";
 
@@ -126,22 +125,9 @@ const EditMember = (props) => {
   };
   return (
     <Container className="small-container">
-      <Header history={history} record={member} clicked={handleDelete}>
+      <Header history={history} showDelete clicked={handleDelete}>
         Edit Account
       </Header>
-      {/* <Row className="justify-content-between heading-container">
-        <Col xs="auto">
-          <BackButton history={history} />
-        </Col>
-        <Col xs="auto">
-          <Heading title={"Edit Account"} />
-        </Col>
-        <Col xs="auto">
-          <ButtonComponent clicked={handleDelete} record={member}>
-            Delete
-          </ButtonComponent>
-        </Col>
-      </Row> */}
 
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicName">
