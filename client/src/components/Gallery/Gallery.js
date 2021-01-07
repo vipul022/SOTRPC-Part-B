@@ -1,15 +1,13 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useGlobalState } from "../../config/globalState";
-import BackButton from "../Button/BackButton";
-import ButtonComponent from "../Button/Button";
-import { getAllPhotos } from "../../services/photoServices";
-import Heading from "../Heading/Heading";
-import Container from "react-bootstrap/Container"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
-import Image from "react-bootstrap/Image"
 
+import { getAllPhotos } from "../../services/photoServices";
+
+import Container from "react-bootstrap/Container";
+
+import Image from "react-bootstrap/Image";
+import Heading2 from "../Heading2/Heading2";
 
 const Gallery = ({ history }) => {
   const { store, dispatch } = useGlobalState();
@@ -58,7 +56,14 @@ const Gallery = ({ history }) => {
   return (
     <div>
       <Container className="main-container">
-        <Row className="justify-content-between heading-container">
+        <Heading2
+          history={history}
+          role={role}
+          clicked={() => history.push("/photos/new")}
+        >
+          Gallery
+        </Heading2>
+        {/* <Row className="justify-content-between heading-container">
           <Col xs="auto"><BackButton history={history} /></Col>
           <Col xs="auto"><Heading title={"Gallery"} /></Col>
           <Col xs="auto">
@@ -71,10 +76,8 @@ const Gallery = ({ history }) => {
                 ) : <div className="spacer"></div> //empty div for correct alignment in justify-content-between
             }
           </Col>
-        </Row>
-        <Container className="gallery-container">
-          {content}
-        </Container>
+        </Row> */}
+        <Container className="gallery-container">{content}</Container>
       </Container>
     </div>
   );

@@ -3,11 +3,12 @@ import React, { useEffect } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { getAllClasses, deleteClass } from "../../services/classesServices";
 import ButtonComponent from "../Button/Button";
-import BackButton from "../Button/BackButton";
-import Heading from "../Heading/Heading";
+// import BackButton from "../Button/BackButton";
+// import Heading from "../Heading/Heading";
 import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+// import Row from "react-bootstrap/Row";
+// import Col from "react-bootstrap/Col";
+import Heading2 from "../Heading2/Heading2";
 
 const Classes = ({ history }) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
@@ -118,25 +119,14 @@ const Classes = ({ history }) => {
   return (
     <div>
       <Container className="main-container">
-        <Row className="justify-content-between heading-container">
-          <Col xs="auto">
-            <BackButton history={history} />
-          </Col>
-          <Col xs="auto">
-            <Heading title={"Classes"} />
-          </Col>
-          <Col xs="auto">
-            {
-              role === "Admin" ? (
-                <ButtonComponent clicked={() => history.push("/classes/new")}>
-                  New
-                </ButtonComponent>
-              ) : (
-                <div className="spacer"></div>
-              ) //empty div for correct alignment in justify-content-between
-            }
-          </Col>
-        </Row>
+        <Heading2
+          history={history}
+          role={role}
+          clicked={() => history.push("/classes/new")}
+        >
+          Classes
+        </Heading2>
+
         <Container className="classes-container">{content}</Container>
       </Container>
     </div>

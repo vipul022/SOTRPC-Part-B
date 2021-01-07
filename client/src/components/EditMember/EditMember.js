@@ -4,10 +4,11 @@ import { deleteMember } from "../../services/membersServices";
 import { updateMember } from "../../services/membersServices";
 import ButtonComponent from "../Button/Button";
 import BackButton from "../Button/BackButton";
-import Heading from "../Heading/Heading"
+import Heading from "../Heading/Heading";
 import { logoutUserFromBackend } from "../../services/authServices";
+// import Heading2 from "../Heading2/Heading2";
 
-import { Form, Container, Row, Col } from "react-bootstrap"
+import { Form, Container, Row, Col } from "react-bootstrap";
 
 const EditMember = (props) => {
   const { store, dispatch } = useGlobalState();
@@ -125,6 +126,7 @@ const EditMember = (props) => {
   };
   return (
     <Container className="small-container">
+      {/* <Heading2 history={history}>s</Heading2> */}
       <Row className="justify-content-between heading-container">
         <Col xs="auto">
           <BackButton history={history} />
@@ -138,7 +140,6 @@ const EditMember = (props) => {
           </ButtonComponent>
         </Col>
       </Row>
-
 
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicName">
@@ -184,23 +185,33 @@ const EditMember = (props) => {
 
         {role === "Admin" && (
           <div>
-                  <Form.Group controlId="formBasicRole">
-                  <Form.Label>Role</Form.Label>
-                  <Form.Control as="select"  value={formState.role} name="role" onChange={handleChange}>
-                    <option value="User">User</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Member">Member</option>
-                  </Form.Control>
-                </Form.Group>
+            <Form.Group controlId="formBasicRole">
+              <Form.Label>Role</Form.Label>
+              <Form.Control
+                as="select"
+                value={formState.role}
+                name="role"
+                onChange={handleChange}
+              >
+                <option value="User">User</option>
+                <option value="Admin">Admin</option>
+                <option value="Member">Member</option>
+              </Form.Control>
+            </Form.Group>
 
-                <Form.Group controlId="formBasicPaid">
-                  <Form.Label>Paid</Form.Label>
-                  <Form.Control as="select"  value={formState.paid} name="paid" onChange={handleChange}>
-                    <option value="Paid">Paid</option>
-                    <option value="Unpaid">Unpaid</option>
-                    <option value="Awaiting">Awaiting</option>
-                  </Form.Control>
-                </Form.Group>
+            <Form.Group controlId="formBasicPaid">
+              <Form.Label>Paid</Form.Label>
+              <Form.Control
+                as="select"
+                value={formState.paid}
+                name="paid"
+                onChange={handleChange}
+              >
+                <option value="Paid">Paid</option>
+                <option value="Unpaid">Unpaid</option>
+                <option value="Awaiting">Awaiting</option>
+              </Form.Control>
+            </Form.Group>
           </div>
         )}
         <div>

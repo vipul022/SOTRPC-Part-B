@@ -3,13 +3,14 @@ import BackButton from "../Button/BackButton";
 import { useGlobalState } from "../../config/globalState";
 import { Link } from "react-router-dom";
 import { getAllMembers } from "../../services/membersServices";
-import Heading from "../Heading/Heading"
-import { Table, Container, Row, Col } from "react-bootstrap"
+
+import Heading2 from "../Heading2/Heading2";
+import { Table, Container, Row, Col } from "react-bootstrap";
 
 const Members = (props) => {
   // !useGlobalState is used to access store and dispatch globally which are defined in app.js
   const { store, dispatch } = useGlobalState();
-  const { members} = store;
+  const { members } = store;
   const { history } = props;
   console.log("members=>", members);
 
@@ -32,30 +33,39 @@ const Members = (props) => {
   console.log("members=>", members);
 
   //  !passing an object with pathname and state as properties with Link to, to access member inside Editmember component
-  const content = members.map((member) => (   
-    <tr key={member._id}>        
+  const content = members.map((member) => (
+    <tr key={member._id}>
       <td>{member._id}</td>
-      <td><Link 
+      <td>
+        <Link
           to={{
             pathname: `/users/edit/${member._id}`,
             state: { member: member },
           }}
-        >{member.name}
-        </Link></td>
+        >
+          {member.name}
+        </Link>
+      </td>
       <td>{member.paid}</td>
-      <td>{member.role}</td>  
+      <td>{member.role}</td>
     </tr>
   ));
 
   return (
     <Container className="main-container">
-      <Row className="justify-content-between heading-container">
-        <Col xs="auto"><BackButton history={history} /></Col>
-        <Col xs="auto"><Heading title={"Members"} /></Col>
+      <Heading2 history={history}>Members</Heading2>
+      {/* <Row className="justify-content-between heading-container">
         <Col xs="auto">
-          <div className="spacer"></div> {/* empty div for correct alignment in justify-content-between */}
+          <BackButton history={history} />
         </Col>
-      </Row>
+        <Col xs="auto">
+          <Heading title={"Members"} />
+        </Col>
+        <Col xs="auto">
+          <div className="spacer"></div>{" "}
+          {/* empty div for correct alignment in justify-content-between */}
+      {/* </Col>
+      </Row> */}
       <Container className="members-container">
         <Table striped bordered hover>
           <thead>
@@ -66,9 +76,7 @@ const Members = (props) => {
               <th>Role</th>
             </tr>
           </thead>
-          <tbody>
-            {content}
-          </tbody>
+          <tbody>{content}</tbody>
         </Table>
       </Container>
     </Container>

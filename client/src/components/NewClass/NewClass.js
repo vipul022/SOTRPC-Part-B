@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { addNewClass } from "../../services/classesServices";
-import BackButton from "../Button/BackButton";
-import Heading from "../Heading/Heading";
+
+import Heading2 from "../Heading2/Heading2";
 
 import { Form, Container, Col, Row, Button } from "react-bootstrap";
 const NewClass = ({ history }) => {
@@ -134,7 +134,8 @@ const NewClass = ({ history }) => {
       </button>
     </form> */}
       <Container className="small-container">
-        <Row className="justify-content-between heading-container">
+        <Heading2 history={history}>Add New Class</Heading2>
+        {/* <Row className="justify-content-between heading-container">
           <Col xs="auto">
             <BackButton history={history} />
           </Col>
@@ -144,7 +145,7 @@ const NewClass = ({ history }) => {
           <Col xs="auto">
             <div className="spacer"></div>
           </Col>
-        </Row>
+        </Row> */}
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="formBasicTitle">
             <Form.Label>Title</Form.Label>
