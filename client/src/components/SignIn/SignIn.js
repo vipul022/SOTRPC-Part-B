@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { useGlobalState } from "../../config/globalState";
 import { loginUser } from "../../services/authServices";
 
-import BackButton from "../Button/BackButton";
-import Heading from "../Heading/Heading";
-
+import Header from "../Header/Header";
 import { Form, Container, Col, Row, Button, Alert } from "react-bootstrap";
 
 const SignIn = ({ history }) => {
@@ -91,17 +89,8 @@ const SignIn = ({ history }) => {
       </div>
     </form> */}
       <Container className="small-container">
-        <Row className="justify-content-between heading-container">
-          <Col xs="auto">
-            <BackButton history={history} />
-          </Col>
-          <Col xs="auto">
-            <Heading title={"Login"} />
-          </Col>
-          <Col xs="auto">
-            <div className="spacer"></div>
-          </Col>
-        </Row>
+        <Header history={history}>Login</Header>
+
         <Form onSubmit={handleSubmit}>
           {errorMessage && (
             <Alert variant="danger">

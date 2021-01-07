@@ -54,18 +54,7 @@ const Members = (props) => {
   return (
     <Container className="main-container">
       <Header history={history}>Members</Header>
-      {/* <Row className="justify-content-between heading-container">
-        <Col xs="auto">
-          <BackButton history={history} />
-        </Col>
-        <Col xs="auto">
-          <Heading title={"Members"} />
-        </Col>
-        <Col xs="auto">
-          <div className="spacer"></div>{" "}
-          {/* empty div for correct alignment in justify-content-between */}
-      {/* </Col>
-      </Row> */}
+
       <Container className="members-container">
         <Table striped bordered hover>
           <thead>

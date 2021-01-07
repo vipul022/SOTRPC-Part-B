@@ -63,20 +63,7 @@ const Gallery = ({ history }) => {
         >
           Gallery
         </Header>
-        {/* <Row className="justify-content-between heading-container">
-          <Col xs="auto"><BackButton history={history} /></Col>
-          <Col xs="auto"><Heading title={"Gallery"} /></Col>
-          <Col xs="auto">
-            {
-              role === "Admin" ?
-                (
-                  <ButtonComponent clicked={() => history.push("/photos/new")}>
-                    New
-                  </ButtonComponent>
-                ) : <div className="spacer"></div> //empty div for correct alignment in justify-content-between
-            }
-          </Col>
-        </Row> */}
+
         <Container className="gallery-container">{content}</Container>
       </Container>
     </div>
