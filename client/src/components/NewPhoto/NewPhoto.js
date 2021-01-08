@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { uploadPhotoToS3 } from "../../services/photoServices";
 
 import { addNewPhoto } from "../../services/photoServices";
@@ -17,6 +17,7 @@ class NewPhoto extends Component {
     };
     console.log("description=>", this.state.description);
   }
+
   handleChange = (ev) => {
     const { name, value } = ev.target;
 
@@ -28,6 +29,8 @@ class NewPhoto extends Component {
   };
 
   handleUpload = (ev) => {
+    const { history } = this.props;
+    console.log("history=>", history);
     const { success, description } = this.state;
     console.log("success=>", success);
 
@@ -71,7 +74,7 @@ class NewPhoto extends Component {
       .catch((error) => {
         alert(JSON.stringify(error));
       });
-    // history.pushState("/photos");
+    // history.push(`/photos`);
   };
 
   render() {
@@ -102,6 +105,7 @@ class NewPhoto extends Component {
               type="text"
               name="description"
               placeholder="Enter description..."
+              maxLength="80"
               onChange={this.handleChange}
             ></input>
           </div>
@@ -121,4 +125,4 @@ class NewPhoto extends Component {
     );
   }
 }
-export default NewPhoto;
+export default withRouter(NewPhoto);
