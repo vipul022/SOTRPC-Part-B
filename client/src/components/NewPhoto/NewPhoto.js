@@ -14,43 +14,33 @@ const NewPhoto = ({ history }) => {
     url: "",
     description: "",
     photo: {},
-    // uploadInput: "",
     selectedFile: "",
   };
   const [PhotoState, setPhotoState] = useState(initialPhotoState);
-  console.log("PhotoState=>", PhotoState);
 
   const handleDescriptionChange = (event) => {
     const { name, value } = event.target;
-
-    console.log("name==>", name);
-    console.log("value=>", value);
-    // setPhotoState({ PhotoState.success: false, PhotoState.url: "", [name]: value });
-    console.log("PhotoState=>", PhotoState);
     setPhotoState({
       ...PhotoState,
       [name]: value,
       success: false,
       url: "",
     });
-
-    console.log("inside handleChange=>");
+    console.log("inside handleDescriptionChange, photoState=>", PhotoState);
   };
 
   const handleFileChange = (event) => {
-    console.log("event.target=>", event.target.files[0]);
     setPhotoState({
       ...PhotoState,
       selectedFile: event.target.files[0],
     });
+    console.log("inside handleFileChange, photoState=>", PhotoState);
   };
+
   const handleUpload = (event) => {
     event.preventDefault();
     const { success, description, selectedFile, photo } = PhotoState;
-    console.log("success=>", success);
-
     let file = selectedFile;
-    console.log("file=>", file);
     // //! Split the filename to get the name and type
     let fileParts = file.name.split(".");
     console.log("fileParts=>", fileParts);
@@ -60,19 +50,19 @@ const NewPhoto = ({ history }) => {
 
     addNewPhoto({ fileName, fileType, description })
       .then((response) => {
-        console.log("response=>", response);
+        // console.log("response=>", response);
         const { returnData } = response.data.data;
         const { signedRequest } = returnData;
+        const responsePhoto = response.data.photo
+        console.log("photo=>", responsePhoto)
 
         setPhotoState({
           ...PhotoState,
-          photo: response.data.photo,
+          photo: responsePhoto,
           url: returnData.url,
         });
-        console.log("photoState=>", PhotoState);
-        const id = photo._id;
-
-        console.log("id=>", id);
+        const id = responsePhoto._id;
+        console.log("photoState now=>", PhotoState);
         // var url = returnData.url;
         // this.setState({ url: url });
         console.log("Recieved a signed request=> " + signedRequest);
@@ -118,15 +108,9 @@ const NewPhoto = ({ history }) => {
           </Form.Group>
 
           <Form.Group controlId="formBasicFile">
-            {/* <Form.Label>Teacher</Form.Label> */}
             <Form.Control
               required
               type="file"
-              // ref=
-              // {(ref) => {
-              //   uploadInput = ref;
-              // }}
-              // value={PhotoState.selectedFile}
               onChange={handleFileChange}
             />
           </Form.Group>
