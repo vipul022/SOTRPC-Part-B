@@ -91,12 +91,13 @@ const uploadFile = (fileName, fileType) => {
        // //! Split the filename to get the name and type
    let fileParts = selectedFile.name.split(".");
    let fileName = fileParts[0];
-   let fileType = fileParts[1];
+   let fileType = fileParts[1].toLowerCase();
    console.log("selectedFile.size=>", selectedFile.size)
-   if (selectedFile.size > 2000000) {
-    setErrorMessage(
-      "File Size needs to be below 2000MB"
-    );
+   console.log("fileType=>", fileType)
+   if (selectedFile.size >= 2097152) {
+    setErrorMessage("File Size needs to be below 2MB");
+   } else if (fileType !== "jpg" && fileType !== "jpeg" && fileType !== "png" ) {
+    setErrorMessage("File type needs to be a jpg or png")
    } else {
     setErrorMessage(null)
     uploadFile(fileName, fileType)
