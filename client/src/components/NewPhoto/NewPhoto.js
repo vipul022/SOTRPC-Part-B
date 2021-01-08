@@ -5,7 +5,7 @@ import { uploadPhotoToS3 } from "../../services/photoServices";
 import Header from "../Header/Header";
 import { addNewPhoto } from "../../services/photoServices";
 import ButtonComponent from "../Button/Button";
-import { Form, Container, Row, Col, Button } from "react-bootstrap";
+import { Form, Container, Row, Col, Button, Alert } from "react-bootstrap";
 
 // ! reference taken from https://medium.com/@khelif96/uploading-files-from-a-react-app-to-aws-s3-the-right-way-541dd6be689
 const NewPhoto = ({ history }) => {
@@ -17,38 +17,13 @@ const NewPhoto = ({ history }) => {
     selectedFile: "",
   };
   const [PhotoState, setPhotoState] = useState(initialPhotoState);
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  const handleDescriptionChange = (event) => {
-    const { name, value } = event.target;
-    setPhotoState({
-      ...PhotoState,
-      [name]: value,
-      success: false,
-      url: "",
-    });
-    console.log("inside handleDescriptionChange, photoState=>", PhotoState);
-  };
 
-  const handleFileChange = (event) => {
-    setPhotoState({
-      ...PhotoState,
-      selectedFile: event.target.files[0],
-    });
-    console.log("inside handleFileChange, photoState=>", PhotoState);
-  };
-
-  const handleUpload = (event) => {
-    event.preventDefault();
-    const { success, description, selectedFile, photo } = PhotoState;
-    let file = selectedFile;
-    // //! Split the filename to get the name and type
-    let fileParts = file.name.split(".");
-    console.log("fileParts=>", fileParts);
-    let fileName = fileParts[0];
-    let fileType = fileParts[1];
-    console.log("Preparing the upload");
-
-    addNewPhoto({ fileName, fileType, description })
+const uploadFile = (fileName, fileType) => {
+  const { success, description, selectedFile } = PhotoState;
+   console.log("Preparing the upload");
+  addNewPhoto({ fileName, fileType, description })
       .then((response) => {
         // console.log("response=>", response);
         const { returnData } = response.data.data;
@@ -73,7 +48,7 @@ const NewPhoto = ({ history }) => {
           },
         };
         // !upload the photo to s3 bucket and incase of error delete the photo from db
-        uploadPhotoToS3(signedRequest, file, options, id)
+        uploadPhotoToS3(signedRequest, selectedFile, options, id)
           .then((result) => {
             console.log("result=>", result);
             // this.setState({ success: true });
@@ -87,15 +62,59 @@ const NewPhoto = ({ history }) => {
       .catch((error) => {
         alert(JSON.stringify(error));
       });
-    // history.push(`/photos`);
+}
+
+
+
+  const handleDescriptionChange = (event) => {
+    const { name, value } = event.target;
+    setPhotoState({
+      ...PhotoState,
+      [name]: value,
+      success: false,
+      url: "",
+    });
+    console.log("inside handleDescriptionChange, photoState=>", PhotoState);
   };
 
+  const handleFileChange = (event) => {
+    setPhotoState({
+      ...PhotoState,
+      selectedFile: event.target.files[0],
+    });
+    console.log("inside handleFileChange, photoState=>", PhotoState);
+  };
+
+  const handleUpload = (event) => {
+    event.preventDefault();
+    const { success, description, selectedFile, photo } = PhotoState;
+       // //! Split the filename to get the name and type
+   let fileParts = selectedFile.name.split(".");
+   let fileName = fileParts[0];
+   let fileType = fileParts[1];
+   console.log("selectedFile.size=>", selectedFile.size)
+   if (selectedFile.size > 2000000) {
+    setErrorMessage(
+      "File Size needs to be below 2000MB"
+    );
+   } else {
+    setErrorMessage(null)
+    uploadFile(fileName, fileType)
+   };   
+  };
+
+    
+
+
   return (
-    <div>
       <Container className="small-container">
         <Header history={history}>Upload Photo</Header>
-
+        {errorMessage && (
+          <Alert variant="danger">
+            <p>{errorMessage}</p>
+          </Alert>)}
         <Form onSubmit={handleUpload}>
+
           <Form.Group controlId="formBasicDescription">
             <Form.Label>Description</Form.Label>
             <Form.Control
@@ -117,7 +136,6 @@ const NewPhoto = ({ history }) => {
           <Button type="submit">Upload Photo</Button>
         </Form>
       </Container>
-    </div>
   );
 };
 // class NewPhoto extends Component {
