@@ -37,6 +37,7 @@ const deletePhotoFromDb = (id) => {
 
 const uploadPhotoToS3 = async (signedRequest, file, options, id) => {
   // !axios  call to S3
+  console.log("id inside photoServices=>", id);
   let res = false;
   await axios
     .put(signedRequest, file, options)
