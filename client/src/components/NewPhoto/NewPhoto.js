@@ -95,7 +95,7 @@ class NewPhoto extends Component {
       <div>
         <center>
           <h1>UPLOAD A FILE</h1>
-          {this.state.success ? SuccessMessage() : null}
+          {this.state.success ? <h3>SUCCESSFUL UPLOAD</h3> : null}
           <div>
             <label>Description</label>
             <input

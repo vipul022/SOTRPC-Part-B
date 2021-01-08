@@ -49,7 +49,7 @@ const Photo = (props) => {
         ) : null} */}
       {/* </div> */}
       <Container className="main-container">
-        <Header history={history} showDelete clicked={handleDelete}>
+        <Header history={history} showButton={"Delete"} clicked={handleDelete}>
           Gallery
         </Header>
       </Container>

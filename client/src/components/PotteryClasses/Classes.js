@@ -119,7 +119,7 @@ const Classes = ({ history }) => {
       <Container className="main-container">
         <Header
           history={history}
-          role={role}
+          showButton={"New"}
           clicked={() => history.push("/classes/new")}
         >
           Classes

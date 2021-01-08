@@ -125,7 +125,7 @@ const EditMember = (props) => {
   };
   return (
     <Container className="small-container">
-      <Header history={history} showDelete clicked={handleDelete}>
+      <Header history={history} showButton={"Delete"} clicked={handleDelete}>
         Edit Account
       </Header>
 

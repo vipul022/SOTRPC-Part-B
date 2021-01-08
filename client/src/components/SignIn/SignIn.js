@@ -60,37 +60,8 @@ const SignIn = ({ history }) => {
 
   return (
     <div>
-      {/* <form onSubmit={handleSubmit}>
-      {errorMessage && <p>{errorMessage}</p>}
-      <div>
-        <label>Email</label>
-        <input
-          required
-          type="email"
-          name="email"
-          placeholder="Enter your email..."
-          onChange={handleChange}
-          data-testid="email"
-        ></input>
-      </div>
-      <div>
-        <label>Password</label>
-        <input
-          required
-          type="password"
-          name="password"
-          placeholder="Enter your password..."
-          onChange={handleChange}
-          data-testid="password"
-        ></input>
-      </div>
-      <div>
-        <input type="submit" value="Log in"></input>
-      </div>
-    </form> */}
       <Container className="small-container">
         <Header history={history}>Login</Header>
-
         <Form onSubmit={handleSubmit}>
           {errorMessage && (
             <Alert variant="danger">

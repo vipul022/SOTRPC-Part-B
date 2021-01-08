@@ -58,7 +58,7 @@ const Gallery = ({ history }) => {
       <Container className="main-container">
         <Header
           history={history}
-          role={role}
+          showButton={"New"}
           clicked={() => history.push("/photos/new")}
         >
           Gallery
