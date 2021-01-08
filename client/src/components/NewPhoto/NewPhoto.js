@@ -105,7 +105,7 @@ class NewPhoto extends Component {
               type="text"
               name="description"
               placeholder="Enter description..."
-              maxLength="80"
+              maxLength="60"
               onChange={this.handleChange}
             ></input>
           </div>
