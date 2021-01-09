@@ -16,6 +16,7 @@ import Gallery from "./components/Gallery/Gallery";
 import NewPhoto from "./components/NewPhoto/NewPhoto";
 import Photo from "./components/Photo/Photo";
 import Footer from "./components/Footer/Footer";
+import History from "./components/History/History";
 import "./styles/app.scss";
 const App = () => {
   const initialState = {
@@ -44,6 +45,7 @@ const App = () => {
             <Route path="/auth/login" component={SignIn} />
             <Route exact path="/photos" component={Gallery} />
             <Route path="/photos/new" component={NewPhoto} />
+            <Route path="/history" component={History} />
 
             <Route path="/photos/:id" component={Photo} />
           </Switch>

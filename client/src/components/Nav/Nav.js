@@ -89,6 +89,9 @@ const Navi = () => {
               <Nav.Link as={Link} to="/photos">
                 Gallery
               </Nav.Link>
+              <Nav.Link as={Link} to="/history">
+                History
+              </Nav.Link>
               {role === "Admin" ? (
                 <Nav.Link as={Link} to="/users">
                   Members
