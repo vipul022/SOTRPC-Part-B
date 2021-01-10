@@ -17,28 +17,30 @@ const NewPhoto = ({ history }) => {
   const [errorMessage, setErrorMessage] = useState(null);
 
   const validatePhoto = (fileType, size) => {
-  const typeLowerCase = fileType.toLowerCase();
-  const TWOMEGABYTES = 2097152;
-   console.log("selectedFile.size=>", size);
-   console.log("fileType=>", fileType);
-   if (size >= TWOMEGABYTES) {
-    setErrorMessage("File Size needs to be below 2MB");
-    return false;
-   } else if (typeLowerCase !== "jpg" && typeLowerCase !== "jpeg" && typeLowerCase !== "png" ) {
-    setErrorMessage("File type needs to be a jpg or png");
-    return false;
-   } else {
-    setErrorMessage(null);
-    return true;
-   };   
-  }
+    const typeLowerCase = fileType.toLowerCase();
+    const TWOMEGABYTES = 2097152;
+    console.log("selectedFile.size=>", size);
+    console.log("fileType=>", fileType);
+    if (size >= TWOMEGABYTES) {
+      setErrorMessage("File Size needs to be below 2MB");
+      return false;
+    } else if (
+      typeLowerCase !== "jpg" &&
+      typeLowerCase !== "jpeg" &&
+      typeLowerCase !== "png"
+    ) {
+      setErrorMessage("File type needs to be a jpg or png");
+      return false;
+    } else {
+      setErrorMessage(null);
+      return true;
+    }
+  };
 
-
-
-const uploadFile = (fileName, fileType) => {
-  const { description, selectedFile } = PhotoState;
-   console.log("Preparing the upload");
-  addNewPhoto({ fileName, fileType, description })
+  const uploadFile = (fileName, fileType) => {
+    const { description, selectedFile } = PhotoState;
+    console.log("Preparing the upload");
+    addNewPhoto({ fileName, fileType, description })
       .then((response) => {
         const { returnData } = response.data.data;
         const { signedRequest } = returnData;
@@ -77,7 +79,7 @@ const uploadFile = (fileName, fileType) => {
         console.log(error);
         setErrorMessage("There was a problem saving the photo to the server");
       });
-}
+  };
 
   const handleDescriptionChange = (event) => {
     const { name, value } = event.target;
@@ -94,7 +96,7 @@ const uploadFile = (fileName, fileType) => {
     setPhotoState({
       ...PhotoState,
       selectedFile: event.target.files[0],
-      success: false
+      success: false,
     });
     setErrorMessage(null);
     // console.log("inside handleFileChange, photoState=>", PhotoState);
@@ -102,48 +104,48 @@ const uploadFile = (fileName, fileType) => {
 
   const handleUpload = (event) => {
     event.preventDefault();
-    const {selectedFile} = PhotoState;
-       // //! Split the filename to get the name and type
-   let fileParts = selectedFile.name.split(".");
-   let fileName = fileParts[0];
-   let fileType = fileParts[1];
-   if (validatePhoto(fileType, selectedFile.size)) uploadFile(fileName, fileType);    
-   };   
+    const { selectedFile } = PhotoState;
+    console.log("selectedFile=>", selectedFile);
+    
+    // //! Split the filename to get the name and type
+    let fileParts = selectedFile.name.split(".");
+    let fileName = fileParts[0];
+    let fileType = fileParts[1];
+    if (validatePhoto(fileType, selectedFile.size))
+      uploadFile(fileName, fileType);
+  };
 
   return (
-      <Container className="small-container">
-        <Header history={history}>Upload Photo</Header>
-        {errorMessage && (
-          <Alert variant="danger">
-            <p>{errorMessage}</p>
-          </Alert>)}
-          {PhotoState.success && (
-          <Alert variant='success'>
-            <p>Upload Successful!</p>
-          </Alert>)}
-        <Form onSubmit={handleUpload}>
+    <Container className="small-container">
+      <Header history={history}>Upload Photo</Header>
+      {errorMessage && (
+        <Alert variant="danger">
+          <p>{errorMessage}</p>
+        </Alert>
+      )}
+      {PhotoState.success && (
+        <Alert variant="success">
+          <p>Upload Successful!</p>
+        </Alert>
+      )}
+      <Form onSubmit={handleUpload}>
+        <Form.Group controlId="formBasicDescription">
+          <Form.Label>Description</Form.Label>
+          <Form.Control
+            type="text"
+            maxLength="60"
+            name="description"
+            placeholder="Enter description..."
+            onChange={handleDescriptionChange}
+          />
+        </Form.Group>
 
-          <Form.Group controlId="formBasicDescription">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              type="text"
-              maxLength="60"
-              name="description"
-              placeholder="Enter description..."
-              onChange={handleDescriptionChange}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicFile">
-            <Form.Control
-              required
-              type="file"
-              onChange={handleFileChange}
-            />
-          </Form.Group>
-          <Button type="submit">Upload Photo</Button>
-        </Form>
-      </Container>
+        <Form.Group controlId="formBasicFile">
+          <Form.Control required type="file" onChange={handleFileChange} />
+        </Form.Group>
+        <Button type="submit">Upload Photo</Button>
+      </Form>
+    </Container>
   );
 };
 

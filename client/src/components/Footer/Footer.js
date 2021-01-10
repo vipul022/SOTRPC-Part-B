@@ -13,14 +13,18 @@ const Footer = () => {
         {/* <Navbar.Toggle aria-controls="responsive-navbar-footer" /> */}
         {/* <Navbar.Collapse id="basic-navbar-footer"> */}
         <Nav className="mr-auto" id="footer-custom-links">
-          <Nav.Link className = "footer-link" href="tel: +6108 9332 8397">
+          <Nav.Link className="footer-link" href="tel: +6108 9332 8397">
             <ImPhone />
           </Nav.Link>
 
-          <Nav.Link className = "footer-link" href="mailto: sorpotters@hotmail.com">
+          <Nav.Link
+            className="footer-link"
+            href="mailto: sorpotters@hotmail.com"
+          >
             <FaEnvelope />
           </Nav.Link>
-          <Nav.Link className = "footer-link"
+          <Nav.Link
+            className="footer-link"
             href="https://www.facebook.com/southriverpotters/"
           >
             <FaFacebookSquare />
