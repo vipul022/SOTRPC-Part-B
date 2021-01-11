@@ -27,42 +27,41 @@ body {
 
 #navbar-wrapper {
   background-color: white;
-
   .nav-link {
     color: $orange !important; // all navbar links
   }
-
   #navbar-top-half {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
-    #logo {
-      margin: 20px 0px 0px 5px;
+    #logo-container {
+      padding: 0px;
+      #logo {
+        width: 150px;
+        margin: 20px 0px 0px 10px;
+      }
     }
-
     #title {
       color: $orange;
       font-family: "Crushed", cursive;
       text-align: center;
       margin: auto;
     }
-
     #signup-login {
       color: $orange;
       margin: 20px 20px 0px 0px;
     }
   }
-
   #navbar-custom-links {
     margin: auto; // main navbar links
   }
-
-  .navbar-custom {
+  .navbar-bottom-half {
+    padding-top : 0px;
     border-bottom: 3px $brown solid; // line indicating end of navbar
   }
 }
 
+//home
 .home-quote-container {
   margin-top: 10px;
 }

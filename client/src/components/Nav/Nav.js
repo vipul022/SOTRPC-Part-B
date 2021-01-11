@@ -66,7 +66,7 @@ const Navi = () => {
   return (
       <div id="navbar-wrapper">
         <Nav id="navbar-top-half">
-          <Nav.Link as={Link} to="/">
+          <Nav.Link as={Link} to="/" id="logo-container">
             <img id="logo" src={Logo} alt="logo" />
           </Nav.Link>
           <h1 className="disappear-class" id="title">
@@ -75,7 +75,7 @@ const Navi = () => {
           <div id="signup-login">{showLogOutOrSignUp(name)}</div>
         </Nav>
 
-        <Navbar className="navbar-custom" expand="lg">
+        <Navbar className="navbar-bottom-half" expand="lg">
           {/* {empty navbar brand so hamburger appears on the right} */}
         <Navbar.Brand></Navbar.Brand>
           <Navbar.Collapse id="basic-navbar-nav">
