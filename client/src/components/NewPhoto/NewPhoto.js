@@ -3,6 +3,7 @@ import { uploadPhotoToS3 } from "../../services/photoServices";
 import Header from "../Header/Header";
 import { addNewPhoto } from "../../services/photoServices";
 import { Form, Container, Row, Col, Button, Alert } from "react-bootstrap";
+import { validatePhoto } from "../../helpers";
 
 // ! reference taken from https://medium.com/@khelif96/uploading-files-from-a-react-app-to-aws-s3-the-right-way-541dd6be689
 const NewPhoto = ({ history }) => {
@@ -15,27 +16,6 @@ const NewPhoto = ({ history }) => {
   };
   const [PhotoState, setPhotoState] = useState(initialPhotoState);
   const [errorMessage, setErrorMessage] = useState(null);
-
-  const validatePhoto = (fileType, size) => {
-    const typeLowerCase = fileType.toLowerCase();
-    const TWOMEGABYTES = 2097152;
-    console.log("selectedFile.size=>", size);
-    console.log("fileType=>", fileType);
-    if (size >= TWOMEGABYTES) {
-      setErrorMessage("File Size needs to be below 2MB");
-      return false;
-    } else if (
-      typeLowerCase !== "jpg" &&
-      typeLowerCase !== "jpeg" &&
-      typeLowerCase !== "png"
-    ) {
-      setErrorMessage("File type needs to be a jpg or png");
-      return false;
-    } else {
-      setErrorMessage(null);
-      return true;
-    }
-  };
 
   const uploadFile = (fileName, fileType) => {
     const { description, selectedFile } = PhotoState;
@@ -106,12 +86,13 @@ const NewPhoto = ({ history }) => {
     event.preventDefault();
     const { selectedFile } = PhotoState;
     console.log("selectedFile=>", selectedFile);
-    
+
     // //! Split the filename to get the name and type
     let fileParts = selectedFile.name.split(".");
     let fileName = fileParts[0];
     let fileType = fileParts[1];
-    if (validatePhoto(fileType, selectedFile.size))
+    // !passing setErrorMessage as an argument to change the state of this component from helpers.js
+    if (validatePhoto(fileType, selectedFile.size, setErrorMessage))
       uploadFile(fileName, fileType);
   };
 
