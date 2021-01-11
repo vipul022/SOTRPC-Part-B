@@ -24,7 +24,7 @@ const History = ({ history }) => {
           <Image className="history-image-left" src={history10} alt="" />
           <Media.Body>
             <h5>The Early Days</h5>
-            <p className="paragraphs">
+            <p>
               The South of the River Potters’ Club was established in 1974 and
               initially occupied premises in the Richmond Shopping Centre on
               Canning Highway, East Fremantle. The first AGM was held on January

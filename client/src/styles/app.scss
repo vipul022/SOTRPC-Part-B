@@ -160,6 +160,8 @@ body {
   text-align: center;
   display: inline-flex;
   flex-wrap: wrap;
+  padding-left: 0px;
+  padding-right: 0px;
   // background-color: $beige;
 
   .thumb-container {
@@ -199,7 +201,7 @@ body {
       width: 80%;
     }
     .photo-desc {
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: rgba(0, 0, 0, 0.4);
     }
   }
 }
@@ -220,10 +222,8 @@ body {
 
 .history-container {
   padding: 10px;
-  // background-color: $beige;
-  .paragraphs {
-    // flex-wrap: wrap;
-  }
+  background-color: $beige;
+
   .history-image-center {
     width: 100%;
     display: block;
