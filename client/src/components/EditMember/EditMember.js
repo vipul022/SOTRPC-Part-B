@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useGlobalState } from "../../config/globalState";
-import { deleteMember } from "../../services/membersServices";
-import { updateMember } from "../../services/membersServices";
-import ButtonComponent from "../Button/Button";
-
+import { deleteMember, updateMember } from "../../services/membersServices";
 import { logoutUserFromBackend } from "../../services/authServices";
 import Header from "../Header/Header";
-
-import { Form, Container } from "react-bootstrap";
+import { Form, Container, Button } from "react-bootstrap";
 
 const EditMember = (props) => {
   const { store, dispatch } = useGlobalState();
@@ -16,7 +12,7 @@ const EditMember = (props) => {
   // console.log("PROPS=>", props);
   const { history } = props;
   // !extracting history from props
-  // console.log("history=>", history);
+
   // !accessing member that is being passed from Members component
   const { member } = props.location.state;
   console.log("member=>", member);
@@ -35,7 +31,7 @@ const EditMember = (props) => {
   const [formState, setFormState] = useState(initialFormState);
   // console.log("formState=>", formState);
   useEffect(() => {
-    // !When member changes, set the form state to the values of the member's properties after the component mounts
+    // ! This will update the form with the values of the specific member immediately after a component is mounted. This is invoked only for the initial render.
 
     setFormState({
       name: member.name,
@@ -45,7 +41,7 @@ const EditMember = (props) => {
       paid: member.paid,
       role: member.role,
     });
-  }, [member]);
+  }, []);
 
   function handleChange(event) {
     const name = event.target.name;
@@ -90,8 +86,8 @@ const EditMember = (props) => {
       history.push("/");
     }
   };
-  //! update function
-  const handleUpdate = (event) => {
+
+  const handleSubmit = (event) => {
     event.preventDefault();
     const updatedMember = {
       _id: member._id,
@@ -120,9 +116,6 @@ const EditMember = (props) => {
     role === "Admin" ? history.push("/users") : history.push("/");
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-  };
   return (
     <Container className="small-container">
       <Header history={history} showButton={"Delete"} clicked={handleDelete}>
@@ -202,11 +195,7 @@ const EditMember = (props) => {
             </Form.Group>
           </div>
         )}
-        <div>
-          <ButtonComponent clicked={handleUpdate} record={member}>
-            Update
-          </ButtonComponent>
-        </div>
+        <Button type="submit">Update</Button>
       </Form>
     </Container>
   );
