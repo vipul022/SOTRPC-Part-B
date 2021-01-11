@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import FindClass from "../FindClass/FindClass";
 import Image from "react-bootstrap/Image";
 import Container from "react-bootstrap/Container"
-import findAClassImage from "../../data/images/img2.jpg"
+import findAClassImage from "../../data/images/37v2.jpg"
 import galleryImage from "../../data/images/img3-1000.jpg"
 import ButtonComponent from "../Button/Button";
 
