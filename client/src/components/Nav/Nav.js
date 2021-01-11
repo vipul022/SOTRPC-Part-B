@@ -64,7 +64,6 @@ const Navi = () => {
   };
 
   return (
-    <div>
       <div id="navbar-wrapper">
         <Nav id="navbar-top-half">
           <Nav.Link as={Link} to="/">
@@ -77,6 +76,8 @@ const Navi = () => {
         </Nav>
 
         <Navbar className="navbar-custom" expand="lg">
+          {/* {empty navbar brand so hamburger appears on the right} */}
+        <Navbar.Brand></Navbar.Brand> /
           <Navbar.Collapse id="basic-navbar-nav">
             <div id="navbar-middle-container"></div>
             <Nav className="mr-auto move-down" id="navbar-custom-links">
@@ -102,7 +103,6 @@ const Navi = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
         </Navbar>
       </div>
-    </div>
   );
 };
 
