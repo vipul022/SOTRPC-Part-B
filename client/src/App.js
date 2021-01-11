@@ -24,6 +24,14 @@ const App = () => {
     members: [],
     photos: [],
     LoggedInUser: {},
+    fileState: {
+      success: false,
+      url: "",
+      description: "",
+      file: {},
+      selectedFile: "",
+      type: "",
+    },
   };
 
   const [store, dispatch] = useReducer(stateReducer, initialState);

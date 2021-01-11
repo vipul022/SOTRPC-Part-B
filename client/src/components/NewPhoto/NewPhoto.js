@@ -3,7 +3,7 @@ import { uploadPhotoToS3 } from "../../services/photoServices";
 import Header from "../Header/Header";
 import { addNewPhoto } from "../../services/photoServices";
 import { Form, Container, Row, Col, Button, Alert } from "react-bootstrap";
-import { validatePhoto } from "../../helpers";
+import { validatePhoto, uploadFile } from "../../helpers";
 
 // ! reference taken from https://medium.com/@khelif96/uploading-files-from-a-react-app-to-aws-s3-the-right-way-541dd6be689
 const NewPhoto = ({ history }) => {
@@ -17,49 +17,49 @@ const NewPhoto = ({ history }) => {
   const [PhotoState, setPhotoState] = useState(initialPhotoState);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  const uploadFile = (fileName, fileType) => {
-    const { description, selectedFile } = PhotoState;
-    console.log("Preparing the upload");
-    addNewPhoto({ fileName, fileType, description })
-      .then((response) => {
-        const { returnData } = response.data.data;
-        const { signedRequest } = returnData;
-        const responsePhoto = response.data.photo;
-        console.log("photo=>", responsePhoto);
+  // const uploadFile = (fileName, fileType) => {
+  //   const { description, selectedFile } = PhotoState;
+  //   console.log("Preparing the upload");
+  //   addNewPhoto({ fileName, fileType, description })
+  //     .then((response) => {
+  //       const { returnData } = response.data.data;
+  //       const { signedRequest } = returnData;
+  //       const responsePhoto = response.data.photo;
+  //       console.log("photo=>", responsePhoto);
 
-        setPhotoState({
-          ...PhotoState,
-          photo: responsePhoto,
-          url: returnData.url,
-        });
-        const id = responsePhoto._id;
-        console.log("photoState now=>", PhotoState);
-        console.log("Recieved a signed request=> " + signedRequest);
-        // Put the fileType in the headers for the upload
-        var options = {
-          headers: {
-            "Content-Type": fileType,
-          },
-        };
-        // !upload the photo to s3 bucket and incase of error delete the photo from db
-        uploadPhotoToS3(signedRequest, selectedFile, options, id)
-          .then((result) => {
-            console.log(result);
-            setPhotoState({
-              ...PhotoState,
-              success: true,
-            });
-          })
-          .catch((error) => {
-            console.log(error);
-            setErrorMessage("There was a problem saving the photo to S3");
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-        setErrorMessage("There was a problem saving the photo to the server");
-      });
-  };
+  //       setPhotoState({
+  //         ...PhotoState,
+  //         photo: responsePhoto,
+  //         url: returnData.url,
+  //       });
+  //       const id = responsePhoto._id;
+  //       console.log("photoState now=>", PhotoState);
+  //       console.log("Recieved a signed request=> " + signedRequest);
+  //       // Put the fileType in the headers for the upload
+  //       var options = {
+  //         headers: {
+  //           "Content-Type": fileType,
+  //         },
+  //       };
+  //       // !upload the photo to s3 bucket and incase of error delete the photo from db
+  //       uploadPhotoToS3(signedRequest, selectedFile, options, id)
+  //         .then((result) => {
+  //           console.log(result);
+  //           setPhotoState({
+  //             ...PhotoState,
+  //             success: true,
+  //           });
+  //         })
+  //         .catch((error) => {
+  //           console.log(error);
+  //           setErrorMessage("There was a problem saving the photo to S3");
+  //         });
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setErrorMessage("There was a problem saving the photo to the server");
+  //     });
+  // };
 
   const handleDescriptionChange = (event) => {
     const { name, value } = event.target;
@@ -93,7 +93,7 @@ const NewPhoto = ({ history }) => {
     let fileType = fileParts[1];
     // !passing setErrorMessage as an argument to change the state of this component from helpers.js
     if (validatePhoto(fileType, selectedFile.size, setErrorMessage))
-      uploadFile(fileName, fileType);
+      uploadFile(PhotoState, setPhotoState, setErrorMessage);
   };
 
   return (
