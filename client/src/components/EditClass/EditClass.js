@@ -27,7 +27,7 @@ const EditClass = (props) => {
     teacher: "",
   };
   const [formState, setFormState] = useState(initialFormState);
-  // ! This will update the form with the values of a specific class  immediately after a component is mounted. This hook is equivalent to componentDidMount() in class components
+  // ! This will update the form with the values of the specific class  immediately after a component is mounted. This is invoked only for the initial render. This hook is equivalent to componentDidMount() in class components
   useEffect(() => {
     setFormState({
       title: cl.title,
