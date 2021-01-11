@@ -77,7 +77,7 @@ const Navi = () => {
 
         <Navbar className="navbar-custom" expand="lg">
           {/* {empty navbar brand so hamburger appears on the right} */}
-        <Navbar.Brand></Navbar.Brand> /
+        <Navbar.Brand></Navbar.Brand>
           <Navbar.Collapse id="basic-navbar-nav">
             <div id="navbar-middle-container"></div>
             <Nav className="mr-auto move-down" id="navbar-custom-links">
