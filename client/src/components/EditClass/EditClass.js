@@ -15,6 +15,7 @@ const EditClass = (props) => {
 
   console.log("classes in editClass=>", classes);
 
+  // !getting a class with a specific id
   const cl = getClassFromId(classes, id);
   console.log("cl=>", cl);
   // !set initial form values to empty string
@@ -26,6 +27,7 @@ const EditClass = (props) => {
     teacher: "",
   };
   const [formState, setFormState] = useState(initialFormState);
+  // ! This will update the form with the values of a specific class  immediately after a component is mounted. This hook is equivalent to componentDidMount() in class components
   useEffect(() => {
     setFormState({
       title: cl.title,
@@ -43,9 +45,6 @@ const EditClass = (props) => {
       [name]: value,
     });
   }
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
