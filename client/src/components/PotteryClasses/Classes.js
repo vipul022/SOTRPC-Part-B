@@ -68,7 +68,9 @@ const Classes = ({ history }) => {
   console.log("classes=>", classes);
   // ! function for conditionally rendering delete and edit buttons
   const showDeleteEdit = (c) => {
+
     console.log("Logged=> ", LoggedInUser);
+    
     return role === "Admin" ? (
       <>
         <ButtonComponent clicked={handleDelete} record={c}>
