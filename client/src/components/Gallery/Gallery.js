@@ -45,7 +45,7 @@ const Gallery = ({ history }) => {
                 // !sending photo as photo  to the pathname
               }}
             >
-              <Image className="thumb" src={photo.url} alt="" />
+              <Image className="thumb" src={photo.url} alt={photo.description} />
             </Link>
             <p className="photo-description">{photo.description}</p>
           </Container>

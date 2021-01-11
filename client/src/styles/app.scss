@@ -118,14 +118,12 @@ body {
 //generic container
 .main-container {
   margin: auto;
-  text-align: center;
   padding: 10px;
 }
 
 .small-container {
   max-width: 500px;
   margin: auto;
-  // text-align: center;
   padding: 20px;
 }
 
@@ -159,6 +157,7 @@ body {
 //gallery
 .gallery-container {
   justify-content: center;
+  text-align: center;
   display: inline-flex;
   flex-wrap: wrap;
   background-color: $beige;
@@ -211,6 +210,32 @@ body {
   display: inline-flex;
   flex-wrap: wrap;
   background-color: $beige;
+}
+
+//history
+
+.history-container {
+  padding:10px;
+  background-color: $beige;
+  .paragraphs {
+    // flex-wrap: wrap;
+  }
+  .history-image-center {
+    width: 100%;
+    display:block;
+    margin:auto;
+    padding:10px;
+  }
+  .history-image-left {
+    width: 60%;
+    float: left;
+    padding:5px 20px 10px;
+  }
+  .history-image-right {
+    width: 60%;
+    float: right;
+    padding:5px 10px 20px;
+  }
 }
 //footer
 
