@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useGlobalState } from "../../config/globalState";
-import { deleteMember } from "../../services/membersServices";
-import { updateMember } from "../../services/membersServices";
+import { deleteMember, updateMember } from "../../services/membersServices";
+// import { updateMember } from "../../services/membersServices";
 import ButtonComponent from "../Button/Button";
 
 import { logoutUserFromBackend } from "../../services/authServices";
@@ -124,7 +124,7 @@ const EditMember = (props) => {
     event.preventDefault();
   };
   return (
-    <Container className="small-container">
+   <Container className="small-container"> 
       <Header history={history} showButton={"Delete"} clicked={handleDelete}>
         Edit Account
       </Header>
