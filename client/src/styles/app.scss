@@ -160,7 +160,7 @@ body {
   text-align: center;
   display: inline-flex;
   flex-wrap: wrap;
-  background-color: $beige;
+  // background-color: $beige;
 
   .thumb-container {
     display: flex;
@@ -170,7 +170,7 @@ body {
     background-color: $beige;
     width: 150px;
     height: 250px;
-
+    position: relative;
     .thumb {
       margin-top: 10px;
       max-width: 100%;
@@ -178,6 +178,10 @@ body {
     }
 
     .photo-description {
+      position: absolute;
+      bottom: 0;
+      right: 5px;
+      left: 5px;
     }
   }
 }
@@ -215,26 +219,26 @@ body {
 //history
 
 .history-container {
-  padding:10px;
-  background-color: $beige;
+  padding: 10px;
+  // background-color: $beige;
   .paragraphs {
     // flex-wrap: wrap;
   }
   .history-image-center {
     width: 100%;
-    display:block;
-    margin:auto;
-    padding:10px;
+    display: block;
+    margin: auto;
+    padding: 10px;
   }
   .history-image-left {
     width: 60%;
     float: left;
-    padding:5px 20px 10px;
+    padding: 5px 20px 10px;
   }
   .history-image-right {
     width: 60%;
     float: right;
-    padding:5px 10px 20px;
+    padding: 5px 10px 20px;
   }
 }
 //footer
