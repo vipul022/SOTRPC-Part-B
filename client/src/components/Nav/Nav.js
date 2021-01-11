@@ -77,10 +77,10 @@ const Navi = () => {
 
         <Navbar className="navbar-bottom-half" expand="lg">
           {/* {empty navbar brand so hamburger appears on the right} */}
-        <Navbar.Brand></Navbar.Brand>
+        <Navbar.Brand />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <div id="navbar-middle-container"></div>
-            <Nav className="mr-auto move-down" id="navbar-custom-links">
+            <Nav className="mr-auto" id="navbar-custom-links">
               <Nav.Link as={Link} to="/">
                 Home
               </Nav.Link>
@@ -100,9 +100,8 @@ const Navi = () => {
               ) : null}
             </Nav>
           </Navbar.Collapse>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
         </Navbar>
-      </div>
+     </div>
   );
 };
 
