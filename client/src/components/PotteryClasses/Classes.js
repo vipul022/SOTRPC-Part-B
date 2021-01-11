@@ -108,7 +108,7 @@ const Classes = ({ history }) => {
                 clicked={handleClick}
                 record={c}
               >
-                Sign up for the class
+                Sign up for this class
               </ButtonComponent>
             </div>
           </Container>

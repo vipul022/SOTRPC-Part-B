@@ -20,7 +20,6 @@ const Navi = () => {
         console.log("data=>", data);
         dispatch({
           type: "setLoggedInUser",
-
           data: {},
         });
       })
@@ -42,7 +41,6 @@ const Navi = () => {
             >
               Account
             </NavDropdown.Item>
-
             <NavDropdown.Item as={Link} onClick={logoutUser} to="/">
               Logout
             </NavDropdown.Item>
