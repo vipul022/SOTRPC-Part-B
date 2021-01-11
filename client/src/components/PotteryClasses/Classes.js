@@ -100,7 +100,7 @@ const Classes = ({ history }) => {
             <h3>{c.title}</h3>
             <p className="class-description">{c.description}</p>
             <p>Time: {c.time}</p>
-            <p>Maximum number: {c.maxNumber}</p>
+            <p>Maximum number of students: {c.maxNumber}</p>
             <div className={classButtons}>
               {showDeleteEdit(c)}
               <ButtonComponent

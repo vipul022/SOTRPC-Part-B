@@ -169,7 +169,7 @@ const EditClass = (props) => {
         </Form.Group>
 
         <Form.Group controlId="formBasicMaxNumber">
-          <Form.Label>Max Number</Form.Label>
+          <Form.Label>Max number of students</Form.Label>
           <Form.Control
             type="number"
             name="maxNumber"
