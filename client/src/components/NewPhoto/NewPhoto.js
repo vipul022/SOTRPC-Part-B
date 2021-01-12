@@ -4,9 +4,14 @@ import Header from "../Header/Header";
 import { addNewPhoto } from "../../services/photoServices";
 import { Form, Container, Row, Col, Button, Alert } from "react-bootstrap";
 import { validatePhoto, uploadFile } from "../../helpers";
+import { useGlobalState } from "../../config/globalState";
 
 // ! reference taken from https://medium.com/@khelif96/uploading-files-from-a-react-app-to-aws-s3-the-right-way-541dd6be689
 const NewPhoto = ({ history }) => {
+  const { store, dispatch } = useGlobalState();
+  const { fileState } = store;
+  console.log("fileState=>", fileState);
+  const { selectedFile, description, success } = fileState;
   const initialPhotoState = {
     success: false,
     url: "",
@@ -15,7 +20,7 @@ const NewPhoto = ({ history }) => {
     selectedFile: "",
   };
   const [PhotoState, setPhotoState] = useState(initialPhotoState);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   // const uploadFile = (fileName, fileType) => {
   //   const { description, selectedFile } = PhotoState;
@@ -63,28 +68,48 @@ const NewPhoto = ({ history }) => {
 
   const handleDescriptionChange = (event) => {
     const { name, value } = event.target;
-    setPhotoState({
-      ...PhotoState,
+    // setPhotoState({
+    //   ...PhotoState,
+    //   [name]: value,
+    //   success: false,
+    //   url: "",
+    // });
+    const updatedData = {
+      ...fileState,
       [name]: value,
-      success: false,
-      url: "",
+      type: "photos",
+      // description: value,
+      // success: false,
+      // url: "",
+    };
+    dispatch({
+      type: "setFileState",
+      data: updatedData,
     });
-    // console.log("inside handleDescriptionChange, photoState=>", PhotoState);
   };
 
   const handleFileChange = (event) => {
-    setPhotoState({
-      ...PhotoState,
+    // setPhotoState({
+    //   ...PhotoState,
+    //   selectedFile: event.target.files[0],
+    //   success: false,
+    // });
+    const updatedData = {
+      ...fileState,
       selectedFile: event.target.files[0],
-      success: false,
+      // success: false,
+    };
+    dispatch({
+      type: "setFileState",
+      data: updatedData,
     });
-    setErrorMessage(null);
-    // console.log("inside handleFileChange, photoState=>", PhotoState);
+    setErrorMessage("");
+    console.log("inside handleFileChange");
   };
 
   const handleUpload = (event) => {
     event.preventDefault();
-    const { selectedFile } = PhotoState;
+    // const { selectedFile } = PhotoState;
     console.log("selectedFile=>", selectedFile);
 
     // //! Split the filename to get the name and type
@@ -93,7 +118,7 @@ const NewPhoto = ({ history }) => {
     let fileType = fileParts[1];
     // !passing setErrorMessage as an argument to change the state of this component from helpers.js
     if (validatePhoto(fileType, selectedFile.size, setErrorMessage))
-      uploadFile(PhotoState, setPhotoState, setErrorMessage);
+      uploadFile(fileState, setPhotoState, setErrorMessage, dispatch);
   };
 
   return (
@@ -104,7 +129,7 @@ const NewPhoto = ({ history }) => {
           <p>{errorMessage}</p>
         </Alert>
       )}
-      {PhotoState.success && (
+      {success && (
         <Alert variant="success">
           <p>Upload Successful!</p>
         </Alert>

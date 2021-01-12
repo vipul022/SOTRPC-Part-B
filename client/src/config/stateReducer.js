@@ -31,6 +31,11 @@ export default function StateReducer(state, action) {
         ...state,
         photos: action.data,
       };
+    case "setFileState":
+      return {
+        ...state,
+        fileState: action.data,
+      };
     default:
       return state;
   }

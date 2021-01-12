@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { addNewPhoto, uploadPhotoToS3 } from "../src/services/photoServices";
+import { useGlobalState } from "../src/config/globalState";
+import dispatch from "../src/App";
 
 const validatePhoto = (fileType, size, setErrorMessage) => {
   const typeLowerCase = fileType.toLowerCase();
@@ -17,14 +19,17 @@ const validatePhoto = (fileType, size, setErrorMessage) => {
     setErrorMessage("File type needs to be a jpg or png");
     return false;
   } else {
-    setErrorMessage(null);
+    setErrorMessage("");
     console.log("inside validatePhoto=>");
     return true;
   }
 };
 
-const uploadFile = (state, setState, setErrorMessage) => {
-  const { selectedFile, description } = state;
+const uploadFile = (fileState, setState, setErrorMessage, dispatch) => {
+  // const { store, dispatch } = useGlobalState();
+  // const { fileState } = store;
+
+  const { selectedFile, description, file, url } = fileState;
   console.log("selectedFile=>", selectedFile);
   let fileParts = selectedFile.name.split(".");
   let fileName = fileParts[0];
@@ -38,14 +43,19 @@ const uploadFile = (state, setState, setErrorMessage) => {
       const { signedRequest } = returnData;
       const responsePhoto = response.data.photo;
       console.log("photo=>", responsePhoto);
-
-      setState({
-        ...state,
-        photo: responsePhoto,
+      let updatedData = {
+        ...fileState,
+        file: responsePhoto,
         url: returnData.url,
+      };
+      console.log("updatedData=>", updatedData);
+      dispatch({
+        type: "setFileState",
+        data: updatedData,
       });
+
       const id = responsePhoto._id;
-      console.log("state now=>", state);
+      // console.log("state now=>", state);
       console.log("Recieved a signed request=> " + signedRequest);
       //     // Put the fileType in the headers for the upload
       var options = {
@@ -57,10 +67,18 @@ const uploadFile = (state, setState, setErrorMessage) => {
       uploadPhotoToS3(signedRequest, selectedFile, options, id)
         .then((result) => {
           console.log(result);
-          setState({
-            ...state,
+          updatedData = {
+            ...fileState,
             success: true,
+          };
+          dispatch({
+            type: "setFileState",
+            data: updatedData,
           });
+          // setState({
+          //   ...state,
+          //   success: true,
+          // });
         })
         .catch((error) => {
           console.log(error);
