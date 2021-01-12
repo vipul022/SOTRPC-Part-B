@@ -24,6 +24,7 @@ const App = () => {
     members: [],
     photos: [],
     LoggedInUser: {},
+    errorMessage: null,
     fileState: {
       success: false,
       url: "",
