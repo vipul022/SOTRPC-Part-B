@@ -22,10 +22,16 @@ const NewPhoto = ({ history }) => {
       ...fileState,
       [name]: value,
       type: "photos",
+      success: false,
     };
+    // !whenever user enters a description of another photo set success message and error message should disappear
     dispatch({
       type: "setFileState",
       data: updatedData,
+    });
+    dispatch({
+      type: "setErrorMessage",
+      data: null,
     });
   };
 

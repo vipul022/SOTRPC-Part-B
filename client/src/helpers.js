@@ -43,7 +43,7 @@ const uploadFile = (fileState, dispatch) => {
   console.log("fileType=>", fileType);
 
   console.log("Preparing the upload");
-  addNewPhoto({ fileName, fileType, description, dispatch })
+  addNewPhoto({ fileName, fileType, description })
     .then((response) => {
       const { returnData } = response.data.data;
       const { signedRequest } = returnData;
@@ -70,7 +70,7 @@ const uploadFile = (fileState, dispatch) => {
         },
       };
 
-      uploadPhotoToS3(signedRequest, selectedFile, options, id, dispatch)
+      uploadPhotoToS3(signedRequest, selectedFile, options, id)
         .then((result) => {
           console.log(result);
           updatedData = {
