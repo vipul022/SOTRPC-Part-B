@@ -1,10 +1,15 @@
-import React from "react";
-import { addNewFile, uploadPhotoToS3 } from "../src/services/photoServices";
+import { addNewFile, uploadFileToS3 } from "../src/services/photoServices";
 
-const validatePhoto = (fileType, size, dispatch) => {
+const validatePhoto = (selectedFile, dispatch) => {
+  const { size } = selectedFile;
+  console.log("size=>", size);
+  // //! Split the filename to get the type
+  let fileParts = selectedFile.name.split(".");
+
+  let fileType = fileParts[1];
   const typeLowerCase = fileType.toLowerCase();
   const TWOMEGABYTES = 2097152;
-  console.log("selectedFile.size=>", size);
+
   console.log("fileType=>", fileType);
   if (size >= TWOMEGABYTES) {
     dispatch({
@@ -43,6 +48,7 @@ const uploadFile = (fileState, dispatch) => {
   console.log("fileType=>", fileType);
 
   console.log("Preparing the upload");
+  // !passed type to make this function reusable to call backend api's
   addNewFile({ fileName, fileType, description, type })
     .then((response) => {
       const { returnData } = response.data.data;
@@ -70,7 +76,7 @@ const uploadFile = (fileState, dispatch) => {
         },
       };
 
-      uploadPhotoToS3(signedRequest, selectedFile, options, id)
+      uploadFileToS3(signedRequest, selectedFile, options, id, type)
         .then((result) => {
           console.log(result);
           updatedData = {

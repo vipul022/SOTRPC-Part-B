@@ -2,7 +2,7 @@ import React from "react";
 // import { uploadPhotoToS3 } from "../../services/photoServices";
 import Header from "../Header/Header";
 // import { addNewPhoto } from "../../services/photoServices";
-import { Form, Container, Row, Col, Button, Alert } from "react-bootstrap";
+import { Form, Container, Button, Alert } from "react-bootstrap";
 import { validatePhoto, uploadFile } from "../../helpers";
 import { useGlobalState } from "../../config/globalState";
 
@@ -12,7 +12,7 @@ const NewPhoto = ({ history }) => {
   // !extracting fileState and errorMessage
   const { fileState, errorMessage } = store;
   console.log("fileState=>", fileState);
-  const { selectedFile, description, success } = fileState;
+  const { selectedFile, success } = fileState;
   console.log("success=>", success);
   console.log("errorMessage=>", errorMessage);
 
@@ -57,13 +57,8 @@ const NewPhoto = ({ history }) => {
 
     console.log("selectedFile=>", selectedFile);
 
-    // //! Split the filename to get the name and type
-    let fileParts = selectedFile.name.split(".");
-    let fileName = fileParts[0];
-    let fileType = fileParts[1];
     //  ! passed dispatch as argument to change the global state
-    if (validatePhoto(fileType, selectedFile.size, dispatch))
-      uploadFile(fileState, dispatch);
+    if (validatePhoto(selectedFile, dispatch)) uploadFile(fileState, dispatch);
   };
 
   return (
