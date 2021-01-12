@@ -1,9 +1,9 @@
 import api from "../config/api";
 import axios from "axios";
 
-const addNewPhoto = async ({ fileName, fileType, description }) => {
+const addNewFile = async ({ fileName, fileType, description, type }) => {
   console.log("fileName=>", fileName);
-  const response = await api.post("/photos", {
+  const response = await api.post(`/${type}`, {
     fileName,
     fileType,
     description,
@@ -53,4 +53,4 @@ const uploadPhotoToS3 = async (signedRequest, file, options, id) => {
     });
   return res;
 };
-export { addNewPhoto, getAllPhotos, deletePhoto, uploadPhotoToS3 };
+export { addNewFile, getAllPhotos, deletePhoto, uploadPhotoToS3 };

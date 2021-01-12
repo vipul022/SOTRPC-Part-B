@@ -61,7 +61,7 @@ const NewPhoto = ({ history }) => {
     let fileParts = selectedFile.name.split(".");
     let fileName = fileParts[0];
     let fileType = fileParts[1];
-    //  ! dispatch as argument to change the global state
+    //  ! passed dispatch as argument to change the global state
     if (validatePhoto(fileType, selectedFile.size, dispatch))
       uploadFile(fileState, dispatch);
   };

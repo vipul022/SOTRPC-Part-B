@@ -1,5 +1,5 @@
 import React from "react";
-import { addNewPhoto, uploadPhotoToS3 } from "../src/services/photoServices";
+import { addNewFile, uploadPhotoToS3 } from "../src/services/photoServices";
 
 const validatePhoto = (fileType, size, dispatch) => {
   const typeLowerCase = fileType.toLowerCase();
@@ -33,17 +33,17 @@ const validatePhoto = (fileType, size, dispatch) => {
 };
 
 const uploadFile = (fileState, dispatch) => {
-  const { selectedFile, description } = fileState;
+  const { selectedFile, description, type } = fileState;
 
   console.log("selectedFile=>", selectedFile);
-
+  console.log("type inside uploadFile=>", type);
   let fileParts = selectedFile.name.split(".");
   let fileName = fileParts[0];
   let fileType = fileParts[1];
   console.log("fileType=>", fileType);
 
   console.log("Preparing the upload");
-  addNewPhoto({ fileName, fileType, description })
+  addNewFile({ fileName, fileType, description, type })
     .then((response) => {
       const { returnData } = response.data.data;
       const { signedRequest } = returnData;
@@ -81,14 +81,10 @@ const uploadFile = (fileState, dispatch) => {
             type: "setFileState",
             data: updatedData,
           });
-          // setState({
-          //   ...state,
-          //   success: true,
-          // });
         })
         .catch((error) => {
           console.log(error);
-          // setErrorMessage("There was a problem saving the photo to S3");
+
           dispatch({
             type: "setErrorMessage",
             data: "There was a problem saving the photo to S3",
